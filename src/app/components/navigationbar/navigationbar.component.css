@@ -3,12 +3,11 @@
 #logo {
     width: 100%;
     height: auto;
-    margin-bottom: -4px;
     background-color: rgba(52,52,52,0.85);
 }
 
  .topnav {
-    margin:0px;
+    width: 100%;
     background-color: rgba(255,53,139,1);
     overflow: hidden;
     text-align: center;
