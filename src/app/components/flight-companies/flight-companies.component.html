@@ -1,0 +1,20 @@
+<p>flight-companies works!</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">MARKA</th>
+            <th scope="col">MODEL</th>
+            <th scope="col">GODINA</th>
+            <th scope="col">CENA ZA JEDAN DAN</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let company of filteredCompanies">
+            <td>{{company.id}}</td>
+            <td><img class="imageTest" src={{company.image}}></td>
+            <td>{{company.address}}</td>
+            <td>{{company.image}}$</td>
+        </tr>
+    </tbody>
+</table>
