@@ -1,3 +1,5 @@
+import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
+import { Flight } from './entities/flights/flight';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RidesComponent } from './components/rides/rides.component';
@@ -16,8 +18,12 @@ const routes: Routes = [
 },
 {
   path: "flight",
-  component: FlightsComponent
-}
+  children: [
+    { path: "", component: RidesComponent },  //placeholder
+    { path: ":id/details", component: FcompanypageComponent },
+    { path: ":id/book", component: FlightsComponent } //placeholder
+  ]
+},
 ];
 
 @NgModule({

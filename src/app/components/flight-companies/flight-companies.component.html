@@ -14,7 +14,51 @@
             <td><img class="imageTest" src={{company.image}}></td>
             <td>{{company.name}}</td>
             <td>{{company.promoDescription}}</td>
-            <td>{{company.rating}}</td>
+            <td class="profile-stars">
+                    <!-- START NO 1-->
+                    <div *ngIf="company.rating < 0.5; then thenBlock1 else elseBlock1"></div>
+                    <ng-template #thenBlock1><i class="material-icons">star_border</i></ng-template>
+                    <ng-template #elseBlock1>
+                        <div *ngIf="company.rating < 1; then thenBlock11 else elseBlock11"></div>
+                        <ng-template #thenBlock11><i class="material-icons">star_half</i></ng-template>
+                        <ng-template #elseBlock11><i class="material-icons">star</i></ng-template>
+                    </ng-template>
+                    <!-- START NO 2-->
+                    <div *ngIf="company.rating < 1.5; then thenBlock2 else elseBlock2"></div>
+                    <ng-template #thenBlock2><i class="material-icons">star_border</i></ng-template>
+                    <ng-template #elseBlock2>
+                        <div *ngIf="company.rating < 2; then thenBlock22 else elseBlock22"></div>
+                        <ng-template #thenBlock22><i class="material-icons">star_half</i></ng-template>
+                        <ng-template #elseBlock22><i class="material-icons">star</i></ng-template>
+                    </ng-template>
+                    <!-- START NO 3-->
+                    <div *ngIf="company.rating < 2.5; then thenBlock3 else elseBlock3"></div>
+                    <ng-template #thenBlock3><i class="material-icons">star_border</i></ng-template>
+                    <ng-template #elseBlock3>
+                        <div *ngIf="company.rating < 3; then thenBlock33 else elseBlock33"></div>
+                        <ng-template #thenBlock33><i class="material-icons">star_half</i></ng-template>
+                        <ng-template #elseBlock33><i class="material-icons">star</i></ng-template>
+                    </ng-template>
+                    <!-- START NO 4-->
+                    <div *ngIf="company.rating < 3.5; then thenBlock4 else elseBlock4"></div>
+                    <ng-template #thenBlock4><i class="material-icons">star_border</i></ng-template>
+                    <ng-template #elseBlock4>
+                        <div *ngIf="company.rating < 4; then thenBlock44 else elseBlock44"></div>
+                        <ng-template #thenBlock44><i class="material-icons">star_half</i></ng-template>
+                        <ng-template #elseBlock44><i class="material-icons">star</i></ng-template>
+                    </ng-template>
+                    <!-- START NO 5-->
+                    <div *ngIf="company.rating < 4.5; then thenBlock5 else elseBlock5"></div>
+                    <ng-template #thenBlock5><i class="material-icons">star_border</i></ng-template>
+                    <ng-template #elseBlock5>
+                        <div *ngIf="company.rating < 5; then thenBlock55 else elseBlock55"></div>
+                        <ng-template #thenBlock55><i class="material-icons">star_half</i></ng-template>
+                        <ng-template #elseBlock55><i class="material-icons">star</i></ng-template>
+                    </ng-template>
+            </td>
+            <td><button class="btn btn-success" routerLink="/flight/{{company.id}}/details">
+                Details
+            </button></td>
         </tr>
     </tbody>
 </table>

@@ -7,6 +7,7 @@ import { NavigationbarComponent } from './components/navigationbar/navigationbar
 import { FlightsComponent } from './components/flights/flights.component';
 import { RidesComponent } from './components/rides/rides.component';
 import { FlightCompaniesComponent } from './components/flight-companies/flight-companies.component';
+import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FlightCompaniesComponent } from './components/flight-companies/flight-c
     FlightsComponent,
     RidesComponent,
     FlightCompaniesComponent,
+    FcompanypageComponent,
   ],
   imports: [
     BrowserModule,
