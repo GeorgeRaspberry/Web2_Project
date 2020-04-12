@@ -13,6 +13,10 @@ const routes: Routes = [
 {
   path: "rides",
   component: RidesComponent
+},
+{
+  path: "flight",
+  component: FlightsComponent
 }
 ];
 

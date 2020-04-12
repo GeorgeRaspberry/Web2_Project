@@ -1,20 +1,22 @@
-<p>flight-companies works!</p>
+<body id="overrider" >
 
 <table class="table table-hover">
-    <thead class="thead-dark">
+    <!--<thead>
         <tr>
-            <th scope="col">MARKA</th>
-            <th scope="col">MODEL</th>
-            <th scope="col">GODINA</th>
-            <th scope="col">CENA ZA JEDAN DAN</th>
+            <th scope="col"></th>
+            <th scope="col">COMPANY</th>
+            <th scope="col">PROMO</th>
+            <th scope="col">RATING</th>
         </tr>
-    </thead>
+    </thead>-->
     <tbody>
         <tr *ngFor="let company of filteredCompanies">
-            <td>{{company.id}}</td>
             <td><img class="imageTest" src={{company.image}}></td>
-            <td>{{company.address}}</td>
-            <td>{{company.image}}$</td>
+            <td>{{company.name}}</td>
+            <td>{{company.promoDescription}}</td>
+            <td>{{company.rating}}</td>
         </tr>
     </tbody>
 </table>
+
+</body>

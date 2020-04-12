@@ -10,14 +10,20 @@ import { FlightCompaniesService } from 'src/app/services/flights/flight-companie
 export class FlightCompaniesComponent implements OnInit {
   allFlightCompanies: Array<FlightCompany>;
   filteredCompanies: Array<FlightCompany>;
+  selectedCompany: FlightCompany;
 
   constructor(private companiesService: FlightCompaniesService) {
     this.allFlightCompanies = this.companiesService.loadCompanies();
     this.filteredCompanies = this.allFlightCompanies;
-   }
+  }
 
   ngOnInit(): void {
 
+  }
+
+  onClick(company: FlightCompany) {
+      this.selectedCompany = company;
+      console.log(this.selectedCompany);
   }
 
 }
