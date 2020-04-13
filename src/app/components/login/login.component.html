@@ -1,0 +1,120 @@
+<div class="modal fade" id="myModal" role="dialog">
+    <div *ngIf="temp == true; else signUp" class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div  class="modal-header">
+          <h4 class="modal-title">Sign in dialog</h4>
+        </div>        
+        <div  class="modal-body">
+            <div class="tab-content">
+                <form class="form">
+                  <div class="form-group row">
+                    <label  class="col-sm-4 col-form-label">Username</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="points" placeholder="Enter your username" min="0" max="100">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label  class="col-sm-4 col-form-label">Password</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="points" placeholder="Enter your password" min="0" max="100">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label  class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <label style="text-align: right;"  ><a class="linkUnderline" role="button" (click)="changeBoolean()">Don't have an account. Click to sign up.</a></label>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="sendMessage()">Sign in</button>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>   
+      
+    </div>
+</div>
+<ng-template #signUp>
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div  class="modal-header">
+        <h4 class="modal-title">Sign up dialog</h4>
+      </div>        
+      <div  class="modal-body">
+          <div class="tab-content">
+              <form class="form">
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Name</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your name" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Lastname</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your lastname" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">City</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your city" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Phone Number</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your phone number" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Email</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your email" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Password</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your password" min="0" max="100">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label">Verify Password</label>
+                  <div class="col-sm-8">
+                      <input type="number" class="form-control" id="points" placeholder="Enter your password verify" min="0" max="100">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label  class="col-sm-4 col-form-label"></label>
+                  <div class="col-sm-8">
+                      <label style="text-align: right;"  ><a class="linkUnderline" (click)="changeBoolean2()">Already have an account. Click to sign in.</a></label>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="sendMessage()">Sign up</button>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>   
+    
+  </div>
+</div>
+
+</ng-template>
+</div>
+
+ 

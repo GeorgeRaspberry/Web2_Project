@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { LoginComponent } from './components/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
+
 export class AppComponent {
   title = 'Angular web2-project';
+  @ViewChild(LoginComponent) loginInfo;
+  message:string;
+
+  receiveMessage() {  
+    alert(this.loginInfo.message);
+  }
+
 }
