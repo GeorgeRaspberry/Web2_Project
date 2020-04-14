@@ -9,7 +9,6 @@ export class FlightCompaniesService {
   constructor() { }
 
   loadCompanies() {
-    console.log('Učitavanje hotela...');
     return this.mockedCompanies();
   }
 

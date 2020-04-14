@@ -1,18 +1,28 @@
-export class Flight {
-    id: number;
-    name: string;
-    address: string;
-    promoDescription: string;
-    rating: number;
-    destinationInfo: Array<string>;
+import { DatePipe, Time } from '@angular/common';
 
-    constructor(id: number, name: string, address: string, promoDescription: string, rating: number)
+export class Flight {
+    id: number
+    company: string;
+    companyId: number
+    flyOffTime: Date;
+    landingTime: Date;
+    fullFlightTime: string;
+    flightLength: number;
+    numberOfTransfers: number;
+    locationOfTransfers: Array<string>;
+    price: number;
+
+    constructor(Id: number, company: string, companyid: number, flyofftime: string, landingtime: string, fullflighttime: string, flightlength: number, transfernum: number, transferlocations: Array<string>, price: number)
     {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.promoDescription = promoDescription;
-        this.rating = rating;
-        this.destinationInfo = new Array<string>();
+        this.id = Id;
+        this.company = company;
+        this.companyId = companyid
+        this.flyOffTime = new Date(); //placeholder
+        this.landingTime = new Date(); //placeholder
+        this.fullFlightTime = fullflighttime;
+        this.flightLength = flightlength;
+        this.numberOfTransfers = transfernum;
+        this.locationOfTransfers = transferlocations;
+        this.price = price;
     }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { FlightsService } from './../../services/flights/flights.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Flight } from 'src/app/entities/flights/flight';
 
 @Component({
   selector: 'app-flights',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+    companyId: number;
+
+  allFlights: Array<Flight>;
+
+  constructor(private flightService: FlightsService) {
+
+    this.allFlights = this.flightService.mockedFlights();
+    
+  }
+
+  book(): void {
+    alert("Booked!");
+  }
+
 
   ngOnInit(): void {
+
+    for (let i = 0; i < this.allFlights.length; i++) {
+
+      if (this.allFlights[i].companyId != this.companyId) {
+        this.allFlights.splice(i, 1);
+        i-=1;
+      }
+      
+    }
+
   }
 
 }

@@ -12,7 +12,7 @@ import { FlightCompany } from 'src/app/entities/flights/flight-company';
 })
 export class FcompanypageComponent implements OnInit {
 
-  id:number;
+  id: number;
   allCompanies: Array<FlightCompany>;
 
   constructor(private route: ActivatedRoute, private companiesService: FlightCompaniesService) {

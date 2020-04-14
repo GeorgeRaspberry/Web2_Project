@@ -14,7 +14,8 @@
 }
 
 #overrider tbody tr {
-    border-bottom: none;
+    border: none;
+    border-bottom: solid transparent 10px;
     box-shadow: 0 6px 4px -1px rgba(255,53,139,0.7);
 }
 
