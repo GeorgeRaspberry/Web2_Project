@@ -1,4 +1,11 @@
+#buttonOverrider:hover {
+    background-color: rgba(52,52,52,1);
+    box-shadow: none;
+}
 
+#buttonOverrider:active {
+    background-color: rgba(52,52,52,1);
+}
 
 .filterTable
 {

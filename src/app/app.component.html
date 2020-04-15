@@ -1,60 +1,13 @@
 <html>
 
   <body>
-      <app-navigationbar>
-
-      </app-navigationbar>
+	  <app-topbar></app-topbar>
+	  
+      <app-navigationbar></app-navigationbar>
           
       <router-outlet></router-outlet>
       <app-login (messageEvent)="receiveMessage()"></app-login>
-      <!-- FOOTER ZAKOMENTARISAN
-        
-        <div class="topnav">
-        <img id="logo" src="assets/logo1-2.png">
-        <a class="active" href="#home">FLIGHTS</a>
-        <a href="#news">RIDES</a>
-        <a href="#contact">FRIENDS</a>
-        <a id="profileItem" href="#profile"> MY PROFILE</a>
-      </div>
-      -->
-
-      <!--
-        <footer>
-        <div class="container1">
-          <ul>
-            <li>
-              ABOUT
-            </li>
-            <li>
-              CONTACT US
-            </li>
-          </ul>
-        </div>
-
-        <div class="container2">
-          <ul>
-            <li>
-              TEAM
-            </li>
-            <li>
-              OUR PILOTS
-            </li>
-          </ul>
-        </div>
-
-        <div class="container3">
-          <ul>
-            <li>
-              FACEBOOK
-            </li>
-            <li>
-              TWITTER
-            </li>
-          </ul>
-        </div>
-        
-      </footer>
-    -->
 
   </body>
+  
 </html>

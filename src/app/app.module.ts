@@ -1,6 +1,6 @@
+import { TopbarComponent } from './components/topbar/topbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationbarComponent } from './components/navigationbar/navigationbar.component';
@@ -27,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RideCompaniesComponent,
     RcompanypageComponent,
     RatingStarComponent,
-    FlightFilterComponent
+    FlightFilterComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule,

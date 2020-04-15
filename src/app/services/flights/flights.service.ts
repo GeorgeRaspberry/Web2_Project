@@ -34,7 +34,6 @@ export class FlightsService {
     const f10 = new Flight(10, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "39:28", 2500, 2, ["","",""], 102);
     const f11 = new Flight(11, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "49:28", 4500, 1, ["","",""], 182);
     const f12 = new Flight(12, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "19:12", 500, 0, ["","",""], 52);
-    
 
     allFlights.push(f1);
     allFlights.push(f2);

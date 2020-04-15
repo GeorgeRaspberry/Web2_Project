@@ -1,31 +1,8 @@
-
-
-
-
-
-
-
-footer {
-  position: fixed;
-  color: white;
-  font-family: "Oswald";
-  font-style: italic;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(52,52,52,0.85);
+html, body {
+  height: 100%;
 }
 
-  footer .container1 {
-    float: left;
-    margin-left: 50px;
-  }
-
-  footer .container2 {
-    float: left;
-    margin-left: 500px;
-  }
-
-  footer .container3 {
-    float: right;
-    margin-right: 150px;
-  }
+video {
+  width: 100%;
+  opacity: 0.7;
+}
