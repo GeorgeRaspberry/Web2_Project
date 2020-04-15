@@ -1,0 +1,23 @@
+
+    <table id="overrider" class="table table-hover">
+        <!--<thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">COMPANY</th>
+                <th scope="col">PROMO</th>
+                <th scope="col">RATING</th>
+            </tr>
+        </thead>-->
+        <tbody>
+            <tr *ngFor="let company of filteredCompanies">
+                <td><img class="imageTest" src={{company.image}}></td>
+                <td>{{company.name}}</td>
+                <td>{{company.promoDescription}}</td>
+                <td><app-rating-star [rating]="company.rating"></app-rating-star></td>
+                <td><button class="btn btn-success" routerLink="/ride/{{company.id}}/details">
+                    Details
+                </button></td>
+            </tr>
+        </tbody>
+    </table>
+    

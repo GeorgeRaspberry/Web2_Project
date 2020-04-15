@@ -1,0 +1,20 @@
+<html>
+<body>
+
+<div *ngFor="let company of allCompanies">
+    <div id="companyInfo" *ngIf="company.id == id">
+
+        <img src={{company.image}}>
+        <app-rating-star [rating]="company.rating"></app-rating-star>
+        <p class="promo">{{company.promoDescription}}</p>
+                
+    </div>
+</div>
+
+<app-flights [companyId]="id"></app-flights>
+
+</body>
+</html>
+
+
+

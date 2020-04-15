@@ -1,0 +1,18 @@
+
+
+.filterTable
+{
+    font-family: "Oswald";
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+
+button {
+    margin-left:12.5%;
+    font-family: "Oswald";
+    background-color: rgba(52,52,52,1);
+    border-color: rgba(255,255,255,0.7)
+}

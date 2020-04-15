@@ -1,0 +1,26 @@
+<div class="filterSlideOut" [@fadeInOut]=currentState>
+    <table class= "filterTable"> 
+        <tr>
+        <td class="filterColumn">Lokacija: 
+        <input style="width:120px;" type="text" class="filterPolja" id="filterLokacija" /> </td>
+        <td class="filterColumn">Uneti broj osoba: 
+        <input style="width:100px;" type="number" class="filterPolja" id="filterBrojOsoba" /></td>
+        <td class="filterColumn">Cena od: 
+        <input style="width:120px;" type="number" placeholder="Izraženo u dinarima" class="filterPolja" id="filterCenaOd" /></td>
+        <td class="filterColumn">Do: 
+        <input style="width:120px;" type="number" placeholder="Izraženo u dinarima" class="filterPolja" id="filterCenaDo" /></td>
+        <td class="filterColumn">Broj soba od: 
+        <input style="width:120px;" type="number" class="filterPolja" id="filterBrojSobaOd" /></td>
+        <td class="filterColumn">Do: 
+        <input style="width:120px;" type="number" class="filterPolja" id="filterBrojSobaDo" /></td>
+        <td class="filterColumn"> Datum od: 
+        <input style="width:120px;" type="text" class="filterPolja" id="filterdatum" /></td>
+        <td class="filterColumn">Do: 
+        <input style="width:120px;" type="text" class="filterPolja" id="filterdatum" /></td>
+        </tr>
+    </table>
+
+
+</div>
+<br>
+<button class="btn btn-success" (click)="changeState()">Search</button>
