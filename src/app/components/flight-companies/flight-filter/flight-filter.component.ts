@@ -8,7 +8,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
     // the fade-in/fade-out animation.
     trigger('fadeInOut', [
       state('initial', style({
-        transform: 'translateY(-200%)',
+        transform: 'translateY(-100%)',
         opacity: 0
 
   })),
@@ -20,18 +20,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
       transition('final => initial', animate(800)),
     ])
    
-    
-
-
-
-
-
-
-
-
   ]
-
-  
 
 })
 export class FlightFilterComponent implements OnInit {

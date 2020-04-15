@@ -1,36 +1,30 @@
 #overrider table {
-    margin-top: 50px;
+    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 75%;
+    width: 85%;
+    border-collapse: collapse;
 }
 
-#overrider thead {
-    background-color: rgba(52,52,52,0.85);
+#overrider thead th{
+    font-size: 16px;
     font-family: "Oswald";
-    color: white;
-    font-size: large;
+    font-weight: 300;
 }
 
 #overrider tbody tr {
-    border-bottom: none;
-    box-shadow: 0 6px 4px -1px rgba(255,53,139,0.7);
+    box-shadow: 0 4px 4px -1px rgba(255,53,139,0.7);
+    border-bottom: solid transparent 10px;
 }
 
-#overrider td {
+#overrider tbody td {
     vertical-align: middle;
     font-family: "Roboto";
 }
 
 #overrider td button {
     font-family: "Oswald";
-    background-color: rgba(52,52,52,1);
-    border-color: rgba(255,255,255,0.7)
-}
-
-.imageTest
-{
-    height: 100px;
-    width:100px;
+    background-color: rgba(255,53,139,0.9);
+    border-color: rgba(255,255,255,0.7);
 }
