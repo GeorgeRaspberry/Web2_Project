@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { UserService } from 'src/app/services/users/user.service';
+import { User } from 'src/app/entities/users/user';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +10,44 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class LoginComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
   message: string = "send message";
-  temp:boolean = true;
-  constructor() { }
+  signUpOrIn:boolean = true;
+  allUsers:Array<User>;
+  constructor(private userService: UserService) {
+      this.allUsers = this.userService.loadUsers();
+   }
   
   ngOnInit(): void {
+    this.signUpOrIn = true;
   }
 
-  changeBoolean()
+  signUp()
   {
-    this.temp = false;
+    this.signUpOrIn = false;
   }
-  changeBoolean2()
+  signIn()
   {
-    this.temp = true;
+    this.signUpOrIn = true;  
   }
 
-  sendMessage() {
-    this.messageEvent.emit()
+  checKLoginInfo() {
+    let username = (<HTMLInputElement> document.getElementById("username")).value;
+    let password = (<HTMLInputElement> document.getElementById("password")).value;
+    let temp = false;
+    for(let user of this.allUsers)
+    {
+      if (user.username == username && user.password == password)
+      {
+        this.userService.loggedInUser = user;
+        temp = true;
+      }
+    }
+    if (temp == true)
+    {
+      this.messageEvent.emit();
+    }
+    else
+    {
+      alert("No user with that combination.");
+    }
   }
 }

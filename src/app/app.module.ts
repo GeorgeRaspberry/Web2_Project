@@ -4,11 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationbarComponent } from './components/navigationbar/navigationbar.component';
-import { FlightsComponent } from './components/flights/flights.component';
 import { RidesComponent } from './components/rides/rides.component';
 import { FlightCompaniesComponent } from './components/flight-companies/flight-companies.component';
 import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
 import { LoginComponent } from './components/login/login.component';
+import { RideCompaniesComponent } from './components/ride-companies/ride-companies.component';
+import { RcompanypageComponent } from './components/ride-companies/rcompanypage/rcompanypage.component';
+import { RatingStarComponent } from './components/rating-star/rating-star.component';
+import { FlightsComponent } from './components/flight-companies/flights/flights.component';
+import { FlightFilterComponent } from './components/flight-companies/flight-filter/flight-filter.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,11 +23,16 @@ import { LoginComponent } from './components/login/login.component';
     RidesComponent,
     FlightCompaniesComponent,
     FcompanypageComponent,
-    LoginComponent
+    LoginComponent,
+    RideCompaniesComponent,
+    RcompanypageComponent,
+    RatingStarComponent,
+    FlightFilterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

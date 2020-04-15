@@ -14,7 +14,7 @@ export class AppComponent {
   message:string;
 
   receiveMessage() {  
-    alert(this.loginInfo.message);
+    alert("User logged in!");
   }
 
 }

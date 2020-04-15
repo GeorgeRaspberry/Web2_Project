@@ -3,8 +3,10 @@ import { Flight } from './entities/flights/flight';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RidesComponent } from './components/rides/rides.component';
-import { FlightsComponent } from './components/flights/flights.component';
 import { FlightCompaniesComponent } from './components/flight-companies/flight-companies.component';
+import { RideCompaniesComponent } from './components/ride-companies/ride-companies.component';
+import { RcompanypageComponent } from './components/ride-companies/rcompanypage/rcompanypage.component';
+import { FlightsComponent } from './components/flight-companies/flights/flights.component';
 
 
 const routes: Routes = [
@@ -13,8 +15,8 @@ const routes: Routes = [
   component: FlightCompaniesComponent
 },
 {
-  path: "rides",
-  component: RidesComponent
+  path: "rideCompanies",
+  component: RideCompaniesComponent
 },
 {
   path: "flight",
@@ -22,6 +24,14 @@ const routes: Routes = [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: FcompanypageComponent },
     { path: ":id/book", component: FlightsComponent } //placeholder
+  ]
+},
+{
+  path: "ride",
+  children: [
+    { path: "", component: RidesComponent },  //placeholder
+    { path: ":id/details", component: RcompanypageComponent },
+    { path: ":id/book", component: RidesComponent } //placeholder
   ]
 },
 ];

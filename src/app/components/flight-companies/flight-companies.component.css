@@ -1,5 +1,5 @@
-#overrider table {
-    margin-top: 50px;
+#overrider {
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -34,4 +34,12 @@
 {
     height: 100px;
     width:100px;
+}
+
+
+button {
+    margin-left:12.5%;
+    font-family: "Oswald";
+    background-color: rgba(52,52,52,1);
+    border-color: rgba(255,255,255,0.7)
 }
