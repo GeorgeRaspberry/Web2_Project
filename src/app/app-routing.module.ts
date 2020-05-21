@@ -1,5 +1,5 @@
+import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
 import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
-import { Flight } from './entities/flights/flight';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RidesComponent } from './components/rides/rides.component';
@@ -7,7 +7,6 @@ import { FlightCompaniesComponent } from './components/flight-companies/flight-c
 import { RideCompaniesComponent } from './components/ride-companies/ride-companies.component';
 import { RcompanypageComponent } from './components/ride-companies/rcompanypage/rcompanypage.component';
 import { FlightsComponent } from './components/flight-companies/flights/flights.component';
-
 
 const routes: Routes = [
 {
@@ -23,7 +22,7 @@ const routes: Routes = [
   children: [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: FcompanypageComponent },
-    { path: ":id/book", component: FlightsComponent } //placeholder
+    { path: ":id/register", component: FlightRegisterComponent }
   ]
 },
 {

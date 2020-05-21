@@ -24,7 +24,6 @@ export class FlightsComponent implements OnInit {
     alert("Booked!");
   }
 
-
   ngOnInit(): void {
 
     for (let i = 0; i < this.allFlights.length; i++) {

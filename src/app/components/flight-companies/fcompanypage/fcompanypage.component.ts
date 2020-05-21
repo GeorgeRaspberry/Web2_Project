@@ -3,8 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FlightCompaniesService } from 'src/app/services/flights/flight-companies.service';
 import { FlightCompany } from 'src/app/entities/flights/flight-company';
 
-
-
 @Component({
   selector: 'app-fcompanypage',
   templateUrl: './fcompanypage.component.html',

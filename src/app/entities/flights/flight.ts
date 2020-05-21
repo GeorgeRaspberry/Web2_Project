@@ -25,4 +25,9 @@ export class Flight {
         this.locationOfTransfers = transferlocations;
         this.price = price;
     }
+
+    CreateTest(Id: number, Name: string) {
+        this.id = Id;
+        this.company = Name;
+    }
 }

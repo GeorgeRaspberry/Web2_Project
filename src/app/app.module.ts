@@ -1,3 +1,5 @@
+import { FlightRegisterService } from './services/flights/flight-register.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -14,6 +16,8 @@ import { RatingStarComponent } from './components/rating-star/rating-star.compon
 import { FlightsComponent } from './components/flight-companies/flights/flights.component';
 import { FlightFilterComponent } from './components/flight-companies/flight-filter/flight-filter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,14 +32,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RcompanypageComponent,
     RatingStarComponent,
     FlightFilterComponent,
-    TopbarComponent
+    TopbarComponent,
+    FlightRegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FlightRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
