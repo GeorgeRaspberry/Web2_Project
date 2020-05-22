@@ -1,3 +1,4 @@
+import { FcompanyRegisterComponent } from './components/flight-companies/fcompany-register/fcompany-register.component';
 import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
 import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,10 @@ const routes: Routes = [
 {
   path: "rideCompanies",
   component: RideCompaniesComponent
+},
+{
+  path: "newFCompany",
+  component: FcompanyRegisterComponent
 },
 {
   path: "flight",

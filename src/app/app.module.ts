@@ -18,6 +18,7 @@ import { FlightFilterComponent } from './components/flight-companies/flight-filt
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
 import { FormsModule } from '@angular/forms';
+import { FcompanyRegisterComponent } from './components/flight-companies/fcompany-register/fcompany-register.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     RatingStarComponent,
     FlightFilterComponent,
     TopbarComponent,
-    FlightRegisterComponent
+    FlightRegisterComponent,
+    FcompanyRegisterComponent
   ],
   imports: [
     BrowserModule,

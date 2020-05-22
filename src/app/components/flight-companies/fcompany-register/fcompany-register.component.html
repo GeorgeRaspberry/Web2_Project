@@ -1,0 +1,40 @@
+<form #form="ngForm" autocomplete="off">
+
+    <table class="center">
+
+        <tr>
+            <input name="Id" class="form-control" placeholder="Company ID" required>
+        </tr>
+
+        <tr>
+            <input name="Name" class="form-control" placeholder="The company's name" required>
+        </tr>
+
+        <tr>
+            <input name="Address" class="form-control" placeholder="The company address" required>
+        </tr>
+
+        <tr>
+            <input name="promoDescription" class="form-control" placeholder="A few words about the company" required>
+        </tr>
+
+        <select
+        name="destinationInfo">
+            <option
+                 *ngFor="let option of destinations">
+                        {{ option }}
+                        <!--
+                            OVDE BI TREBALO DA SE ISPISU SVE DESTINACIJE IZ BAZE :(
+                        -->
+            </option>
+        </select>
+
+        <tr>
+        <button class="btn btn-success" id="add" (click)="addFlight()">
+            CREATE
+        </button>
+        </tr>
+  
+    </table>
+    
+  </form>
