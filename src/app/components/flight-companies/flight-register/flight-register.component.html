@@ -1,13 +1,63 @@
 
 <form #form="ngForm" autocomplete="off">
-  
+
   <table class="center">
+
     <tr>
-        <input name="Id" class="form-control" placeholder="Flight ID" required>
+      <td>
+        <input name="flyOffTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select fly off time">
+        <owl-date-time #dt1></owl-date-time>
+      </td>
     </tr>
 
     <tr>
-        <input name="Name" class="form-control" placeholder="A flights name" required>
+      <td>
+        <input name="landingTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select landing time">
+        <owl-date-time #dt1></owl-date-time>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <!--
+        <input [ngxTimepicker]="picker">
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
+        -->
+        <input name="fullFlightTime" class="form-control" placeholder="Full flight time: HH:MM" required>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <input name="flightLength" type="number" class="form-control" placeholder="Number of kilometers" required>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <input name="numberOfTransfers" type="number" class="form-control" placeholder="Number of transfers" required>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+          <select
+              name="locationOfTransfers" >
+                  <option
+                      *ngFor="let option of transfers">
+                              {{ option }}
+                              <!--
+                                  OVDE BI TREBALO DA SE ISPISU SVE DESTINACIJE IZ BAZE :(
+                              -->
+                  </option>
+          </select>
+      </td>
+  </tr>
+
+    <tr>
+      <td>
+        <input name="price" type="number" class="form-control" placeholder="Price" required>
+      </td>
     </tr>
 
     <tr>

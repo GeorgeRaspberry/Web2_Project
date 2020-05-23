@@ -1,0 +1,47 @@
+
+<form #form="ngForm" autocomplete="off">
+
+    <table class="center">
+  
+      <tr>
+        <td>
+          <input name="carMaker" class="form-control" placeholder="Car maker name" required>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input name="carMaker" class="form-control" placeholder="Car model name" required>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input name="productionYear" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select production year">
+          <owl-date-time #dt1></owl-date-time>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input name="numberOfSeats" type="number" class="form-control" placeholder="Number of seats" required>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input name="vehicleType" class="form-control" placeholder="Vehicle type" required>
+        </td>
+      </tr>
+  
+      <tr>
+        <td>
+            <button class="btn btn-success" id="add" (click)="addRide()">
+            CREATE
+            </button>
+        </td>
+      </tr>
+  
+    </table>
+    
+  </form>

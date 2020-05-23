@@ -9,7 +9,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 })
 export class FcompanyRegisterComponent implements OnInit {
 
-  addFlight() {
+  addFCompany() {
     alert("Djum djum ?");
   }
 

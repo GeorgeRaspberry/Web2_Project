@@ -13,6 +13,5 @@ export class NavigationbarComponent implements OnInit {
   }
   test()
   {
-    
   }
 }

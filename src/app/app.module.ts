@@ -19,6 +19,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
 import { FormsModule } from '@angular/forms';
 import { FcompanyRegisterComponent } from './components/flight-companies/fcompany-register/fcompany-register.component';
+import { ProfilePageComponent } from './components/login/profile-page/profile-page.component';
+import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-register/rcompany-register.component';
+import { RideRegisterComponent } from './components/ride-companies/ride-register/ride-register.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -35,14 +40,20 @@ import { FcompanyRegisterComponent } from './components/flight-companies/fcompan
     FlightFilterComponent,
     TopbarComponent,
     FlightRegisterComponent,
-    FcompanyRegisterComponent
+    FcompanyRegisterComponent,
+    ProfilePageComponent,
+    RcompanyRegisterComponent,
+    RideRegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [FlightRegisterService],
   bootstrap: [AppComponent]

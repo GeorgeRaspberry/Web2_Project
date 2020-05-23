@@ -7,7 +7,6 @@ import { LoginComponent } from './components/login/login.component';
   styleUrls: ['./app.component.css']
 })
 
-
 export class AppComponent {
   title = 'Angular web2-project';
   @ViewChild(LoginComponent) loginInfo;

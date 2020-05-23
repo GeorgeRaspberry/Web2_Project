@@ -1,0 +1,116 @@
+<form #form="ngForm" autocomplete="off">
+
+    <table class="center">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr>
+            <td rowspan="8">
+                <img src="assets/Portrait_Placeholder.png">
+            </td>
+            <td>
+                <input name="Username" class="form-control" placeholder="Username" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Password" class="form-control" placeholder="Password" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Name" class="form-control" placeholder="Name" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Lastname" class="form-control" placeholder="Last name" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="City" class="form-control" placeholder="City" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="PhoneNumber" class="form-control" placeholder="Phone number" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Email" class="form-control" placeholder="Email" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-success" id="add" (click)="saveChanges()">
+                    SAVE CHANGES
+                </button>
+            </td>    
+        </tr>
+    </table>
+
+    <hr>
+
+    <div class="promo">
+        Friends list:
+    </div>
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Username</th>
+                <th id="friendsHeader">Name</th>
+                <th id="friendsHeader">Last name</th>
+                <th id="friendsHeader">Requests</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+            <td>
+                <button class="btn btn-success" id="pending">
+                    ACCEPT
+                </button>
+                <button class="btn btn-success" id="pending">
+                    REJECT
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+        </tr>
+        <tr>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+            <td>
+                asd
+            </td>
+        </tr>
+    </table>
+
+  </form>
+

@@ -4,5 +4,4 @@ export enum UserRole {
     RideAdministrator,
     FlightAdministrator,
     NotLoggedIn
-
 }

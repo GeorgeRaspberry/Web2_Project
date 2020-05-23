@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files
     background-image: linear-gradient(to bottom right, rgba(80,173,212,1), rgba(57,132,176,1)); */
+    
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
 html {
     height: 100%;
 }
@@ -16,3 +19,5 @@ body{
     position: absolute;
     bottom: 0;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

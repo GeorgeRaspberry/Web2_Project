@@ -1,6 +1,10 @@
+import { FlightCompany } from 'src/app/entities/flights/flight-company';
 import { FlightRegisterService } from './../../../services/flights/flight-register.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
 
 @Component({
   selector: 'app-flight-register',
@@ -9,9 +13,13 @@ import { NgForm, FormsModule } from '@angular/forms';
 })
 export class FlightRegisterComponent implements OnInit {
   
+  transfers: Array<string>;
+
   addFlight() {
     alert("Djum djum ?");
   }
+
+  companies: Array<FlightCompany>;
 
   @Input() 
     companyId: number;

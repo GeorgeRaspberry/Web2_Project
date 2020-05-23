@@ -25,8 +25,17 @@
 
 #overrider td button {
     font-family: "Oswald";
-    background-color: rgba(52,52,52,1);
+    background-color: rgba(52,52,52,0.9);
     border-color: rgba(255,255,255,0.7)
+}
+
+#overrider td #add {
+    font-family: "Oswald";
+    font-size: 18px;
+    font-weight: 300;
+    background-color: rgba(52,52,52,0.9);
+    border-color: rgba(255,255,255,0.7);
+    width: 200px;
 }
 
 .imageTest

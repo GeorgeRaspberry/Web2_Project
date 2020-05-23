@@ -1,14 +1,5 @@
 import { DatePipe, Time } from '@angular/common';
 
-
-/*
-naziv, 
-marka, 
-model, 
-godina proizvodnje, 
-broj sedišta, 
-tip vozila,
-*/
 export class Car {
     id: number
     company: string;

@@ -10,8 +10,9 @@ import { User } from 'src/app/entities/users/user';
 export class LoginComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
   message: string = "send message";
-  signUpOrIn:boolean = true;
+  signUpOrIn: boolean = true;
   allUsers:Array<User>;
+
   constructor(private userService: UserService) {
       this.allUsers = this.userService.loadUsers();
    }
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   {
     this.signUpOrIn = false;
   }
+
   signIn()
   {
     this.signUpOrIn = true;  

@@ -35,21 +35,22 @@
         <tr>
             <td>
                 <select
-                    name="destinationInfo">
+                    name="carCompanyInfo">
                         <option
-                            *ngFor="let option of destinations">
-                                    {{ option }}
+                            *ngFor="let option of cars">
+                                    {{ option.carMaker }} {{ option.carModel }} 
                                     <!--
-                                        OVDE BI TREBALO DA SE ISPISU SVE DESTINACIJE IZ BAZE :(
+                                        OVDE BI TREBALO DA SE ISPISU SVI AUTI IZ BAZE :(
                                     -->
                         </option>
                 </select>
             </td>
         </tr>
+        
 
         <tr>
             <td>
-                <button class="btn btn-success" id="add" (click)="addFCompany()">
+                <button class="btn btn-success" id="add" (click)="addRideCompany()">
                     CREATE
                 </button>
             </td>
@@ -58,3 +59,4 @@
     </table>
     
   </form>
+
