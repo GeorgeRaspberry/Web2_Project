@@ -1,0 +1,17 @@
+<div class="filterSlideOut" [@fadeInOut]=currentState>
+    <table class= "filterTable"> 
+        <tr>
+        <td class="filterColumn">Company location: </td>
+        <td><input style="width:120px;" type="text" placeholder="Enter here" /> </td>
+        <td class="filterColumn">Company name: </td>
+        <td><input style="width:100px;" type="text" placeholder="Enter here" /></td>
+        <td class="filterColumn">Start date: </td>
+        <td><input style="width:120px;" type="datetime" placeholder="Enter here" /></td>
+        <td class="filterColumn">End date: </td>
+        <td><input style="width:120px;" type="datetime" placeholder="Enter here" /></td>
+        </tr>
+    </table>
+
+</div>
+<br>
+<button id="buttonOverrider" class="btn btn-success" (click)="changeState()">Filter</button>
