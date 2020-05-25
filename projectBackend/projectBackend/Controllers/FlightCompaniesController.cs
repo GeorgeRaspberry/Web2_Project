@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace projectBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlightCompaniesController : ControllerBase
+  public class FlightCompaniesController : ControllerBase
     {
         private readonly FlightContext _context;
 
@@ -25,7 +25,6 @@ namespace projectBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FlightCompany>>> GetFlightCompanies()
         {
-            List<FlightCompany> lista = _context.FlightCompanies.ToList();
             return await _context.FlightCompanies.ToListAsync();
         }
 

@@ -1,5 +1,4 @@
-import { FlightRegisterService } from './services/flights/flight-register.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,6 +23,8 @@ import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-
 import { RideRegisterComponent } from './components/ride-companies/ride-register/ride-register.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { FlightCompaniesService } from './services/flights/flight-companies.service';
+import { FlightsService } from './services/flights/flights.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
   ],
-  providers: [FlightRegisterService],
+  providers: [FlightsService,FlightCompaniesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

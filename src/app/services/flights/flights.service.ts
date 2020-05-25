@@ -3,51 +3,41 @@ import { FlightCompaniesService } from './flight-companies.service';
 import { Flight } from './../../entities/flights/flight';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightsService {
 
-  allCompanies: Array<FlightCompany>;
-
-  constructor(private flightCompanyService: FlightCompaniesService) {
-      this.allCompanies = flightCompanyService.loadCompanies();
+  formData: Flight;
+  readonly rootURL = 'http://localhost:37240/api';
+  flights : Flight[];
+  company : FlightCompany;
+  constructor(private http: HttpClient) {
+      
    }
 
   loadFlights() {
-    return this.mockedFlights();
+    this.http.get(this.rootURL + '/Flights')
+    .toPromise()
+    .then(res => this.flights = res as Flight[]);
+  }
+  loadCompanyData(id:number)
+  {
+    this.http.get(this.rootURL + '/FlightCompanies/'+id)
+    .toPromise()
+    .then(res => this.company = res as FlightCompany);
+  }
+  postFlight() {
+    return this.http.post(this.rootURL + '/Flights', this.formData);
+  }
+  putFlight() {
+    return this.http.put(this.rootURL + '/Flights/'+ this.formData.companyId, this.formData);
+  }
+  deleteFlight(id) {
+    return this.http.delete(this.rootURL + '/Flights/'+ this.formData.id);
   }
 
-  mockedFlights(): Array<Flight> {
-    let allFlights = new Array<Flight>();
 
-    const f1 = new Flight(1, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "39:28", 2500, 2, ["","",""], 101);
-    const f2 = new Flight(2, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "49:28", 4500, 1, ["","",""], 181);
-    const f3 = new Flight(3, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "19:12", 500, 0, ["","",""], 51);
-    const f4 = new Flight(4, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "39:28", 2500, 2, ["","",""], 101);
-    const f5 = new Flight(5, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "49:28", 4500, 1, ["","",""], 181);
-    const f6 = new Flight(6, this.allCompanies[0].name, 1, "yyyy-dd-MM", "yyyy-dd-MM", "19:12", 500, 0, ["","",""], 51);
-    const f7 = new Flight(7, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "39:28", 2500, 2, ["","",""], 102);
-    const f8 = new Flight(8, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "49:28", 4500, 1, ["","",""], 182);
-    const f9 = new Flight(9, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "19:12", 500, 0, ["","",""], 52);
-    const f10 = new Flight(10, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "39:28", 2500, 2, ["","",""], 102);
-    const f11 = new Flight(11, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "49:28", 4500, 1, ["","",""], 182);
-    const f12 = new Flight(12, this.allCompanies[1].name, 2, "yyyy-dd-MM", "yyyy-dd-MM", "19:12", 500, 0, ["","",""], 52);
-
-    allFlights.push(f1);
-    allFlights.push(f2);
-    allFlights.push(f3);
-    allFlights.push(f4);
-    allFlights.push(f5);
-    allFlights.push(f6);
-    allFlights.push(f7);
-    allFlights.push(f8);
-    allFlights.push(f9);
-    allFlights.push(f10);
-    allFlights.push(f11);
-    allFlights.push(f12);
-
-    return allFlights;
-  }
 }

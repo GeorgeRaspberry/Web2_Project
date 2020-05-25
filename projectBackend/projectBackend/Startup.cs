@@ -32,6 +32,13 @@ namespace projectBackend
                 options.UseSqlServer(Configuration.GetConnectionString("connectString")); 
                 options.UseLazyLoadingProxies(); 
             });
+
+            services.AddDbContext<UserContext>(options =>
+            {
+              options.UseSqlServer(Configuration.GetConnectionString("connectString2"));
+              options.UseLazyLoadingProxies();
+            });
+
             services.AddControllersWithViews()
                .AddNewtonsoftJson(options =>
                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

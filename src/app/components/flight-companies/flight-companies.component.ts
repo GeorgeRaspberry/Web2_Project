@@ -12,24 +12,30 @@ import { transition, state, trigger, style, animate } from '@angular/animations'
   
 })
 export class FlightCompaniesComponent implements OnInit {
-  allFlightCompanies: Array<FlightCompany>;
-  filteredCompanies: Array<FlightCompany>;
   selectedCompany: FlightCompany;
   isButtonVisible:boolean;
 
-  constructor(private companiesService: FlightCompaniesService) {
-    this.allFlightCompanies = this.companiesService.loadCompanies();
-    this.filteredCompanies = this.allFlightCompanies;
-    this.isButtonVisible = false;
+  constructor(public companiesService: FlightCompaniesService) {
   }
 
   ngOnInit(): void {
+    this.companiesService.loadCompanies();
+    this.isButtonVisible = false;
 
   }
 
   onClick(company: FlightCompany) {
       this.selectedCompany = company;
       console.log(this.selectedCompany);
+  }
+  deleteCompany(id:number)
+  {
+    this.companiesService.deleteFlightCompany(id).subscribe(
+      res=>{
+        this.companiesService.loadCompanies();
+      }, 
+      err=> {console.log(err);}
+    );
   }
 
 }

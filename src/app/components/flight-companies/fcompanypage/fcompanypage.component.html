@@ -1,19 +1,15 @@
-<html>
-<body>
-
-<div *ngFor="let company of allCompanies">
-    <div id="companyInfo" *ngIf="company.id == id">
-        <img src={{company.image}}>
-        <app-rating-star [rating]="company.rating"></app-rating-star>
-        <p class="promo">{{company.promoDescription}}</p>
+<div id="overrider">
+    <div id="companyInfo">
+        <img src={{service.company.image}}>
+        <app-rating-star [rating]="service.company.rating"></app-rating-star>
+        <p class="promo">{{service.company.promoDescription}}</p>
                 
     </div>
+
+<app-flights [flights]="service.company.flights"></app-flights>
+        <button class="btn btn-success" id="add" routerLink="/flight/{{id}}/register">
+            CREATE NEW FLIGHT
+        </button>
 </div>
-
-<app-flights [companyId]="id"></app-flights>
-
-</body>
-</html>
-
 
 

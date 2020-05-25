@@ -1,18 +1,20 @@
 import { UserRole } from './user-role.enum';
 
 export class User {
+    id: number;
     name: string;
     lastname: string;
     image: string;
     city: string;
-    phoneNumber: Array<number>;
+    phoneNumber: string;
     email: string;
     username: string;
     password: string;
     role: UserRole;
 
-    constructor(name: string, lastname: string, image: string, city: string, phoneNumber: Array<number>, email: string, username: string, password:string, role:UserRole)
+    constructor(name: string, lastname: string, image: string, city: string, phoneNumber: string, email: string, username: string, password:string, role:UserRole)
     {
+        this.id = 0;
         this.name = name;
         this.lastname = lastname;
         this.city = city;

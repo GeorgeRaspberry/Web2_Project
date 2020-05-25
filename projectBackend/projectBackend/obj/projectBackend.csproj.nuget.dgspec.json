@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "P:\\Cas\\vebreactandnodejs\\projectAngular\\projectBackend\\projectBackend\\projectBackend.csproj": {}
+    "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {}
   },
   "projects": {
-    "P:\\Cas\\vebreactandnodejs\\projectAngular\\projectBackend\\projectBackend\\projectBackend.csproj": {
+    "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "P:\\Cas\\vebreactandnodejs\\projectAngular\\projectBackend\\projectBackend\\projectBackend.csproj",
+        "projectUniqueName": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
         "projectName": "projectBackend",
-        "projectPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\projectBackend\\projectBackend\\projectBackend.csproj",
+        "projectPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
         "packagesPath": "C:\\Users\\Duka\\.nuget\\packages\\",
-        "outputPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\projectBackend\\projectBackend\\obj\\",
+        "outputPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -79,6 +79,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.6.0, )"
             }
           },
           "imports": [

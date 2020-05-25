@@ -5,7 +5,7 @@
 
     <table id="overrider" class="table table-hover" >
         <tbody>
-            <tr *ngFor="let company of filteredCompanies">
+            <tr *ngFor="let company of companiesService.companies">
                 <td><img class="imageTest" src={{company.image}}></td>
                 <td>{{company.name}}</td>
                 <td>{{company.promoDescription}}</td>
@@ -13,6 +13,7 @@
                 <td><button class="btn btn-success" routerLink="/flight/{{company.id}}/details">
                     Details
                 </button></td>
+                <td><button class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button></td>
             </tr>
         </tbody>
         <tr id="add">
