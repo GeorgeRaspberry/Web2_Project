@@ -166,3 +166,4 @@ S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\n
 S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.dll
 S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.pdb
 S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.genruntimeconfig.cache
+S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.csprojAssemblyReference.cache

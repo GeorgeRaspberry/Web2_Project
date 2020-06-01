@@ -25,19 +25,22 @@ namespace projectBackend.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
 
+        
+        // public UserController(UserContext context, UserManager<ApplicationUser> userManager, 
+        //    SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
+        //{
+        //    _context = context;
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //    _appSettings = appSettings.Value;
+        //}
+        public UserController(UserContext context)
+        {
+            _context = context;
+        }
 
-    public UserController(UserContext context, UserManager<ApplicationUser> userManager,
-       SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
-    {
-      _context = context;
-      _userManager = userManager;
-      _signInManager = signInManager;
-      _appSettings = appSettings.Value;
-    }
-
-
-    // GET: api/User
-    [HttpGet]
+        // GET: api/User
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();

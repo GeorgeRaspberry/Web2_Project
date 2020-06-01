@@ -2,54 +2,36 @@
 
     <table class="center">
 
+    
+
         <tr>
             <td>
-                <input name="Id" class="form-control" placeholder="Company ID" required>
+                <input name="Name" #Name="ngModel" class="form-control" [(ngModel)]="service.formData.name" placeholder="The company's name" required>
             </td>
         </tr>
 
         <tr>
             <td>
-                <input name="Name" class="form-control" placeholder="The company's name" required>
+                <input name="Address" #Address="ngModel" class="form-control" [(ngModel)]="service.formData.address" placeholder="The company address" required>
             </td>
         </tr>
 
         <tr>
             <td>
-                <input name="Address" class="form-control" placeholder="The company address" required>
+              <input #file name="image" type="file" class="form-control" accept='image/*' (change)="onSelectFile($event)" placeholder="Choose company image" required>
+              <img [src]="url" height="200"> <br/>
             </td>
         </tr>
 
         <tr>
             <td>
-              <input name="image" type="file" class="form-control" placeholder="Choose company image" required>
+                <input name="promoDescription" #promoDescription="ngModel" class="form-control" [(ngModel)]="service.formData.promoDescription" placeholder="A few words about the company" required>
             </td>
         </tr>
 
         <tr>
             <td>
-                <input name="promoDescription" class="form-control" placeholder="A few words about the company" required>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <select
-                    name="destinationInfo">
-                        <option
-                            *ngFor="let option of destinations">
-                                    {{ option }}
-                                    <!--
-                                        OVDE BI TREBALO DA SE ISPISU SVE DESTINACIJE IZ BAZE :(
-                                    -->
-                        </option>
-                </select>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <button class="btn btn-success" id="add" (click)="addFCompany()">
+                <button type="submit" class="btn btn-success" id="add" (click)="addFCompany(form)">
                     CREATE
                 </button>
             </td>

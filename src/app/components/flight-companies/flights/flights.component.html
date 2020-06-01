@@ -1,6 +1,5 @@
-<body id="overrider">
 
-    <table class="table table-hover">
+    <table id="overrider" class="table table-hover">
         <thead  class="thead-dark">
             <tr>
                 <th scope="col">TAKE OFF/LANDING TIME</th>
@@ -12,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let flight of allFlights">
+            <tr *ngFor="let flight of flights">
                 <td>{{flight.flyOffTime | date: 'short'}} <b>-></b> {{flight.landingTime | date: 'short'}}</td>
                 <td>{{flight.numberOfTransfers}}</td>
                 <td>{{flight.fullFlightTime}}</td>
@@ -23,21 +22,6 @@
                 </button></td>
             </tr>
 
-        </tbody>
-
-        <tr id="add">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-success" id="add" routerLink="/flight/companyId/register">
-                    CREATE NEW FLIGHT
-                </button>
-            </td>
-        </tr>
-        
+        </tbody>        
     </table>
 
-</body>

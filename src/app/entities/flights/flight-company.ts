@@ -1,3 +1,5 @@
+import { Flight } from './flight';
+
 export class FlightCompany {
     id: number;
     name: string;
@@ -5,7 +7,7 @@ export class FlightCompany {
     address: string;
     promoDescription: string;
     rating: number;
-    destinationInfo: Array<string>;
+    flights: Array<Flight>;
 
     constructor(id: number, image:string, name: string, address: string, promoDescription: string, rating: number)
     {
@@ -15,6 +17,6 @@ export class FlightCompany {
         this.address = address;
         this.promoDescription = promoDescription;
         this.rating = rating;
-        this.destinationInfo = new Array<string>();
+        this.flights = new Array<Flight>();
     }
 }

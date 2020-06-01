@@ -1,19 +1,18 @@
-
 <form #form="ngForm" autocomplete="off">
 
   <table class="center">
 
     <tr>
       <td>
-        <input name="flyOffTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select fly off time">
+        <input name="flyOffTime" #flyOffTime="ngModel" [(ngModel)]="service.formData.flyOffTime" name="flyOffTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select fly off time">
         <owl-date-time #dt1></owl-date-time>
       </td>
     </tr>
 
     <tr>
       <td>
-        <input name="landingTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select landing time">
-        <owl-date-time #dt1></owl-date-time>
+        <input name="landingTime" #landingTime="ngModel" [(ngModel)]="service.formData.landingTime" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" class="form-control" placeholder="Select landing time">
+        <owl-date-time #dt2></owl-date-time>
       </td>
     </tr>
 
@@ -23,19 +22,19 @@
         <input [ngxTimepicker]="picker">
         <ngx-material-timepicker #picker></ngx-material-timepicker>
         -->
-        <input name="fullFlightTime" class="form-control" placeholder="Full flight time: HH:MM" required>
+        <input name="fullFlightTime" #fullFlightTime="ngModel" [(ngModel)]="service.formData.fullFlightTime" class="form-control" placeholder="Full flight time: HH:MM" required>
       </td>
     </tr>
 
     <tr>
       <td>
-        <input name="flightLength" type="number" class="form-control" placeholder="Number of kilometers" required>
+        <input name="flightLength" #flightLength="ngModel" [(ngModel)]="service.formData.flightLength" type="number" class="form-control" placeholder="Number of kilometers" required>
       </td>
     </tr>
 
     <tr>
       <td>
-        <input name="numberOfTransfers" type="number" class="form-control" placeholder="Number of transfers" required>
+        <input name="numberOfTransfers" #numberOfTransfers="ngModel" [(ngModel)]="service.formData.numberOfTransfers" type="number" class="form-control" placeholder="Number of transfers" required>
       </td>
     </tr>
 
@@ -56,12 +55,12 @@
 
     <tr>
       <td>
-        <input name="price" type="number" class="form-control" placeholder="Price" required>
+        <input name="price" #price="ngModel" [(ngModel)]="service.formData.price" type="number" class="form-control" placeholder="Price" required>
       </td>
     </tr>
 
     <tr>
-      <button class="btn btn-success" id="add" (click)="addFlight()">
+      <button class="btn btn-success" id="add" (click)="addFlight(form)">
         CREATE
       </button>
     </tr>

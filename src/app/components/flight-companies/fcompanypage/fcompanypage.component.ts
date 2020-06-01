@@ -11,14 +11,14 @@ import { FlightCompany } from 'src/app/entities/flights/flight-company';
 export class FcompanypageComponent implements OnInit {
 
   id: number;
-  allCompanies: Array<FlightCompany>;
 
-  constructor(private route: ActivatedRoute, private companiesService: FlightCompaniesService) {
-    route.params.subscribe(params => { this.id = params['id']; });
-    this.allCompanies = companiesService.loadCompanies();
+  constructor(public route: ActivatedRoute, public service: FlightCompaniesService) {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => { this.id = params['id']; });
+    alert(this.id);
+    this.service.loadCompanyData(this.id);
   }
 
 }
