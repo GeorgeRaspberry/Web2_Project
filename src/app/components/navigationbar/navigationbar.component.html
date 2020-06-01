@@ -3,5 +3,14 @@
     <a routerLink = "flightCompanies" routerLinkActive="active"  >FLIGHTS</a>
     <a routerLink = "rideCompanies" routerLinkActive="active"  >RIDES</a>
     <a routerLink = "profilePage">RESERVATIONS</a>
-    <a (click)="test()" data-toggle="modal" data-target="#myModal"> MY PROFILE</a>
+    <!--
+    <div *ngIf="loggedIn == false; else loggedInBlock">
+    -->
+        <a (click)="test()" data-toggle="modal" data-target="#myModal"> MY PROFILE</a>
+    <!--
+        </div>
+    <ng-template #loggedInBlock>
+        <a routerLink = "profilePage">MY PROFILE</a>
+    </ng-template>
+    -->
 </div>

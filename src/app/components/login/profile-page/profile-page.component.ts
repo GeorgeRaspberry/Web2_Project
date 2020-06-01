@@ -1,5 +1,8 @@
+import { UserRole } from 'src/app/entities/users/user-role.enum';
 import { ProfilePageService } from './../../../services/users/profile-page.service';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { User } from 'src/app/entities/users/user';
 
 @Component({
   selector: 'app-profile-page',
@@ -8,21 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  saveChanges() {
+  saveChanges(form: NgForm) {
+    this.service.formData.id = 0;
     if (window.confirm('Are you sure?'))
     {
-        // They clicked Yes
+      this.service.postUser().subscribe(
+        res=>{
+          this.resetForm(form);
+          this.service.refreshList();
+        }, 
+        err=> {console.log(err);}
+    );
+      alert("Saved!");
     }
     else
     {
-        // They clicked no
+      /*They clicked no. */
     }
   }
 
-  constructor(private service: ProfilePageService) { }
+  constructor(public service: ProfilePageService) {
+   }
 
   ngOnInit(): void {
-    
+    this.resetForm();
+  }
+
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.form.reset();
+    this.service.formData = new User("","","",0,"","","","Registered");
   }
 
 }

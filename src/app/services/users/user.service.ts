@@ -9,7 +9,7 @@ export class UserService {
 
   loggedInUser:User;
   constructor() {
-    this.loggedInUser = new User('','','','', null, '', '', '', UserRole.NotLoggedIn);
+    this.loggedInUser = new User('','','', 0, '', '', '', "Registered");
   }
 
   loadUsers() {
@@ -19,10 +19,10 @@ export class UserService {
   {
     let allUsers = new Array<User>();
 
-    const u1 = new User('','','','', null, '','admin','admin',UserRole.Administrator);
-    const u2 = new User('','','','', null, '','adminride','adminride',UserRole.RideAdministrator);
-    const u3 = new User('','','','', null, '','adminflight','adminflight',UserRole.FlightAdministrator);
-    const u4 = new User('','','','', null, '','user','user',UserRole.Registered);
+    const u1 = new User('','','', 0, '','admin','admin',"Registered");
+    const u2 = new User('','','', 0, '','adminride','adminride',"Registered");
+    const u3 = new User('','','', 0, '','adminflight','adminflight',"Registered");
+    const u4 = new User('','','', 0, '','user','user',"Registered");
 
     allUsers.push(u1);
     allUsers.push(u2);

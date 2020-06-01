@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using projectBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace projectBackend.Database
 
         public DbSet<Flight> Flights { get; set; }
         public DbSet<FlightCompany> FlightCompanies { get; set; }
+        public DbSet<projectBackend.Models.User> User { get; set; }
 
     }
 }
