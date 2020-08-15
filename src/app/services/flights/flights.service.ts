@@ -19,6 +19,7 @@ export class FlightsService {
    }
 
   loadFlights() {
+    alert("asd");
     this.http.get(this.rootURL + '/Flights')
     .toPromise()
     .then(res => this.flights = res as Flight[]);

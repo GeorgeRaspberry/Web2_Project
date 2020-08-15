@@ -10,10 +10,10 @@
                 <td>{{company.name}}</td>
                 <td>{{company.promoDescription}}</td>
                 <td><app-rating-star [rating]="company.rating"></app-rating-star></td>
-                <td><button class="btn btn-success" routerLink="/flight/{{company.id}}/details">
-                    Details
-                </button></td>
-                <td><button class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button></td>
+                <td>
+                    <button class="btn btn-success" routerLink="/flight/{{company.id}}/details">Details</button>
+                    <button *ngIf="service.loggedUser.role == 'Administrator';" class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button>
+                </td>
             </tr>
         </tbody>
         <tr id="add">
@@ -22,7 +22,7 @@
             <td></td>
             <td></td>
             <td>
-                <button class="btn btn-success" id="add" routerLink="/newFCompany">
+                <button *ngIf="service.loggedUser.role == 'Administrator';" class="btn btn-success" id="add" routerLink="/newFCompany">
                     NEW COMPANY
                 </button>
             </td>

@@ -34,13 +34,13 @@ export class ProfilePageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.resetForm();
+    this.service.formData = this.service.loggedUser;
   }
 
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
-    this.service.formData = new User("","","",0,"","","","Registered");
+    this.service.formData = new User();
   }
 
 }

@@ -1,16 +1,13 @@
 <img id="logo" src="assets/logo1-3.png">
 <div class="topnav">
-    <a routerLink = "flightCompanies" routerLinkActive="active"  >FLIGHTS</a>
-    <a routerLink = "rideCompanies" routerLinkActive="active"  >RIDES</a>
-    <a routerLink = "profilePage">RESERVATIONS</a>
-    <!--
-    <div *ngIf="loggedIn == false; else loggedInBlock">
-    -->
-        <a (click)="test()" data-toggle="modal" data-target="#myModal"> MY PROFILE</a>
-    <!--
-        </div>
+    <a (click)="routeView()" routerLink = "flightCompanies" routerLinkActive="active">FLIGHTS</a>
+    <a (click)="routeView()"  routerLink = "rideCompanies" routerLinkActive="active"  >RIDES</a>
+    <a (click)="routeView()" routerLink = "profilePage">RESERVATIONS</a>
+    
+ 
+    <a *ngIf="service.loggedUser.role == 'NotLoggedIn'; else loggedInBlock"  data-toggle="modal" data-target="#myModal"> MY PROFILE</a>
     <ng-template #loggedInBlock>
-        <a routerLink = "profilePage">MY PROFILE</a>
+    <a (click)="routeView()" routerLink = "profilePage">MY PROFILE</a>
     </ng-template>
-    -->
+
 </div>

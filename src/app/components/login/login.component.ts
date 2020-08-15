@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         localStorage.setItem('token', res.token);
         alert('Login successful!');
+        this.service.getLoggedUser(localStorage.getItem('token'));
         this.router.navigateByUrl('/flightCompanies');
       },
       err => {
@@ -72,7 +73,8 @@ export class LoginComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
-    this.service.formData = new User("","","",0,"","","", "Registered");
+    this.service.formData = new User();
+    this.service.formData.role = "Registered";
     this.verifiedPassword = "";
   }
 
@@ -92,7 +94,7 @@ export class LoginComponent implements OnInit {
     let temp = false;
     for(let user of this.allUsers)
     {
-      if (user.username == username && user.password == password)
+      if (user.userName == username && user.password == password)
       {
         this.userService.loggedInUser = user;
         temp = true;

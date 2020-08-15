@@ -33,11 +33,6 @@ export class FlightCompaniesService {
     return this.http.delete(this.rootURL + '/FlightCompanies/'+ id);
   }
 
-  refreshList(){
-    this.http.get(this.rootURL + '/Flights')
-    .toPromise()
-    .then(res => this.companies = res as FlightCompany[]);
-  }
 
 
 

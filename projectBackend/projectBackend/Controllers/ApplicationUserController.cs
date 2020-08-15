@@ -34,6 +34,34 @@ namespace projectBackend.Controllers
       _appSettings = appSettings.Value;
     }
 
+    [HttpGet]
+    [Route("GetUserData/{token}")]
+    public async Task<Object> GetUserData(string token)
+    {
+      var tokenHandle = new JwtSecurityTokenHandler();
+      var userToken = tokenHandle.ReadJwtToken(token);
+
+      string userId = userToken.Payload["UserID"].ToString();
+
+      var user = await _userManager.FindByIdAsync(userId);
+      string name = user.FullName.Split(' ')[0];
+      string lastname = user.FullName.Split(' ')[1];
+
+      ApplicationUserModel userModel = new ApplicationUserModel();
+      var returnUser = new ApplicationUserModel()
+      {
+        UserName = user.UserName,
+        Email = user.Email,
+        Name = name,
+        Lastname = lastname,
+        PhoneNumber = 1,
+        City = user.City,
+        Role = user.Role
+      };
+
+      return returnUser;
+    }
+
     [HttpPost]
     [Route("Register")]
     //POST : /api/ApplicationUser/Register
@@ -45,7 +73,8 @@ namespace projectBackend.Controllers
         Email = model.Email,
         FullName = model.Name + ' ' + model.Lastname,
         PhoneNumber = model.PhoneNumber.ToString(),
-        City = model.City
+        City = model.City,
+        Role = "FlightAdministrator"
       };
 
       try
@@ -73,11 +102,27 @@ namespace projectBackend.Controllers
           Subject = new ClaimsIdentity(new Claim[]
             {
                         new Claim("UserID", user.Id.ToString()),
-                        new Claim("Roles", "admin")
             }),
           Expires = DateTime.UtcNow.AddDays(1),
           SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
         };
+        if (user.Role == "Registered")
+        {
+          tokenDescriptor.Subject.AddClaim(new Claim("Roles", "Registered"));
+        }
+        else if (user.Role == "Administrator")
+        {
+          tokenDescriptor.Subject.AddClaim(new Claim("Roles", "Administrator"));
+        }
+        else if (user.Role == "RideAdministrator")
+        {
+          tokenDescriptor.Subject.AddClaim(new Claim("Roles", "RideAdministrator"));
+        }
+        else if (user.Role == "FlightAdministrator")
+        {
+          tokenDescriptor.Subject.AddClaim(new Claim("Roles", "FlightAdministrator"));
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
         var token = tokenHandler.WriteToken(securityToken);

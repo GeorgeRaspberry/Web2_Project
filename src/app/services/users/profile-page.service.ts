@@ -12,7 +12,7 @@ export class ProfilePageService {
   formData: User;
   readonly rootURL = 'http://localhost:37240/api';
   list : User[];
-
+  loggedUser:User = new User();
   constructor(private http: HttpClient) { }
 
   postUser() {
@@ -24,15 +24,20 @@ export class ProfilePageService {
   deleteUser(id) {
     return this.http.delete(this.rootURL + '/User/'+ this.formData.id);
   }
+  getLoggedUser(token:string){
+    this.http.get(this.rootURL + '/ApplicationUser/GetUserData/'+ token)
+    .toPromise()
+    .then(res => this.loggedUser = res as User);
+  }
+
 
   login(form:NgForm) {
-  /*return this.http.post(this.rootURL + '/User/Login', this.formData);*/
     return this.http.post(this.rootURL + '/ApplicationUser/Login', this.formData);
   }
 
   register (form:NgForm) {
       var body = {
-      UserName: this.formData.username,
+      UserName: this.formData.userName,
       Email: this.formData.email,
       Name: this.formData.name,
       Lastname: this.formData.lastname,

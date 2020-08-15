@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/entities/users/user';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-topbar',
@@ -6,12 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
-
-  constructor() { }
-
+  loggedUser:User;
+  constructor(public service:ProfilePageService) { }
+  
   ngOnInit(): void {
   }
 
+  logOut()
+  {
+    localStorage.removeItem('token');
+    this.service.loggedUser = new User();
+  }
   onClickSocial(num: number) {
     if (num == 1) {
       alert("Facebook opened!");

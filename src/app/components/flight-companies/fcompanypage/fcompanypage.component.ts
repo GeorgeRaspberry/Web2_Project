@@ -17,7 +17,6 @@ export class FcompanypageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.id = params['id']; });
-    alert(this.id);
     this.service.loadCompanyData(this.id);
   }
 

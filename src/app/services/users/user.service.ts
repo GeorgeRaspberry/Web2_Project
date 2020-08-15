@@ -9,7 +9,7 @@ export class UserService {
 
   loggedInUser:User;
   constructor() {
-    this.loggedInUser = new User('','','', 0, '', '', '', "Registered");
+    this.loggedInUser = new User();
   }
 
   loadUsers() {
@@ -19,16 +19,7 @@ export class UserService {
   {
     let allUsers = new Array<User>();
 
-    const u1 = new User('','','', 0, '','admin','admin',"Registered");
-    const u2 = new User('','','', 0, '','adminride','adminride',"Registered");
-    const u3 = new User('','','', 0, '','adminflight','adminflight',"Registered");
-    const u4 = new User('','','', 0, '','user','user',"Registered");
 
-    allUsers.push(u1);
-    allUsers.push(u2);
-    allUsers.push(u3);
-    allUsers.push(u4);
-    
 
     return allUsers; 
   }
