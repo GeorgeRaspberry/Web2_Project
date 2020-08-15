@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,12 +46,35 @@ namespace projectBackend.Controllers
         Email = model.Email,
         FullName = model.Name + ' ' + model.Lastname,
         PhoneNumber = model.PhoneNumber.ToString(),
-        City = model.City
+        City = model.City,
+        Authenticate = model.Authenticate
       };
 
       try
       {
         var result = await _userManager.CreateAsync(applicationUser, model.Password);
+
+        #region Mail
+        MailMessage msg = new MailMessage();
+        msg.From = new MailAddress("helpertravel45@gmail.com");
+        msg.To.Add(new MailAddress(applicationUser.Email));
+        msg.Subject = "Email Confirmation";
+        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200";
+
+        //string text = string.Format("Please click on this link to {0}: {1}", msg.Subject, msg.Body);
+        //string html = "Please confirm your account by clicking this link: <a href=\"" + msg.Body + "\">link</a><br/>";
+
+        //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+        //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+
+        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
+        smtpClient.UseDefaultCredentials = false;
+        System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("helpertravel45@gmail.com", "helpmeplease");
+        smtpClient.Credentials = credentials;
+        smtpClient.EnableSsl = true;
+        smtpClient.Send(msg);
+        #endregion
+
         return Ok(result);
       }
       catch (Exception ex)

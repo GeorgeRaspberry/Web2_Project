@@ -28,5 +28,7 @@ namespace projectBackend.Models
     }
 
     public string Role { get; set; }
+
+    public int Authenticate { get; set; }
   }
 }

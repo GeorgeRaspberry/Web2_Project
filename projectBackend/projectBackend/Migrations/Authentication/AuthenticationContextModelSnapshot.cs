@@ -229,6 +229,10 @@ namespace projectBackend.Migrations.Authentication
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("Authenticate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(150)");
 

@@ -10,6 +10,7 @@ export class User {
     username: string;
     password: string;
     role: string;
+    authenticate: number
 
     constructor(name: string, lastname: string, city: string, phoneNumber: number, email: string, username: string, password:string, role:string)
     {
@@ -22,5 +23,6 @@ export class User {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.authenticate = 0;
     }
 }

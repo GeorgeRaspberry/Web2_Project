@@ -14,5 +14,8 @@ namespace projectBackend.Models
 
         [Column(TypeName ="nvarchar(150)")]
         public string City { get; set; }
+
+        [Column(TypeName = "nvarchar(150)")]
+        public int Authenticate { get; set; }
   }
 }
