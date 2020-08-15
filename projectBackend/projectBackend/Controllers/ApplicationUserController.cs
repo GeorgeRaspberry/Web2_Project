@@ -59,7 +59,7 @@ namespace projectBackend.Controllers
         msg.From = new MailAddress("helpertravel45@gmail.com");
         msg.To.Add(new MailAddress(applicationUser.Email));
         msg.Subject = "Email Confirmation";
-        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200";
+        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200/" + model.UserName;
 
         //string text = string.Format("Please click on this link to {0}: {1}", msg.Subject, msg.Body);
         //string html = "Please confirm your account by clicking this link: <a href=\"" + msg.Body + "\">link</a><br/>";
