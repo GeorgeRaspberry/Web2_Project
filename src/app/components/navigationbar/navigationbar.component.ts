@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigationbar',
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationbarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public service:ProfilePageService, private router:Router) { }
   ngOnInit(): void {
   }
-  test()
+  routeView()
   {
+
   }
+  
 }

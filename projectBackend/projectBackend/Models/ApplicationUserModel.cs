@@ -19,13 +19,7 @@ namespace projectBackend.Models
 
     public string Password { get; set; }
 
-    private string city;
-
-    public string City
-    {
-      get { return city; }
-      set { city = value; }
-    }
+    public string City { get; set; }
 
     public string Role { get; set; }
 

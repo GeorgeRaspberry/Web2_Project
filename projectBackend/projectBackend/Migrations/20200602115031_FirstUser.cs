@@ -1,9 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace projectBackend.Migrations.Authentication
+namespace projectBackend.Migrations
 {
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200815174446_AuthMigration.cs
     public partial class AuthMigration : Migration
+=======
+    public partial class FirstUser : Migration
+>>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +47,11 @@ namespace projectBackend.Migrations.Authentication
                     Discriminator = table.Column<string>(nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(150)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(150)", nullable: true),
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200815174446_AuthMigration.cs
                     Authenticate = table.Column<string>(type: "nvarchar(150)", nullable: true)
+=======
+                    Role = table.Column<string>(type: "nvarchar(150)", nullable: true)
+>>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.cs
                 },
                 constraints: table =>
                 {

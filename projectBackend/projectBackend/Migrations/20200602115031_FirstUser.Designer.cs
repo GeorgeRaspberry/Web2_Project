@@ -3,15 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projectBackend.Database;
 
-namespace projectBackend.Migrations.Authentication
+namespace projectBackend.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200815174446_AuthMigration.Designer.cs
+    [Migration("20200815174446_AuthMigration")]
+    partial class AuthMigration
+=======
+    [Migration("20200602115031_FirstUser")]
+    partial class FirstUser
+>>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,6 +244,9 @@ namespace projectBackend.Migrations.Authentication
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(150)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");

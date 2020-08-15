@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { FlightCompany } from 'src/app/entities/flights/flight-company';
 import { FlightCompaniesService } from 'src/app/services/flights/flight-companies.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fcompany-register',
@@ -14,7 +15,7 @@ export class FcompanyRegisterComponent implements OnInit {
 
   destinations: ["asd", "asf","gsd"];
   url: any;
-  constructor(public service: FlightCompaniesService) {
+  constructor(public service: FlightCompaniesService,private router: Router) {
     this.resetForm();
    }
 
@@ -24,10 +25,9 @@ export class FcompanyRegisterComponent implements OnInit {
     this.service.postFlightCompany().subscribe(
         res=>{
           this.resetForm(form);
-          this.service.refreshList();
+          this.router.navigateByUrl('/flightCompanies');
         }, 
         err=> {console.log(err);}
-
     );
   }
 
