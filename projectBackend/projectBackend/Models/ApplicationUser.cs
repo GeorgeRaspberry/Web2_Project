@@ -16,5 +16,6 @@ namespace projectBackend.Models
         public string City { get; set; }
         [Column(TypeName = "nvarchar(150)")]
         public string Role { get; set; }
+
   }
 }

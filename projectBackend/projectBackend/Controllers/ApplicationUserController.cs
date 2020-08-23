@@ -38,7 +38,7 @@ namespace projectBackend.Controllers
     [Route("GetUserData/{token}")]
     public async Task<Object> GetUserData(string token)
     {
-      var tokenHandle = new JwtSecurityTokenHandler();
+      /*var tokenHandle = new JwtSecurityTokenHandler();
       var userToken = tokenHandle.ReadJwtToken(token);
 
       string userId = userToken.Payload["UserID"].ToString();
@@ -58,8 +58,8 @@ namespace projectBackend.Controllers
         City = user.City,
         Role = user.Role
       };
-
-      return returnUser;
+      */
+      return null;
     }
 
     [HttpPost]

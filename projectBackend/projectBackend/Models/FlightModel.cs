@@ -1,17 +1,12 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace projectBackend.Models
 {
-  public class Flight
+  public class FlightModel
   {
-    [Key]
     public int ID { get; set; }
     public DateTime FlyOffTime { get; set; }
     public DateTime LandingTime { get; set; }
@@ -20,13 +15,7 @@ namespace projectBackend.Models
     public int NumberOfTransfers { get; set; }
     public int Price { get; set; }
     public int CompanyID { get; set; }
-    [ForeignKey("CompanyID")]
 
-    [JsonIgnore]
-    public virtual FlightCompany Company { get; set; }
-
-
-    [JsonIgnore]
-    public virtual ICollection<LocationTransfers> LocationTransfers { get; set; }
+    public virtual ICollection<Location> LocationTransfers { get; set; }
   }
 }

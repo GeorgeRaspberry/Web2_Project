@@ -13,11 +13,10 @@ export class FcompanypageComponent implements OnInit {
   id: number;
 
   constructor(public route: ActivatedRoute, public service: FlightCompaniesService) {
-  }
-
-  ngOnInit(): void {
     this.route.params.subscribe(params => { this.id = params['id']; });
     this.service.loadCompanyData(this.id);
   }
 
+  ngOnInit(): void {
+  }
 }

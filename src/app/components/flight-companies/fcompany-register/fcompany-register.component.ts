@@ -25,7 +25,6 @@ export class FcompanyRegisterComponent implements OnInit {
     this.service.postFlightCompany().subscribe(
         res=>{
           this.resetForm(form);
-          this.router.navigateByUrl('/flightCompanies');
         }, 
         err=> {console.log(err);}
     );

@@ -3,66 +3,56 @@
   <table class="center">
 
     <tr>
-      <td>
+      <td colspan="4">
         <input name="flyOffTime" #flyOffTime="ngModel" [(ngModel)]="service.formData.flyOffTime" name="flyOffTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select fly off time">
         <owl-date-time #dt1></owl-date-time>
       </td>
     </tr>
 
     <tr>
-      <td>
+      <td colspan="4">
         <input name="landingTime" #landingTime="ngModel" [(ngModel)]="service.formData.landingTime" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" class="form-control" placeholder="Select landing time">
         <owl-date-time #dt2></owl-date-time>
       </td>
     </tr>
 
     <tr>
-      <td>
-        <!--
-        <input [ngxTimepicker]="picker">
-        <ngx-material-timepicker #picker></ngx-material-timepicker>
-        -->
+      <td colspan="4">
         <input name="fullFlightTime" #fullFlightTime="ngModel" [(ngModel)]="service.formData.fullFlightTime" class="form-control" placeholder="Full flight time: HH:MM" required>
       </td>
     </tr>
 
     <tr>
-      <td>
+      <td colspan="4">
         <input name="flightLength" #flightLength="ngModel" [(ngModel)]="service.formData.flightLength" type="number" class="form-control" placeholder="Number of kilometers" required>
       </td>
     </tr>
 
     <tr>
-      <td>
-        <input name="numberOfTransfers" #numberOfTransfers="ngModel" [(ngModel)]="service.formData.numberOfTransfers" type="number" class="form-control" placeholder="Number of transfers" required>
+      <td colspan="4">
+        <input name="numberOfTransfers" #numberOfTransfers="ngModel" [(ngModel)]="service.formData.numberOfTransfers" (change)=objChanged($event) type="number" class="form-control" placeholder="Number of transfers" required>
       </td>
     </tr>
-
-    <tr>
-      <td>
-          <select
-              name="locationOfTransfers" >
-                  <option
-                      *ngFor="let option of transfers">
-                              {{ option }}
-                              <!--
-                                  OVDE BI TREBALO DA SE ISPISU SVE DESTINACIJE IZ BAZE :(
-                              -->
-                  </option>
-          </select>
-      </td>
+  <tr *ngFor="let t of array(math.ceil(this.service.formData.locationTransfers.length/4)); let i = index">
+    <td *ngFor="let location of this.service.formData.locationTransfers.slice(4*i,4*i + 4); let j = index">         
+      <select name="locationOfTransfers" [(ngModel)]="location.locationID">
+          <option *ngFor="let title of service.transfers" [value]="title.id">{{title.name}}</option>
+      </select> 
+    </td> 
   </tr>
 
     <tr>
-      <td>
+      <td colspan="4">
         <input name="price" #price="ngModel" [(ngModel)]="service.formData.price" type="number" class="form-control" placeholder="Price" required>
       </td>
     </tr>
 
     <tr>
+      <td colspan="4">
       <button class="btn btn-success" id="add" (click)="addFlight(form)">
         CREATE
       </button>
+    </td>
     </tr>
 
   </table>

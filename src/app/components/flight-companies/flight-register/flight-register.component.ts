@@ -6,6 +6,7 @@ import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { Flight } from 'src/app/entities/flights/flight';
 import { FlightsService } from 'src/app/services/flights/flights.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from 'src/app/entities/flights/location';
 
 
 @Component({
@@ -14,29 +15,63 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./flight-register.component.css']
 })
 export class FlightRegisterComponent implements OnInit {
-  
-  transfers: Array<string>;
+  array = Array;
+  math = Math;
 
-  constructor(public route: ActivatedRoute,public service: FlightsService) { }
+  transfers: Array<Location>;
+  id: number;
+  constructor(public service: FlightsService,public route: ActivatedRoute) { 
+    this.resetForm();
+    this.route.params.subscribe(params => { this.id = Number(params['id']); });
+    this.service.formData.locationTransfers = new Array();
+    this.service.loadTransfers()
+    
+  }
 
   ngOnInit(): void {
-    this.resetForm();
-    this.route.params.subscribe(params => { this.service.formData.companyId = params['id']; });
   }
   addFlight(form:NgForm) {
+    /*if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
+      || /^[0-9][0-9]:[0-9][0-9]$/.test(this.service.formData.fullFlightTime) == false 
+      || (this.service.formData.flightLength == null || this.service.formData.flightLength < 0) || (this.service.formData.price == null || this.service.formData.price < 0) )
+    {
+      alert("Not all inputs are filled correctly")
+      return
+    }
+
+    if (this.service.formData.numberOfTransfers > 1){
+      for (let location of this.locations){
+        if (location.locationID == 0){
+          alert("Not all transfers are entered.")
+          return
+        }
+      }
+    }*/
+    this.service.formData.companyId = this.id;
+
     this.service.postFlight().subscribe(
       res=>{
         this.resetForm(form);
       }, 
       err=> {console.log(err);}
-
-  );
+    );
   }
+  objChanged(event: any)
+  {
+    if (event.target.value <=1){
+      alert("Must have at least two transfers.")
+      return
+    }
 
+    this.service.formData.locationTransfers = new Array();
+    for (let i = 0 ; i < event.target.value; i++){
+      this.service.formData.locationTransfers.push(new Location());
+    }
+  }
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
-    this.service.formData = new Flight(0,0,"","","",0,0,"",0);
+    this.service.formData = new Flight();
   }
   
 }

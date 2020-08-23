@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace projectBackend.Migrations
 {
-    public partial class FirstUser : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,36 @@ namespace projectBackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FlightCompanies",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PromoDescription = table.Column<string>(nullable: true),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FlightCompanies", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +186,58 @@ namespace projectBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Flights",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlyOffTime = table.Column<DateTime>(nullable: false),
+                    LandingTime = table.Column<DateTime>(nullable: false),
+                    FullFlightTime = table.Column<string>(nullable: true),
+                    FlightLength = table.Column<int>(nullable: false),
+                    NumberOfTransfers = table.Column<int>(nullable: false),
+                    Price = table.Column<int>(nullable: false),
+                    CompanyID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Flights", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Flights_FlightCompanies_CompanyID",
+                        column: x => x.CompanyID,
+                        principalTable: "FlightCompanies",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LocationTransfers",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlightID = table.Column<int>(nullable: false),
+                    LocationID = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocationTransfers", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_LocationTransfers_Flights_FlightID",
+                        column: x => x.FlightID,
+                        principalTable: "Flights",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LocationTransfers_Locations_LocationID",
+                        column: x => x.LocationID,
+                        principalTable: "Locations",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +276,21 @@ namespace projectBackend.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Flights_CompanyID",
+                table: "Flights",
+                column: "CompanyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LocationTransfers_FlightID",
+                table: "LocationTransfers",
+                column: "FlightID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LocationTransfers_LocationID",
+                table: "LocationTransfers",
+                column: "LocationID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -214,10 +311,22 @@ namespace projectBackend.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "LocationTransfers");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Flights");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "FlightCompanies");
         }
     }
 }
