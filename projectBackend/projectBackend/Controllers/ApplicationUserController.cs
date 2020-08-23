@@ -75,11 +75,9 @@ namespace projectBackend.Controllers
         FullName = model.Name + ' ' + model.Lastname,
         PhoneNumber = model.PhoneNumber.ToString(),
         City = model.City,
-<<<<<<< HEAD
-        Authenticate = model.Authenticate
-=======
+        Authenticate = model.Authenticate,
         Role = "FlightAdministrator"
->>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648
+
       };
 
       try
