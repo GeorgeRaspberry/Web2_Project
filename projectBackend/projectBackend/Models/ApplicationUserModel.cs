@@ -22,5 +22,7 @@ namespace projectBackend.Models
     public string City { get; set; }
 
     public string Role { get; set; }
+
+    public int Authenticate { get; set; }
   }
 }

@@ -3,15 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projectBackend.Database;
 
 namespace projectBackend.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AuthenticationContext))]
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200815174446_AuthMigration.Designer.cs
+    [Migration("20200815174446_AuthMigration")]
+    partial class AuthMigration
+=======
+    [Migration("20200602115031_FirstUser")]
+    partial class FirstUser
+>>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,108 +232,6 @@ namespace projectBackend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("projectBackend.Models.Flight", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlightLength")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FlyOffTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FullFlightTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LandingTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumberOfTransfers")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CompanyID");
-
-                    b.ToTable("Flights");
-                });
-
-            modelBuilder.Entity("projectBackend.Models.FlightCompany", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PromoDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("FlightCompanies");
-                });
-
-            modelBuilder.Entity("projectBackend.Models.Location", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Locations");
-                });
-
-            modelBuilder.Entity("projectBackend.Models.LocationTransfers", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FlightID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LocationID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("FlightID");
-
-                    b.HasIndex("LocationID");
-
-                    b.ToTable("LocationTransfers");
-                });
-
             modelBuilder.Entity("projectBackend.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -394,30 +299,6 @@ namespace projectBackend.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("projectBackend.Models.Flight", b =>
-                {
-                    b.HasOne("projectBackend.Models.FlightCompany", "Company")
-                        .WithMany("Flights")
-                        .HasForeignKey("CompanyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("projectBackend.Models.LocationTransfers", b =>
-                {
-                    b.HasOne("projectBackend.Models.Flight", "flight")
-                        .WithMany("LocationTransfers")
-                        .HasForeignKey("FlightID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("projectBackend.Models.Location", "location")
-                        .WithMany("LocationTransfers")
-                        .HasForeignKey("LocationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

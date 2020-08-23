@@ -9,9 +9,20 @@ using projectBackend.Database;
 
 namespace projectBackend.Migrations
 {
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200822165724_db.Designer.cs
     [DbContext(typeof(DatabaseContext))]
     [Migration("20200822165724_db")]
     partial class db
+=======
+    [DbContext(typeof(AuthenticationContext))]
+<<<<<<< HEAD:projectBackend/projectBackend/Migrations/20200815174446_AuthMigration.Designer.cs
+    [Migration("20200815174446_AuthMigration")]
+    partial class AuthMigration
+=======
+    [Migration("20200602115031_FirstUser")]
+    partial class FirstUser
+>>>>>>> 718123fa023ea5f2cd18d3d021b8d0b13b4f0648:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.Designer.cs
+>>>>>>> 0731d3adc63b31ac5f49c5bd2255199f4d7e29c9:projectBackend/projectBackend/Migrations/20200602115031_FirstUser.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,6 +343,10 @@ namespace projectBackend.Migrations
             modelBuilder.Entity("projectBackend.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Authenticate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(150)");

@@ -10,6 +10,7 @@ export class User {
     userName: string;
     password: string;
     role: string;
+    authenticate: number
 
     constructor()
     {
