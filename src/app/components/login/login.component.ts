@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         if (err.status == 400)
-          alert('Incorrect username or password.');
+          alert('Incorrect password or username. Did you activate your account?');
         else
           console.log(err);
       }
@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
 
   signUp()
   {
+    this.resetForm();
     this.signUpOrIn = false;
   }
 

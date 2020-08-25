@@ -39,7 +39,7 @@ namespace projectBackend.Controllers
     [Route("GetUserData/{token}")]
     public async Task<Object> GetUserData(string token)
     {
-      /*var tokenHandle = new JwtSecurityTokenHandler();
+      var tokenHandle = new JwtSecurityTokenHandler();
       var userToken = tokenHandle.ReadJwtToken(token);
 
       string userId = userToken.Payload["UserID"].ToString();
@@ -55,12 +55,22 @@ namespace projectBackend.Controllers
         Email = user.Email,
         Name = name,
         Lastname = lastname,
-        PhoneNumber = 1,
+        PhoneNumber = Convert.ToInt32(user.PhoneNumber),
         City = user.City,
         Role = user.Role
       };
-      */
-      return null;
+
+      return returnUser;
+    }
+
+    [HttpGet]
+    [Route("Confirm/{token}")]
+    public async Task<Object> Confirm(string token)
+    {
+      var user = await _userManager.FindByIdAsync(token);
+      user.Authenticate = 1;
+      var result = await _userManager.UpdateAsync(user);
+      return result;
     }
 
     [HttpPost]
@@ -76,7 +86,7 @@ namespace projectBackend.Controllers
         PhoneNumber = model.PhoneNumber.ToString(),
         City = model.City,
         Authenticate = model.Authenticate,
-        Role = "FlightAdministrator"
+        Role = "Registered"
 
       };
 
@@ -89,7 +99,7 @@ namespace projectBackend.Controllers
         msg.From = new MailAddress("helpertravel45@gmail.com");
         msg.To.Add(new MailAddress(applicationUser.Email));
         msg.Subject = "Email Confirmation";
-        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200/" + model.UserName;
+        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200/confirm/" + applicationUser.Id;
 
         //string text = string.Format("Please click on this link to {0}: {1}", msg.Subject, msg.Body);
         //string html = "Please confirm your account by clicking this link: <a href=\"" + msg.Body + "\">link</a><br/>";
@@ -122,6 +132,9 @@ namespace projectBackend.Controllers
       var user = await _userManager.FindByNameAsync(model.Username);
       if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
       {
+        if (user.Authenticate == 0)
+          return BadRequest(new { message = "User did not activate account!" });
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
           Subject = new ClaimsIdentity(new Claim[]

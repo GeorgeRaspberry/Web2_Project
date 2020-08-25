@@ -13,6 +13,6 @@ namespace projectBackend.Models
     Administrator,
     RideAdministrator,
     FlightAdministrator,
-    NotLoggedIn
+    
   }
 }

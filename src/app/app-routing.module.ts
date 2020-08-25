@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './components/login/confirmation/confirmation.component';
 import { RideRegisterComponent } from './components/ride-companies/ride-register/ride-register.component';
 import { ProfilePageComponent } from './components/login/profile-page/profile-page.component';
 import { FcompanyRegisterComponent } from './components/flight-companies/fcompany-register/fcompany-register.component';
@@ -39,6 +40,12 @@ const routes: Routes = [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: FcompanypageComponent },
     { path: ":id/register", component: FlightRegisterComponent }
+  ]
+},
+{
+  path: "confirm",
+  children: [
+    { path: ":id", component: ConfirmationComponent },
   ]
 },
 {
