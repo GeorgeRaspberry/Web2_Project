@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using projectBackend.Database;
 using projectBackend.Database.DatabaseFunctions;
-using projectBackend.Json;
 using projectBackend.Models;
 
 namespace projectBackend.Controllers
@@ -107,8 +106,7 @@ namespace projectBackend.Controllers
       _context.FlightCompanies.Remove(flightCompany);
       await _context.SaveChangesAsync();
 
-      JsonHelper<FlightCompany> json = new JsonHelper<FlightCompany>();
-      return json.Jsonify(flightCompany);
+      return flightCompany;
     }
 
     private bool FlightCompanyExists(int id)
