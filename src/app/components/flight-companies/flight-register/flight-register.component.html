@@ -36,7 +36,7 @@
   <tr *ngFor="let t of array(math.ceil(this.service.formData.locationTransfers.length/4)); let i = index">
     <td *ngFor="let location of this.service.formData.locationTransfers.slice(4*i,4*i + 4); let j = index">         
       <select name="locationOfTransfers" [(ngModel)]="location.locationID">
-          <option *ngFor="let title of service.transfers" [value]="title.id">{{title.name}}</option>
+          <option *ngFor="let title of service.transfers" [value]=title.id>{{title.name}}</option>
       </select> 
     </td> 
   </tr>

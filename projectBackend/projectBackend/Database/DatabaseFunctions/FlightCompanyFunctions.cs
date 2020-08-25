@@ -16,12 +16,5 @@ namespace projectBackend.Database.DatabaseFunctions
     }
 
 
-    public async Task<IEnumerable<Flight>> GetFlightsByAirlineId(int companyID)
-    {
-      var query = Database.Flights.Where(i => i.CompanyID == companyID);
-
-      return await Task.FromResult(query.ToList());
-    }
-
   }
 }

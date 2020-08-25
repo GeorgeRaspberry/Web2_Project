@@ -1,0 +1,23 @@
+<div style="margin-top: 2%;">  
+    <table id="overrider" class="table table-hover" >
+        <thead>
+            <tr *ngFor="let location of service.transfers">
+                <td>{{location.name}}</td>
+            </tr>
+        </thead>
+    </table>
+    <form #form="ngForm" autocomplete="off">
+        <table id="overrider" class="table table-hover" >
+            <tr>
+                <td>
+                    <input name="name" #name="ngModel" [(ngModel)]="location.name" class="form-control" placeholder="Location name" required>
+                </td>
+                <td>
+                    <button class="btn btn-success" id="add" (click)="addLocation()">
+                        CREATE
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>  
+</div>

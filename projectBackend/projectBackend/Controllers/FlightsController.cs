@@ -98,13 +98,10 @@ namespace projectBackend.Controllers
     [HttpPost]
     public async Task<ActionResult<Flight>> PostFlight(Flight flight)
     {
-
-      
-
       _context.Flights.Add(flight);
       await _context.SaveChangesAsync();
 
-      return CreatedAtAction("GetFlightCompany", new { id = flight.ID }, flight);
+      return CreatedAtAction("GetFlight", new { id = flight.ID }, flight);
     }
 
     // DELETE: api/Flights/5

@@ -21,12 +21,7 @@ namespace projectBackend.Models
     public int Price { get; set; }
     public int CompanyID { get; set; }
     [ForeignKey("CompanyID")]
-
-    [JsonIgnore]
     public virtual FlightCompany Company { get; set; }
-
-
-    [JsonIgnore]
     public virtual ICollection<LocationTransfers> LocationTransfers { get; set; }
   }
 }

@@ -30,9 +30,10 @@ namespace projectBackend.Controllers
 
     // GET: api/FlightCompanies
     [HttpGet]
-    public Task<List<FlightCompany>> GetFlightCompanies()
+    public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
-      return _context.FlightCompanies.Include(r => r.Flights).ToListAsync(); ;
+      var data = await _context.FlightCompanies.Include(r=>r.Flights).ToListAsync();
+      return data;
     }
 
     // GET: api/FlightCompanies/5

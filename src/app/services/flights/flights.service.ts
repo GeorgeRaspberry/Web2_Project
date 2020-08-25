@@ -11,41 +11,19 @@ export class FlightsService {
   formData: Flight;
   readonly rootURL = 'http://localhost:37240/api';
   flights : Flight[];
-  company : FlightCompany;
+  flight : Flight;
   transfers: Array<Location> = new Array();
-  location: Location;
 
   constructor(private http: HttpClient) {
    }
   loadTransfers(){
-    /*this.location = new Location();
-    this.location.name = "New York";
-    this.postLocation().subscribe(
-      res=>{
-      }, 
-      err=> {console.log(err);}
-    );
-    this.location.name = "Novi Sad";
-    this.postLocation().subscribe(
-      res=>{
-      }, 
-      err=> {console.log(err);}
-    );
-    this.location.name = "Belgrade";
-    this.postLocation().subscribe(
-      res=>{
-      }, 
-      err=> {console.log(err);}
-    );*/
-
-
     this.http.get(this.rootURL + '/Flights/GetLocations')
     .toPromise()
     .then(res =>  this.transfers = res as Array<Location>);
   }
 
-  postLocation(){
-    return this.http.post(this.rootURL + '/Flights/PostLocation', this.location);
+  postLocation(location:Location){
+    return this.http.post(this.rootURL + '/Flights/PostLocation', location);
   }
 
   loadFlights() {
@@ -53,13 +31,17 @@ export class FlightsService {
     .toPromise()
     .then(res => this.flights = res as Flight[]);
   }
-  loadCompanyData(id:number)
+
+  loadFlight(id:number)
   {
-    this.http.get(this.rootURL + '/FlightCompanies/'+id)
+    this.http.get(this.rootURL + '/Flights/'+id)
     .toPromise()
-    .then(res => this.company = res as FlightCompany);
+    .then(res => this.flight = res as Flight);
   }
+
+  
   postFlight() {
+    alert(this.formData.locationTransfers)
     return this.http.post(this.rootURL + '/Flights', this.formData);
   }
   putFlight() {

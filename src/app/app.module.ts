@@ -25,6 +25,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { FlightCompaniesService } from './services/flights/flight-companies.service';
 import { FlightsService } from './services/flights/flights.service';
+import { LocationPageComponent } from './components/location-page/location-page.component';
+import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { FlightsService } from './services/flights/flights.service';
     FcompanyRegisterComponent,
     ProfilePageComponent,
     RcompanyRegisterComponent,
-    RideRegisterComponent
+    RideRegisterComponent,
+    LocationPageComponent,
+    BookFlightComponent
   ],
   imports: [
     BrowserModule,

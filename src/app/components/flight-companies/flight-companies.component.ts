@@ -17,11 +17,11 @@ export class FlightCompaniesComponent implements OnInit {
   isButtonVisible:boolean;
 
   constructor(public companiesService: FlightCompaniesService, public service:ProfilePageService) {
+    this.companiesService.loadCompanies();
+    this.isButtonVisible = false;
   }
 
   ngOnInit(): void {
-    this.companiesService.loadCompanies();
-    this.isButtonVisible = false;
 
   }
 

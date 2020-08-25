@@ -37,18 +37,21 @@ export class FlightRegisterComponent implements OnInit {
     {
       alert("Not all inputs are filled correctly")
       return
-    }
+    }*/
 
     if (this.service.formData.numberOfTransfers > 1){
-      for (let location of this.locations){
+      for (let location of this.service.formData.locationTransfers){
+        location.locationID = Number(location.locationID)
+
         if (location.locationID == 0){
           alert("Not all transfers are entered.")
           return
         }
       }
-    }*/
+    }
     this.service.formData.companyId = this.id;
-
+    this.service.formData.locationTransfers[0].status = 1
+    this.service.formData.locationTransfers[this.service.formData.locationTransfers.length].status = 2
     this.service.postFlight().subscribe(
       res=>{
         this.resetForm(form);
@@ -62,7 +65,6 @@ export class FlightRegisterComponent implements OnInit {
       alert("Must have at least two transfers.")
       return
     }
-
     this.service.formData.locationTransfers = new Array();
     for (let i = 0 ; i < event.target.value; i++){
       this.service.formData.locationTransfers.push(new Location());

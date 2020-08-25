@@ -11,11 +11,17 @@ import { RideCompaniesComponent } from './components/ride-companies/ride-compani
 import { RcompanypageComponent } from './components/ride-companies/rcompanypage/rcompanypage.component';
 import { FlightsComponent } from './components/flight-companies/flights/flights.component';
 import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-register/rcompany-register.component';
+import { LocationPageComponent } from './components/location-page/location-page.component';
+import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
 
 const routes: Routes = [
 {
   path: "flightCompanies",
   component: FlightCompaniesComponent
+},
+{
+  path: "showLocation",
+  component: LocationPageComponent
 },
 {
   path: "rideCompanies",
@@ -38,7 +44,8 @@ const routes: Routes = [
   children: [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: FcompanypageComponent },
-    { path: ":id/register", component: FlightRegisterComponent }
+    { path: ":id/register", component: FlightRegisterComponent },
+    { path: ":id/book", component: BookFlightComponent }
   ]
 },
 {

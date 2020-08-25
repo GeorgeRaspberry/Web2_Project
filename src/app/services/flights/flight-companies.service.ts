@@ -21,7 +21,9 @@ export class FlightCompaniesService {
     .toPromise()
     .then(res =>  this.transfers = res as Array<Location>);
   }
-
+  postLocation(location: Location) {
+    return this.http.post(this.rootURL + '/PostLocation', location);
+  }
   loadCompanies() {
     this.company = null
     this.http.get(this.rootURL + '/FlightCompanies')
