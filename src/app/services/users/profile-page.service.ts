@@ -3,6 +3,7 @@ import { User } from 'src/app/entities/users/user';
 import { ProfilePageComponent } from './../../components/login/profile-page/profile-page.component';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { NgxMaterialTimepickerHoursFace } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-hours-face/ngx-material-timepicker-hours-face';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProfilePageService {
   formData: User;
   readonly rootURL = 'http://localhost:37240/api';
   list : User[];
-  loggedUser:User = new User();
+  loggedUser:User = new User()
   constructor(private http: HttpClient) { }
 
   postUser() {
@@ -27,7 +28,12 @@ export class ProfilePageService {
   getLoggedUser(token:string){
     this.http.get(this.rootURL + '/ApplicationUser/GetUserData/'+ token)
     .toPromise()
-    .then(res => this.loggedUser = res as User);
+    .then(res =>{
+      if (res == null){
+        localStorage.removeItem('token')
+      }
+      this.loggedUser = res as User
+    } );
   }
 
 

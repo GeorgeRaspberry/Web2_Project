@@ -41,7 +41,6 @@ export class FlightsService {
 
   
   postFlight() {
-    alert(this.formData.locationTransfers)
     return this.http.post(this.rootURL + '/Flights', this.formData);
   }
   putFlight() {

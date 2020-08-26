@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace projectBackend.Models
     public int ID { get; set; }
     public string Name { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<LocationTransfers> LocationTransfers { get; set; }
   }
 }

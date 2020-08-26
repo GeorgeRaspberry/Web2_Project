@@ -5,7 +5,7 @@
     <a (click)="routeView()" routerLink = "profilePage">RESERVATIONS</a>
     
  
-    <a *ngIf="!service.loggedUser || service.loggedUser.role == 'NotLoggedIn'; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
+    <a *ngIf="service.loggedUser.role == ''; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
     <ng-template #loggedInBlock>
     <a (click)="routeView()" routerLink = "profilePage">MY PROFILE</a>
     </ng-template>

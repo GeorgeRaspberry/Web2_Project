@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     }
     else
     {
-      this.service.loggedUser = new User();
+      this.service.loggedUser = new User()
     }
   }
 

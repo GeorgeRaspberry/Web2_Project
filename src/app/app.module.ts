@@ -27,6 +27,7 @@ import { FlightCompaniesService } from './services/flights/flight-companies.serv
 import { FlightsService } from './services/flights/flights.service';
 import { LocationPageComponent } from './components/location-page/location-page.component';
 import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
+import { ProfilePageService } from './services/users/profile-page.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { BookFlightComponent } from './components/flight-companies/book-flight/b
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
   ],
-  providers: [FlightsService,FlightCompaniesService],
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

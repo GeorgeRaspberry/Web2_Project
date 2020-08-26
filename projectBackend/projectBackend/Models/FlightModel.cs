@@ -16,6 +16,19 @@ namespace projectBackend.Models
     public int Price { get; set; }
     public int CompanyID { get; set; }
 
+    public FlightModel(int iD, DateTime flyOffTime, DateTime landingTime, string fullFlightTime, int flightLength, int numberOfTransfers, int price, int companyID, ICollection<Location> locationTransfers)
+    {
+      ID = iD;
+      FlyOffTime = flyOffTime;
+      LandingTime = landingTime;
+      FullFlightTime = fullFlightTime;
+      FlightLength = flightLength;
+      NumberOfTransfers = numberOfTransfers;
+      Price = price;
+      CompanyID = companyID;
+      LocationTransfers = locationTransfers;
+    }
+
     public virtual ICollection<Location> LocationTransfers { get; set; }
   }
 }

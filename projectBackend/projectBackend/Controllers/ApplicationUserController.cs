@@ -39,28 +39,41 @@ namespace projectBackend.Controllers
     [Route("GetUserData/{token}")]
     public async Task<Object> GetUserData(string token)
     {
+      if (token == null)
+      {
+        return null;
+      }
       var tokenHandle = new JwtSecurityTokenHandler();
       var userToken = tokenHandle.ReadJwtToken(token);
 
       string userId = userToken.Payload["UserID"].ToString();
 
       var user = await _userManager.FindByIdAsync(userId);
-      string name = user.FullName.Split(' ')[0];
-      string lastname = user.FullName.Split(' ')[1];
-
-      ApplicationUserModel userModel = new ApplicationUserModel();
-      var returnUser = new ApplicationUserModel()
+      if (user != null)
       {
-        UserName = user.UserName,
-        Email = user.Email,
-        Name = name,
-        Lastname = lastname,
-        PhoneNumber = Convert.ToInt32(user.PhoneNumber),
-        City = user.City,
-        Role = user.Role
-      };
 
-      return returnUser;
+        string name = user.FullName.Split(' ')[0];
+        string lastname = user.FullName.Split(' ')[1];
+
+        ApplicationUserModel userModel = new ApplicationUserModel();
+        var returnUser = new ApplicationUserModel()
+        {
+          UserName = user.UserName,
+          Email = user.Email,
+          Name = name,
+          Lastname = lastname,
+          PhoneNumber = Convert.ToInt32(user.PhoneNumber),
+          City = user.City,
+          Role = user.Role
+        };
+
+
+        return returnUser;
+      }
+      else
+      {
+        return null;
+      }
     }
 
     [HttpGet]

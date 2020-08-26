@@ -13,13 +13,12 @@ export class TopbarComponent implements OnInit {
   constructor(public service:ProfilePageService, public router: Router) { }
   
   ngOnInit(): void {
-    console.log(this.service.loggedUser.role);
   }
 
   logOut()
   {
     localStorage.removeItem('token');
-    this.service.loggedUser = new User();
+    this.service.loggedUser = new User()
     this.router.navigateByUrl('/flightCompanies');
   }
   onClickSocial(num: number) {

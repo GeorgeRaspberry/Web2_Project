@@ -324,7 +324,6 @@ P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBacke
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.csprojAssemblyReference.cache
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.AssemblyInfoInputs.cache
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.AssemblyInfo.cs
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.csproj.CoreCompileInputs.cache

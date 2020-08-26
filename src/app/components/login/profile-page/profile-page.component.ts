@@ -31,7 +31,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   constructor(public service: ProfilePageService) {
-   }
+   
+  }
 
   ngOnInit(): void {
     this.service.formData = this.service.loggedUser;

@@ -10,7 +10,7 @@ export class FlightCompaniesService {
   formData: FlightCompany;
   readonly rootURL = 'http://localhost:37240/api';
   companies : Array<FlightCompany>;
-  company:FlightCompany;
+  company:FlightCompany = new FlightCompany(0,"","","","",0)
   transfers: Array<Location> = new Array();
 
 
@@ -25,7 +25,7 @@ export class FlightCompaniesService {
     return this.http.post(this.rootURL + '/PostLocation', location);
   }
   loadCompanies() {
-    this.company = null
+    this.company =new FlightCompany(0,"","","","",0)
     this.http.get(this.rootURL + '/FlightCompanies')
     .toPromise()
     .then(res =>  this.companies = res as Array<FlightCompany>);

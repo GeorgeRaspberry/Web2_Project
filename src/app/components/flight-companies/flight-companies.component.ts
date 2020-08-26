@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightCompany } from 'src/app/entities/flights/flight-company';
 import { FlightCompaniesService } from 'src/app/services/flights/flight-companies.service';
-import { UserService } from 'src/app/services/users/user.service';
 import { transition, state, trigger, style, animate } from '@angular/animations';
 import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 

@@ -10,7 +10,7 @@ export class ConfirmationService {
 
   constructor(private http: HttpClient) { }
 
-  confirmAccount(id:string) {    
+  confirmAccount(id:string) {
     this.http.get(this.rootURL + '/ApplicationUser/Confirm/'+ id).subscribe(
       (res: any) => {
         alert('Account confirmed!');

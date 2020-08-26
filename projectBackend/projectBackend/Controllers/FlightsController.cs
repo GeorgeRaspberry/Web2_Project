@@ -32,12 +32,15 @@ namespace projectBackend.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Flight>> GetFlight(int id)
     {
-      var flight = await _context.Flights.FindAsync(id);
+      var flight = await _context.Flights.Include(c=>c.Company).Include(l=>l.LocationTransfers).FirstOrDefaultAsync(i => i.ID == id);
+
+      
 
       if (flight == null)
       {
         return NotFound();
       }
+      //FlightModel flightModel = new FlightModel(flight.ID,flight.FlyOffTime,flight.LandingTime, flight.FullFlightTime, flight.FlightLength,flight.NumberOfTransfers,flight.Price,flight.CompanyID,flight.LocationTransfers)
 
       return flight;
     }

@@ -16,7 +16,6 @@ export class ConfirmationComponent implements OnInit {
     var splitRoute = this.router.url.split('/', 3);
     var id = splitRoute[2];
     this.service.confirmAccount(id);
-
     this.router.navigateByUrl('/flightCompanies');
   }
 }

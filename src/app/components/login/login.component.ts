@@ -2,7 +2,6 @@ import { ProfilePageService } from './../../services/users/profile-page.service'
 import { UserRole } from 'src/app/entities/users/user-role.enum';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { UserService } from 'src/app/services/users/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/entities/users/user';
 
@@ -44,13 +43,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(public service: ProfilePageService, private router: Router, private userService: UserService) { }
+  constructor(public service: ProfilePageService, private router: Router) { }
   
   ngOnInit(): void {
     this.signUpOrIn = true;
     this.resetForm();
     if (localStorage.getItem('token') != null)
+    {
       this.router.navigateByUrl('/flightCompanies');
+    }
   }
 
   logIn(form: NgForm) {
@@ -89,25 +90,4 @@ export class LoginComponent implements OnInit {
     this.signUpOrIn = true;  
   }
 
-  checKLoginInfo() {
-    let username = (<HTMLInputElement> document.getElementById("username")).value;
-    let password = (<HTMLInputElement> document.getElementById("password")).value;
-    let temp = false;
-    for(let user of this.allUsers)
-    {
-      if (user.userName == username && user.password == password)
-      {
-        this.userService.loggedInUser = user;
-        temp = true;
-      }
-    }
-    if (temp == true)
-    {
-      this.messageEvent.emit();
-    }
-    else
-    {
-      alert("No user with that combination.");
-    }
-  }
 }

@@ -14,6 +14,6 @@ export class User {
 
     constructor()
     {
-        this.role = 'NotLoggedIn';
+        this.role = ""
     }
 }
