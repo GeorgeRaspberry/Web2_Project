@@ -5,7 +5,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { Flight } from 'src/app/entities/flights/flight';
 import { FlightsService } from 'src/app/services/flights/flights.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/entities/flights/location';
 
 
@@ -20,7 +20,7 @@ export class FlightRegisterComponent implements OnInit {
 
   transfers: Array<Location>;
   id: number;
-  constructor(public service: FlightsService,public route: ActivatedRoute) { 
+  constructor(public service: FlightsService,public route: ActivatedRoute, private router: Router) { 
     this.resetForm();
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
     this.service.formData.locationTransfers = new Array();
@@ -51,10 +51,11 @@ export class FlightRegisterComponent implements OnInit {
     }
     this.service.formData.companyId = this.id;
     this.service.formData.locationTransfers[0].status = 1
-    this.service.formData.locationTransfers[this.service.formData.locationTransfers.length].status = 2
+    this.service.formData.locationTransfers[this.service.formData.locationTransfers.length - 1].status = 2
     this.service.postFlight().subscribe(
       res=>{
         this.resetForm(form);
+        this.router.navigateByUrl('/flight/'+this.id+'/details');
       }, 
       err=> {console.log(err);}
     );
