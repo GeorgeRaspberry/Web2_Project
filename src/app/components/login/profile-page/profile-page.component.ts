@@ -12,13 +12,11 @@ import { User } from 'src/app/entities/users/user';
 export class ProfilePageComponent implements OnInit {
 
   saveChanges(form: NgForm) {
-    this.service.formData.id = 0;
     if (window.confirm('Are you sure?'))
     {
       this.service.postUser().subscribe(
         res=>{
           this.resetForm(form);
-          this.service.refreshList();
         }, 
         err=> {console.log(err);}
     );
@@ -36,6 +34,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.formData = this.service.loggedUser;
+    this.service.updateProfilePage();
   }
 
   resetForm(form?: NgForm) {
@@ -44,4 +43,43 @@ export class ProfilePageComponent implements OnInit {
     this.service.formData = new User();
   }
 
+  sendRequest(potentialId: string) {
+    this.service.sendFriendRequest(potentialId).subscribe(
+      res=>{
+        this.service.getLoggedUser(localStorage.getItem('token'));
+      }, 
+      err=> {console.log(err);}
+  );
+    alert("Sent!");
+  }
+
+  acceptRequest(potentialId: string) {
+    this.service.acceptFriendRequest(potentialId).subscribe(
+      res=>{
+        this.service.getLoggedUser(localStorage.getItem('token'));
+      }, 
+      err=> {console.log(err);}
+  );
+    alert("Accepted!");
+  }
+
+  rejectRequest(potentialId: string) {
+    this.service.rejectFriendRequest(potentialId).subscribe(
+      res=>{
+        this.service.getLoggedUser(localStorage.getItem('token'));
+      }, 
+      err=> {console.log(err);}
+  );
+    alert("Rejected!");
+  }
+
+  removeFriend(potentialId: string) {
+    this.service.removeFriend(potentialId).subscribe(
+      res=>{
+        this.service.getLoggedUser(localStorage.getItem('token'));
+      }, 
+      err=> {console.log(err);}
+  );
+    alert("Removed!");
+  }
 }

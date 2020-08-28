@@ -3,9 +3,7 @@
     <a (click)="routeView()" routerLink = "flightCompanies" routerLinkActive="active">FLIGHTS</a>
     <a (click)="routeView()"  routerLink = "rideCompanies" routerLinkActive="active"  >RIDES</a>
     <a (click)="routeView()" routerLink = "profilePage">RESERVATIONS</a>
-    
- 
-    <a *ngIf="service.loggedUser.role == ''; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
+    <a *ngIf="!service.loggedUser.role || service.loggedUser.role == ''; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
     <ng-template #loggedInBlock>
     <a (click)="routeView()" routerLink = "profilePage">MY PROFILE</a>
     </ng-template>

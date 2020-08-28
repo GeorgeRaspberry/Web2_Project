@@ -19,13 +19,6 @@
                 <input type="password" name="Password" [(ngModel)]="service.formData.password" class="form-control" placeholder="Password" required>
             </td>
         </tr>
-<!--
-            <tr>
-                <td>
-                    <input name="image" type="file" [(ngModel)]="service.formData.image" class="form-control" placeholder="Choose profile picture" required>
-                </td>
-            </tr>
--->
         <tr>
             <td>
                 <input name="Name" [(ngModel)]="service.formData.name" class="form-control" placeholder="Name" required>
@@ -71,53 +64,104 @@
         <thead>
             <tr>
                 <th id="friendsHeader">Username</th>
-                <th id="friendsHeader">Name</th>
-                <th id="friendsHeader">Last name</th>
-                <th id="friendsHeader">Requests</th>
+                <th id="friendsHeader">Full name</th>
+                <th id="friendsHeader">Action</th>
             </tr>
         </thead>
-        <tr>
-            <td>
-                asd
-            </td>
-            <td>
-                asd
-            </td>
-            <td>
-                asd
-            </td>
-            <td>
-                <button class="btn btn-success" id="pending">
-                    ACCEPT
-                </button>
-                <button class="btn btn-success" id="pending">
-                    REJECT
-                </button>
-            </td>
+            
+        <tr *ngFor="let request of service.loggedUser.receivedRequests">
+            <ng-container *ngIf="request.status == 1">
+                <td>{{request.user.userName}}</td>
+                <td>{{request.user.fullName}}</td>
+                <td>
+                    <button (click)="removeFriend(request.user.id)" class="btn btn-success" id="accepted">
+                        REMOVE
+                    </button>
+                </td>
+            </ng-container>
         </tr>
-        <tr>
-            <td>
-                asd
-            </td>
-            <td>
-                asd
-            </td>
-            <td>
-                asd
-            </td>
+        
+        <tr *ngFor="let request of service.loggedUser.sentRequests">
+            <ng-container *ngIf="request.status == 1">
+                <td>{{request.friend.userName}}</td>
+                <td>{{request.friend.fullName}}</td>
+                <td>
+                    <button (click)="removeFriend(request.friend.id)" class="btn btn-success" id="accepted">
+                        REMOVE
+                    </button>
+                   
+                </td>
+            </ng-container>
         </tr>
-        <tr>
+
+    </table>
+
+    <div class="promo">
+        Pending requests:
+    </div>
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Username</th>
+                <th id="friendsHeader">Full name</th>
+                <th id="friendsHeader">Action</th>
+            </tr>
+        </thead>
+
+        <tr *ngFor="let request of service.loggedUser.receivedRequests">
+            <ng-container *ngIf="request.status == 0">
+                <td>{{request.user.userName}}</td>
+                <td>{{request.user.fullName}}</td>
+                <td>
+
+                        <button (click)="acceptRequest(request.user.id)" class="btn btn-success" id="pending">
+                            ACCEPT
+                        </button>
+                        <button (click)="rejectRequest(request.user.id)" class="btn btn-success" id="pending">
+                            REJECT
+                        </button>
+                </td>
+            </ng-container>
+        </tr>
+        
+        <tr *ngFor="let request of service.loggedUser.sentRequests">
+            <ng-container *ngIf="request.status == 0">
+                <td>{{request.friend.userName}}</td>
+                <td>{{request.friend.fullName}}</td>
+                <td>
+                    *request sent*
+                </td>
+            </ng-container>
+        </tr>
+
+    </table>
+
+    <div class="promo">
+        Need a friend ?
+    </div>
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Username</th>
+                <th id="friendsHeader">Full name</th>
+                <th id="friendsHeader">Action</th>
+            </tr>
+        </thead>
+
+        <tr *ngFor="let potentialFriend of service.allUsers">
+            <td>{{potentialFriend.userName}}</td>
+            <td>{{potentialFriend.fullName}}</td>
             <td>
-                asd
-            </td>
-            <td>
-                asd
-            </td>
-            <td>
-                asd
+                <button (click)="sendRequest(potentialFriend.id)" class="btn btn-success" id="pending">
+                    SEND REQUEST
+                </button>
             </td>
         </tr>
     </table>
 
   
+    
+    
 

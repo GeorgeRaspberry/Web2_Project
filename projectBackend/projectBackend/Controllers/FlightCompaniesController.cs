@@ -31,7 +31,7 @@ namespace projectBackend.Controllers
     [HttpGet]
     public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
-      var data = await _context.FlightCompanies.Include(r=>r.Flights).ToListAsync();
+      var data = await _context.FlightCompanies.ToListAsync();
       return data;
     }
 

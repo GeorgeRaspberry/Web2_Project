@@ -12,9 +12,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using projectBackend.Database;
+using projectBackend.Database.DatabaseFunctions;
 using projectBackend.Models;
 
 namespace projectBackend.Controllers
@@ -23,16 +26,21 @@ namespace projectBackend.Controllers
   [ApiController]
   public class ApplicationUserController : ControllerBase
   {
+    private readonly DatabaseContext _context;
     private UserManager<ApplicationUser> _userManager;
     private SignInManager<ApplicationUser> _signInManager;
     private readonly ApplicationSettings _appSettings;
+    private ApplicationUserFunctions userFunctions;
+    private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
 
     public ApplicationUserController(UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
+        SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings, DatabaseContext context)
     {
+      _context = context;
       _userManager = userManager;
       _signInManager = signInManager;
       _appSettings = appSettings.Value;
+      userFunctions = new ApplicationUserFunctions();
     }
 
     [HttpGet]
@@ -51,24 +59,25 @@ namespace projectBackend.Controllers
       var user = await _userManager.FindByIdAsync(userId);
       if (user != null)
       {
-
-        string name = user.FullName.Split(' ')[0];
+        return user;
+        /*string name = user.FullName.Split(' ')[0];
         string lastname = user.FullName.Split(' ')[1];
 
         ApplicationUserModel userModel = new ApplicationUserModel();
         var returnUser = new ApplicationUserModel()
         {
+          ID = user.Id,
           UserName = user.UserName,
           Email = user.Email,
           Name = name,
           Lastname = lastname,
           PhoneNumber = Convert.ToInt32(user.PhoneNumber),
           City = user.City,
-          Role = user.Role
+          Role = user.Role,
+          FriendsList = userFunctions.GetAllFriends(user)
         };
 
-
-        return returnUser;
+        return returnUser;*/
       }
       else
       {
@@ -86,6 +95,40 @@ namespace projectBackend.Controllers
       return result;
     }
 
+    [HttpGet]
+    [Route("GetAllFriends/{token}")]
+    public async Task<Object> GetAllFriends(string token)
+    {
+      var user = await _userManager.FindByIdAsync(token);
+      return userFunctions.GetAllFriends(user);
+    }
+
+    [HttpGet]
+    [Route("GetAllUsers/{token}")]
+    public async Task<Object> GetAllUsers(string token)
+    {
+      var user = await _userManager.FindByIdAsync(token);
+      List<ApplicationUser> allRequests = userFunctions.GetAllFriends(user);
+      List<ApplicationUser> allUsers = await _userManager.Users.ToListAsync();
+      allUsers.Remove(user);
+
+      if (allRequests.Count() == 0)
+        return allUsers;
+
+      foreach (ApplicationUser tempUser in allUsers.ToList())
+      {
+        if (allRequests.Contains(tempUser))
+        {
+          allUsers.Remove(tempUser);
+        }
+      }
+
+      if (allUsers.Count() == 0)
+        return new List<ApplicationUser>();
+
+      return allUsers;
+    }
+
     [HttpPost]
     [Route("Register")]
     //POST : /api/ApplicationUser/Register
@@ -99,8 +142,8 @@ namespace projectBackend.Controllers
         PhoneNumber = model.PhoneNumber.ToString(),
         City = model.City,
         Authenticate = model.Authenticate,
-        Role = "Registered"
-
+        Role = "Registered",
+        Password = model.Password
       };
 
       try
@@ -183,6 +226,101 @@ namespace projectBackend.Controllers
         return BadRequest(new { message = "Username or password is incorrect." });
     }
 
+    [HttpPut("{id}")]
+    [Route("SendRequest/{id}/{potentialId}")]
+    public async Task<IActionResult> SendRequest(string id, string potentialId)
+    {
+      var user = await _userManager.FindByIdAsync(id);
+      user.SentRequests.Add(new Requests() {FriendID = potentialId, Status = 0});
+
+      var result = await _userManager.UpdateAsync(user);
+
+      return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    [Route("RejectRequest/{id}/{potentialId}")]
+    public async Task<IActionResult> RejectRequest(string id, string potentialId)
+    {
+      //var user = await _userManager.FindByIdAsync(id);
+      //foreach (Requests req in user.ReceivedRequests.ToList())
+      //{
+      //  if (req.Status == 0)
+      //    if (req.UserID == potentialId)
+      //    {
+      //      user.ReceivedRequests.Remove(req);
+      //    }
+      //}
+
+      //var result = await _userManager.UpdateAsync(user);
+
+      //user = await _userManager.FindByIdAsync(potentialId);
+      //foreach (Requests req in user.SentRequests.ToList())
+      //{
+      //  if (req.Status == 0)
+      //    if (req.UserID == id)
+      //    {
+      //      user.SentRequests.Remove(req);
+      //    }
+      //}
+
+      //result = await _userManager.UpdateAsync(user);
+
+      //List<ApplicationUser> tempList = await _userManager.Users.ToListAsync();
+
+      foreach(Requests req in _context.Requests.ToList())
+      {
+        if (req.FriendID == id)
+        {
+          _context.Requests.Remove(req);
+          break;
+        }
+      }
+
+      await _context.SaveChangesAsync();
+
+      return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    [Route("AcceptRequest/{id}/{potentialId}")]
+    public async Task<IActionResult> AcceptRequest(string id, string potentialId)
+    {
+      var user = await _userManager.FindByIdAsync(id);
+      foreach (Requests req in user.ReceivedRequests.ToList())
+      {
+        if (req.UserID == potentialId)
+        {
+          req.Status = 1;
+          break;
+        }
+      }
+
+      var result = await _userManager.UpdateAsync(user);
+
+      return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    [Route("RemoveFriend/{id}/{potentialId}")]
+    public async Task<IActionResult> RemoveFriend(string id, string potentialId)
+    {
+      foreach (Requests req in _context.Requests.ToList())
+      {
+        if (req.Status == 1)
+          if ((req.UserID == id && req.FriendID == potentialId) || (req.UserID == potentialId && req.FriendID == id))
+          {
+            _context.Requests.Remove(req);
+            break;
+          }
+      }
+
+      await _context.SaveChangesAsync();
+
+      return NoContent();
+    }
+
+
     [HttpPost]
     [Route("SocialLogin")]
     // POST: api/<controller>/Login
@@ -205,7 +343,6 @@ namespace projectBackend.Controllers
 
       return Ok();
     }
-    private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
 
     public bool VerifyToken(string providerToken)
     {

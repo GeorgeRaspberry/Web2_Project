@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {}
+    "S:\\FTN\\Web2\\Web2_Projekat\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {}
   },
   "projects": {
-    "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {
+    "S:\\FTN\\Web2\\Web2_Projekat\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
+        "projectUniqueName": "S:\\FTN\\Web2\\Web2_Projekat\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
         "projectName": "projectBackend",
-        "projectPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
-        "packagesPath": "C:\\Users\\Duka\\.nuget\\packages\\",
-        "outputPath": "P:\\Cas\\vebreactandnodejs\\projectAngular\\Web2_Project\\projectBackend\\projectBackend\\obj\\",
+        "projectPath": "S:\\FTN\\Web2\\Web2_Projekat\\Web2_Project\\projectBackend\\projectBackend\\projectBackend.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "S:\\FTN\\Web2\\Web2_Projekat\\Web2_Project\\projectBackend\\projectBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Duka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +25,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\Microsoft SDKs\\Azure\\.NET SDK\\v2.9\\packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -177,12 +176,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -191,7 +184,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
