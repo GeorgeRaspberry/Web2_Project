@@ -1,4 +1,5 @@
-import { Car } from './car';
+import { Ride } from './ride';
+import { RideLocationTransfers } from '../flights/location-transfers';
 
 export class RideCompany {
     id: number;
@@ -7,16 +8,11 @@ export class RideCompany {
     address: string;
     promoDescription: string;
     rating: number;
-    cars: Array<Car>;
+    rides: Array<Ride>;
+    numberOfTransfers:number;
+    rideLocationTransfers: Array<RideLocationTransfers>;
 
-    constructor(id: number, image:string, name: string, address: string, promoDescription: string, rating: number)
+    constructor()
     {
-        this.id = id;
-        this.image = image;
-        this.name = name;
-        this.address = address;
-        this.promoDescription = promoDescription;
-        this.rating = rating;
-        this.cars = new Array<Car>();
     }
 }

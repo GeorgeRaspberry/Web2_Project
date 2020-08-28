@@ -1,19 +1,20 @@
 import { DatePipe, Time } from '@angular/common';
 import { FlightCompany } from './flight-company';
 import { Location } from './location';
+import { LocationTransfers } from './location-transfers';
 
 export class Flight {
     id: number
-    fullFlightTime: string;
-    flightLength: number;
     flyOffTime: Date;
     landingTime: Date;
-    companyId: number
+    fullFlightTime: string;
+    flightLength: number;
     numberOfTransfers: number;
-    locationTransfers: Array<Location>;
     price: number;
+    companyID: number
     company: FlightCompany;
-    
+    locationTransfers: Array<LocationTransfers>;
+
 
     constructor()
     {

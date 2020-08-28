@@ -58,6 +58,7 @@ namespace projectBackend.Controllers
         ApplicationUserModel userModel = new ApplicationUserModel();
         var returnUser = new ApplicationUserModel()
         {
+          ID = user.Id,
           UserName = user.UserName,
           Email = user.Email,
           Name = name,

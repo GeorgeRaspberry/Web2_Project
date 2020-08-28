@@ -9,14 +9,7 @@ export class FlightCompany {
     rating: number;
     flights: Array<Flight>;
 
-    constructor(id: number, image:string, name: string, address: string, promoDescription: string, rating: number)
+    constructor()
     {
-        this.id = id;
-        this.image = image;
-        this.name = name;
-        this.address = address;
-        this.promoDescription = promoDescription;
-        this.rating = rating;
-        this.flights = new Array<Flight>();
     }
 }

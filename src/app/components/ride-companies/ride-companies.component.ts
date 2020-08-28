@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RideCompany } from 'src/app/entities/rides/ride-company';
 import { RideCompaniesService } from 'src/app/services/rides/ride-companies.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ride-companies',
@@ -8,14 +9,10 @@ import { RideCompaniesService } from 'src/app/services/rides/ride-companies.serv
   styleUrls: ['./ride-companies.component.css']
 })
 export class RideCompaniesComponent implements OnInit {
-
-  allRideCompanies: Array<RideCompany>;
-  filteredCompanies: Array<RideCompany>;
   selectedCompany: RideCompany;
 
-  constructor(private companiesService: RideCompaniesService) {
-    this.allRideCompanies = this.companiesService.loadCompanies();
-    this.filteredCompanies = this.allRideCompanies;
+  constructor(public companiesService: RideCompaniesService, private router: Router) {
+    this.companiesService.loadCompanies();
   }
 
   ngOnInit(): void {
@@ -23,7 +20,27 @@ export class RideCompaniesComponent implements OnInit {
   }
 
   onClick(company: RideCompany) {
-      this.selectedCompany = company;
-      console.log(this.selectedCompany);
+    this.selectedCompany = company;
+  }
+
+  addCompany(){
+    this.companiesService.formData = new RideCompany()
+    this.router.navigateByUrl("/newRCompany")
+  }
+  
+  updateCompany(company:RideCompany){
+    this.companiesService.formData = company
+    this.router.navigateByUrl("/newRCompany")
+  }
+
+
+  deleteCompany(id:number)
+  {
+    this.companiesService.deleteRideCompany(id).subscribe(
+      res=>{
+        this.companiesService.loadCompanies();
+      }, 
+      err=> {console.log(err);}
+    );
   }
 }

@@ -1,33 +1,53 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { RideCompany } from 'src/app/entities/rides/ride-company';
+import { Location } from 'src/app/entities/flights/location';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RideCompaniesService {
 
-  constructor() { }
+  formData: RideCompany;
+  readonly rootURL = 'http://localhost:37240/api';
+  companies : Array<RideCompany>;
+  company:RideCompany = new RideCompany()
+  transfers: Array<Location>
+  constructor(private http: HttpClient) { }
 
-  loadCompanies() {
-    console.log('Učitavanje kompanija...');
-    return this.mockedCompanies();
+  loadTransfers(){
+    this.http.get(this.rootURL + '/Flights/GetLocations')
+    .toPromise()
+    .then(res =>  this.transfers = res as Array<Location>);
   }
 
-  mockedCompanies(): Array<RideCompany> {
-    let allRideCompanies = new Array<RideCompany>();
+  postLocation(location:Location){
+    return this.http.post(this.rootURL + '/Flights/PostLocation', location);
+  }
 
-    const r1 = new RideCompany(1,"assets/rentcar1.png", 'Rentorius Carius', "Addis Ababa	, Ethiopia" , 'Drive like a real man!', 4.3);
-    const r2 = new RideCompany(2,"assets/rentcar2.png", 'KarzEkspress', 'Paris, France', 'We grant what you wish for!', 4.4);
-    const r3 = new RideCompany(3,"assets/rentcar3.png", 'ForCar', 'Novi Sad, Serbia', 'We all for it!', 0.2);
-    const r4 = new RideCompany(4,"assets/rentcar4.png", 'Smart Car', 'Vienna, Austria', 'Go fast or go home!', 3.6);
-    const r5 = new RideCompany(5,"assets/rentcar5.png", 'Cole Rental', "California, USA" , 'We are good!', 5.0);
+  loadCompanies() {
+    this.company =new RideCompany()
+    this.http.get(this.rootURL + '/RideCompanies')
+    .toPromise()
+    .then(res =>  this.companies = res as Array<RideCompany>);
+  }
+  loadCompanyData(id:number)
+  {
+    this.http.get(this.rootURL + '/RideCompanies/'+id)
+    .toPromise()
+    .then(res => {
+      this.company = res as RideCompany
+    });
+  }
 
-    allRideCompanies.push(r1);
-    allRideCompanies.push(r2);
-    allRideCompanies.push(r3);
-    allRideCompanies.push(r4);
-    allRideCompanies.push(r5);
-    
-    return allRideCompanies;
+
+  postRideCompany() {
+    return this.http.post(this.rootURL + '/RideCompanies', this.formData);
+  }
+  putRideCompany() {
+    return this.http.put(this.rootURL + '/RideCompanies/'+ this.formData.id, this.formData);
+  }
+  deleteRideCompany(id) {
+    return this.http.delete(this.rootURL + '/RideCompanies/'+ id);
   }
 }

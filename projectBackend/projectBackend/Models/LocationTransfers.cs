@@ -12,13 +12,12 @@ namespace projectBackend.Models
   {
     [Key]
     public int ID { get; set; }
+    [ForeignKey("Flight")]
     public int FlightID { get; set; }
-    [ForeignKey("FlightID")]
-    public virtual Flight flight { get; set; }
-
+    public virtual Flight Flight { get; set; }
+    [ForeignKey("Location")]
     public int LocationID { get; set; }
-    [ForeignKey("LocationID")]
-    public virtual Location location { get; set; }
+    public virtual Location Location { get; set; }
     public int Status { get; set; }
   }
 }

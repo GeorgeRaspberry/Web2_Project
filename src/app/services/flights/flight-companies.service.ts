@@ -10,22 +10,13 @@ export class FlightCompaniesService {
   formData: FlightCompany;
   readonly rootURL = 'http://localhost:37240/api';
   companies : Array<FlightCompany>;
-  company:FlightCompany = new FlightCompany(0,"","","","",0)
-  transfers: Array<Location> = new Array();
-
+  company:FlightCompany = new FlightCompany()
 
   constructor(private http: HttpClient) { }
 
-  loadTransfers(){
-    this.http.get(this.rootURL + '/GetLocations')
-    .toPromise()
-    .then(res =>  this.transfers = res as Array<Location>);
-  }
-  postLocation(location: Location) {
-    return this.http.post(this.rootURL + '/PostLocation', location);
-  }
+
   loadCompanies() {
-    this.company =new FlightCompany(0,"","","","",0)
+    this.company =new FlightCompany()
     this.http.get(this.rootURL + '/FlightCompanies')
     .toPromise()
     .then(res =>  this.companies = res as Array<FlightCompany>);
@@ -34,7 +25,9 @@ export class FlightCompaniesService {
   {
     this.http.get(this.rootURL + '/FlightCompanies/'+id)
     .toPromise()
-    .then(res => this.company = res as FlightCompany);
+    .then(res => {
+      this.company = res as FlightCompany
+    });
   }
 
 
@@ -42,7 +35,7 @@ export class FlightCompaniesService {
     return this.http.post(this.rootURL + '/FlightCompanies', this.formData);
   }
   putFlight() {
-    return this.http.put(this.rootURL + '/FlightCompanies'+ this.formData.id, this.formData);
+    return this.http.put(this.rootURL + '/FlightCompanies/'+ this.formData.id, this.formData);
   }
   deleteFlightCompany(id) {
     return this.http.delete(this.rootURL + '/FlightCompanies/'+ id);

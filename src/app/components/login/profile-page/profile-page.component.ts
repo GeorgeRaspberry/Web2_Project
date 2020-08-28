@@ -12,7 +12,7 @@ import { User } from 'src/app/entities/users/user';
 export class ProfilePageComponent implements OnInit {
 
   saveChanges(form: NgForm) {
-    this.service.formData.id = 0;
+    this.service.formData.id = "";
     if (window.confirm('Are you sure?'))
     {
       this.service.postUser().subscribe(

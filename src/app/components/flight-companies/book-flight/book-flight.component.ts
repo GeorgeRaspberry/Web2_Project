@@ -13,7 +13,6 @@ export class BookFlightComponent implements OnInit {
   constructor(public service: FlightsService,public route: ActivatedRoute) { 
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
     this.service.loadFlight(this.id)   
-    console.log(this.service.flight) 
   }
 
   ngOnInit(): void {

@@ -7,6 +7,7 @@ import { Flight } from 'src/app/entities/flights/flight';
 import { FlightsService } from 'src/app/services/flights/flights.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/entities/flights/location';
+import { LocationTransfers } from 'src/app/entities/flights/location-transfers';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class FlightRegisterComponent implements OnInit {
         }
       }
     }
-    this.service.formData.companyId = this.id;
+    this.service.formData.companyID = this.id;
     this.service.formData.locationTransfers[0].status = 1
     this.service.formData.locationTransfers[this.service.formData.locationTransfers.length - 1].status = 2
     this.service.postFlight().subscribe(
@@ -68,7 +69,7 @@ export class FlightRegisterComponent implements OnInit {
     }
     this.service.formData.locationTransfers = new Array();
     for (let i = 0 ; i < event.target.value; i++){
-      this.service.formData.locationTransfers.push(new Location());
+      this.service.formData.locationTransfers.push(new LocationTransfers());
     }
   }
   resetForm(form?: NgForm) {

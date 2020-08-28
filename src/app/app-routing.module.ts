@@ -6,7 +6,6 @@ import { FlightRegisterComponent } from './components/flight-companies/flight-re
 import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RidesComponent } from './components/rides/rides.component';
 import { FlightCompaniesComponent } from './components/flight-companies/flight-companies.component';
 import { RideCompaniesComponent } from './components/ride-companies/ride-companies.component';
 import { RcompanypageComponent } from './components/ride-companies/rcompanypage/rcompanypage.component';
@@ -14,6 +13,7 @@ import { FlightsComponent } from './components/flight-companies/flights/flights.
 import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-register/rcompany-register.component';
 import { LocationPageComponent } from './components/location-page/location-page.component';
 import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
+import { RidesComponent } from './components/ride-companies/rides/rides.component';
 
 const routes: Routes = [
 {

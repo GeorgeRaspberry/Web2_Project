@@ -11,29 +11,50 @@ import { Router } from '@angular/router';
 })
 export class FcompanyRegisterComponent implements OnInit {
 
- 
-
-  destinations: ["asd", "asf","gsd"];
   url: any;
   constructor(public service: FlightCompaniesService,private router: Router) {
-    this.resetForm();
-   }
+    this.url = this.service.formData.image
+  }
 
   ngOnInit(): void {
   }
   addFCompany(form:NgForm) {
-    this.service.postFlightCompany().subscribe(
+    if (   (this.service.formData.address == null || this.service.formData.address == "") 
+     ||(this.service.formData.promoDescription == null || this.service.formData.promoDescription == "") 
+     ||(this.service.formData.image == null || this.service.formData.image == "")
+     ||(this.service.formData.name == null || this.service.formData.name == "")
+     ){
+      alert("Not all inputs filled")
+      return
+     }
+
+
+
+
+    if (this.service.formData.id == null || this.service.formData.id == 0)
+    { 
+      this.service.postFlightCompany().subscribe(
+          res=>{
+            this.resetForm(form);
+            this.router.navigateByUrl("/flightCompanies")
+          }, 
+          err=> {console.log(err);}
+      );
+    }else{
+      this.service.putFlight().subscribe(
         res=>{
           this.resetForm(form);
+          this.router.navigateByUrl("/flightCompanies")
         }, 
         err=> {console.log(err);}
-    );
+      );
+    }
   }
 
   resetForm(form?: NgForm) {
     if (form != null)
       form.form.reset();
-    this.service.formData = new FlightCompany(0,"","","","",0);
+    this.service.formData = new FlightCompany();
     this.url = null;
   }
   onSelectFile(event) { // called each time file input changes

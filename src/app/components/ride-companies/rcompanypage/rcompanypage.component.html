@@ -1,18 +1,13 @@
 <div id="overrider">
-
-<div *ngFor="let company of allCompanies">
-    <div id="companyInfo" *ngIf="company.id == id">
-
-        <img src={{company.image}}>
-        <app-rating-star [rating]="company.rating"></app-rating-star>
-        <p class="promo">{{company.promoDescription}}</p>
+    <div id="companyInfo">
+        <img src={{service.company.image}}>
+        <app-rating-star [rating]="service.company.rating"></app-rating-star>
+        <p class="promo">{{service.company.promoDescription}}</p>
                 
     </div>
+
+<app-rides [rides]="service.company.rides"></app-rides>
+        <button class="btn btn-success" id="add" (click)="addRide()" routerLink="/ride/{{id}}/register">
+            CREATE NEW RIDE
+        </button>
 </div>
-
-<app-rides [companyId]="id"></app-rides>
-</div>
-
-
-
-

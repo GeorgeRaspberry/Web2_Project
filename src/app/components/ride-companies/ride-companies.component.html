@@ -1,22 +1,20 @@
+<div style="margin-top: 2%;">
+    <br>
+    <app-ride-filter></app-ride-filter>
+    <br>
 
-    <table id="overrider" class="table table-hover">
-        <!--<thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">COMPANY</th>
-                <th scope="col">PROMO</th>
-                <th scope="col">RATING</th>
-            </tr>
-        </thead>-->
+    <table id="overrider" class="table table-hover" >
         <tbody>
-            <tr *ngFor="let company of filteredCompanies">
+            <tr *ngFor="let company of companiesService.companies">
                 <td><img class="imageTest" src={{company.image}}></td>
                 <td>{{company.name}}</td>
                 <td>{{company.promoDescription}}</td>
                 <td><app-rating-star [rating]="company.rating"></app-rating-star></td>
-                <td><button class="btn btn-success" routerLink="/ride/{{company.id}}/details">
-                    Details
-                </button></td>
+                <td>
+                    <button class="btn btn-success" routerLink="/ride/{{company.id}}/details">Details</button>
+                    <button class="btn btn-success" (click)="updateCompany(company)">Update</button>
+                    <button class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button>
+                </td>
             </tr>
         </tbody>
         <tr id="add">
@@ -25,10 +23,21 @@
             <td></td>
             <td></td>
             <td>
-                <button class="btn btn-success" id="add" routerLink="/newRCompany">
+                <button  class="btn btn-success" id="add" (click)="addCompany()">
                     NEW COMPANY
                 </button>
             </td>
         </tr>
+        <tr id="add">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button  class="btn btn-success" id="add" routerLink="/showLocation">
+                    SHOW LOCATIONS
+                </button>
+            </td>
+        </tr>
     </table>
-    
+</div>

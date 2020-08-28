@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationbarComponent } from './components/navigationbar/navigationbar.component';
-import { RidesComponent } from './components/rides/rides.component';
 import { FlightCompaniesComponent } from './components/flight-companies/flight-companies.component';
 import { FcompanypageComponent } from './components/flight-companies/fcompanypage/fcompanypage.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,6 +27,10 @@ import { FlightsService } from './services/flights/flights.service';
 import { LocationPageComponent } from './components/location-page/location-page.component';
 import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
 import { ProfilePageService } from './services/users/profile-page.service';
+import { RideFilterComponent } from './components/ride-companies/ride-filter/ride-filter.component';
+import { RideCompaniesService } from './services/rides/ride-companies.service';
+import { RidesService } from './services/rides/rides.service';
+import { RidesComponent } from './components/ride-companies/rides/rides.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { ProfilePageService } from './services/users/profile-page.service';
     RcompanyRegisterComponent,
     RideRegisterComponent,
     LocationPageComponent,
-    BookFlightComponent
+    BookFlightComponent,
+    RideFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,7 @@ import { ProfilePageService } from './services/users/profile-page.service';
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
   ],
-  providers: [FlightsService,FlightCompaniesService,ProfilePageService],
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

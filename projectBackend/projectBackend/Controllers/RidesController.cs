@@ -12,40 +12,40 @@ namespace projectBackend.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class FlightsController : ControllerBase
+  public class RidesController : ControllerBase
   {
     private readonly DatabaseContext _context;
 
-    public FlightsController(DatabaseContext context)
+    public RidesController(DatabaseContext context)
     {
       _context = context;
     }
 
-    // GET: api/Flights
+    // GET: api/Rides
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
+    public async Task<ActionResult<IEnumerable<Ride>>> GetRides()
     {
-      return await _context.Flights.ToListAsync();
+      return await _context.Rides.ToListAsync();
     }
 
-    // GET: api/Flights/5
+    // GET: api/Rides/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Flight>> GetFlight(int id)
+    public async Task<ActionResult<Ride>> GetRide(int id)
     {
-      var flight = await _context.Flights.FirstOrDefaultAsync(i => i.ID == id);
+      var ride = await _context.Rides.FirstOrDefaultAsync(i => i.ID == id);
 
-      if (flight == null)
+      if (ride == null)
       {
         return NotFound();
       }
-      //FlightModel flightModel = new FlightModel(flight.ID,flight.FlyOffTime,flight.LandingTime, flight.FullFlightTime, flight.FlightLength,flight.NumberOfTransfers,flight.Price,flight.CompanyID,flight.LocationTransfers)
+      //RideModel rideModel = new RideModel(ride.ID,ride.FlyOffTime,ride.LandingTime, ride.FullRideTime, ride.RideLength,ride.NumberOfTransfers,ride.Price,ride.CompanyID,ride.LocationTransfers)
 
-      return flight;
+      return ride;
     }
 
     [HttpPost]
     [Route("PostLocation")]
-    public async Task<ActionResult<List<Flight>>> PostLocation(Location location)
+    public async Task<ActionResult<List<Ride>>> PostLocation(Location location)
     {
       _context.Locations.Add(location);
       await _context.SaveChangesAsync();
@@ -61,18 +61,18 @@ namespace projectBackend.Controllers
       return await _context.Locations.ToListAsync();
     }
 
-    // PUT: api/Flights/5
+    // PUT: api/Rides/5
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for
     // more details see https://aka.ms/RazorPagesCRUD.
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutFlight(int id, Flight flight)
+    public async Task<IActionResult> PutRide(int id, Ride ride)
     {
-      if (id != flight.ID)
+      if (id != ride.ID)
       {
         return BadRequest();
       }
-
-      _context.Entry(flight).State = EntityState.Modified;
+      ride.Location = null;
+      _context.Entry(ride).State = EntityState.Modified;
 
       try
       {
@@ -80,7 +80,7 @@ namespace projectBackend.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!FlightExists(id))
+        if (!RideExists(id))
         {
           return NotFound();
         }
@@ -93,37 +93,37 @@ namespace projectBackend.Controllers
       return NoContent();
     }
 
-    // POST: api/Flights
+    // POST: api/Rides
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for
     // more details see https://aka.ms/RazorPagesCRUD.
     [HttpPost]
-    public async Task<ActionResult<Flight>> PostFlight(Flight flight)
+    public async Task<ActionResult<Ride>> PostRide(Ride ride)
     {
-      _context.Flights.Add(flight);
+      _context.Rides.Add(ride);
       await _context.SaveChangesAsync();
 
-      return CreatedAtAction("GetFlight", new { id = flight.ID }, flight);
+      return CreatedAtAction("GetRide", new { id = ride.ID }, ride);
     }
 
-    // DELETE: api/Flights/5
+    // DELETE: api/Rides/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Flight>> DeleteFlight(int id)
+    public async Task<ActionResult<Ride>> DeleteRide(int id)
     {
-      var flight = await _context.Flights.FindAsync(id);
-      if (flight == null)
+      var ride = await _context.Rides.FindAsync(id);
+      if (ride == null)
       {
         return NotFound();
       }
 
-      _context.Flights.Remove(flight);
+      _context.Rides.Remove(ride);
       await _context.SaveChangesAsync();
 
-      return flight;
+      return ride;
     }
 
-    private bool FlightExists(int id)
+    private bool RideExists(int id)
     {
-      return _context.Flights.Any(e => e.ID == id);
+      return _context.Rides.Any(e => e.ID == id);
     }
   }
 }

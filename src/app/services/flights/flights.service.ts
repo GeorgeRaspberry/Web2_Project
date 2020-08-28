@@ -44,12 +44,10 @@ export class FlightsService {
     return this.http.post(this.rootURL + '/Flights', this.formData);
   }
   putFlight() {
-    return this.http.put(this.rootURL + '/Flights/'+ this.formData.companyId, this.formData);
+    return this.http.put(this.rootURL + '/Flights/'+ this.formData.companyID, this.formData);
   }
   deleteFlight(id) {
     alert("delete")
     return this.http.delete(this.rootURL + '/Flights/'+ this.formData.id);
   }
-
-
 }

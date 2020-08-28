@@ -22,6 +22,7 @@ namespace projectBackend.Models
     public int CompanyID { get; set; }
     [ForeignKey("CompanyID")]
     public virtual FlightCompany Company { get; set; }
+    [InverseProperty("Flight")]
     public virtual ICollection<LocationTransfers> LocationTransfers { get; set; }
   }
 }

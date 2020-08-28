@@ -5,38 +5,49 @@
   
       <tr>
         <td>
-          <input name="carMaker" class="form-control" placeholder="Car maker name" required>
+          <input type="text" #carMaker="ngModel" [(ngModel)]="service.formData.carMaker" name="carMaker" class="form-control" placeholder="Ride maker name" required>
         </td>
       </tr>
 
       <tr>
         <td>
-          <input name="carMaker" class="form-control" placeholder="Car model name" required>
+          <input type="text" #carModel="ngModel" [(ngModel)]="service.formData.carModel" name="carModel" class="form-control" placeholder="Ride model name" required>
         </td>
       </tr>
 
       <tr>
         <td>
-          <input name="productionYear" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select production year">
-          <owl-date-time #dt1></owl-date-time>
+          <input type="number" #productionYear="ngModel" [(ngModel)]="service.formData.productionYear" name="productionYear" class="form-control" placeholder="Select production year">
         </td>
       </tr>
 
       <tr>
         <td>
-          <input name="numberOfSeats" type="number" class="form-control" placeholder="Number of seats" required>
+          <input #numberOfSeats="ngModel" [(ngModel)]="service.formData.numberOfSeats" name="numberOfSeats" type="number" class="form-control" placeholder="Number of seats" required>
         </td>
       </tr>
 
       <tr>
         <td>
-          <input name="vehicleType" class="form-control" placeholder="Vehicle type" required>
+          <input type="text" #carType="ngModel" [(ngModel)]="service.formData.carType" name="carType" class="form-control" placeholder="Car type" required>
         </td>
       </tr>
   
       <tr>
         <td>
-            <button class="btn btn-success" id="add" (click)="addRide()">
+          <select name="locationOfTransfers" (change)="onChange($event)">
+            <ng-container *ngFor="let title of service.transfers">
+            <option  *ngIf="service.formData.location != null && title.name==service.formData.location.name" [value]=title.id selected>{{title.name}}</option>
+            <option  *ngIf="service.formData.location == null || title.name!=service.formData.location.name" [value]=title.id>{{title.name}}</option>
+
+            </ng-container>
+          </select> 
+          </td>
+      </tr>
+  
+      <tr>
+        <td>
+            <button class="btn btn-success" id="add" (click)="addRide(form)">
             CREATE
             </button>
         </td>

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using projectBackend.Database;
 using projectBackend.Database.DatabaseFunctions;
 using projectBackend.Models;
@@ -15,52 +13,58 @@ namespace projectBackend.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class FlightCompaniesController : ControllerBase
+  public class RideCompaniesController : ControllerBase
   {
     private readonly DatabaseContext _context;
-    private FlightCompanyFunctions flightCompanyFunction;
+    private RideCompanyFunctions rideCompanyFunction;
 
 
-    public FlightCompaniesController(DatabaseContext context)
+    public RideCompaniesController(DatabaseContext context)
     {
       _context = context;
-      flightCompanyFunction = new FlightCompanyFunctions(_context);
+      rideCompanyFunction = new RideCompanyFunctions(_context);
     }
 
     // GET: api/FlightCompanies
     [HttpGet]
-    public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
+    public async Task<ActionResult<List<RideCompany>>> GetRideCompanies()
     {
-      var data = await _context.FlightCompanies.ToListAsync();
+
+
+
+
+
+
+      var data = await _context.RideCompanies.ToListAsync();
       return data;
     }
 
     // GET: api/FlightCompanies/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<FlightCompany>> GetFlightCompany(int id)
+    public async Task<ActionResult<RideCompany>> GetRideCompany(int id)
     {
-      var flightCompany = await _context.FlightCompanies.FirstOrDefaultAsync(i=>i.ID == id);
+      var rideCompany = await _context.RideCompanies.FirstOrDefaultAsync(i => i.ID == id);
 
-      if (flightCompany == null)
+      if (rideCompany == null)
       {
         return NotFound();
       }
 
-      return flightCompany;
+      return rideCompany;
     }
 
     // PUT: api/FlightCompanies/5
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for
     // more details see https://aka.ms/RazorPagesCRUD.
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutFlightCompany(int id, FlightCompany flightCompany)
+    public async Task<IActionResult> PutRideCompany(int id, RideCompany rideCompany)
     {
-      if (id != flightCompany.ID)
+      if (id != rideCompany.ID)
       {
         return BadRequest();
       }
 
-      _context.Entry(flightCompany).State = EntityState.Modified;
+      _context.Entry(rideCompany).State = EntityState.Modified;
 
       try
       {
@@ -68,7 +72,7 @@ namespace projectBackend.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!FlightCompanyExists(id))
+        if (!RideCompanyExists(id))
         {
           return NotFound();
         }
@@ -85,33 +89,35 @@ namespace projectBackend.Controllers
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for
     // more details see https://aka.ms/RazorPagesCRUD.
     [HttpPost]
-    public async Task<ActionResult<FlightCompany>> PostFlightCompany(FlightCompany flightCompany)
+    public async Task<ActionResult<RideCompany>> PostRideCompany(RideCompany rideCompany)
     {
-      _context.FlightCompanies.Add(flightCompany);
+      _context.RideCompanies.Add(rideCompany);
       await _context.SaveChangesAsync();
 
-      return CreatedAtAction("GetFlightCompany", new { id = flightCompany.ID }, flightCompany);
+      return CreatedAtAction("GetRideCompany", new { id = rideCompany.ID }, rideCompany);
     }
 
     // DELETE: api/FlightCompanies/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<FlightCompany>> DeleteFlightCompany(int id)
+    public async Task<ActionResult<RideCompany>> DeleteRideCompany(int id)
     {
-      var flightCompany = await _context.FlightCompanies.FindAsync(id);
-      if (flightCompany == null)
+      var rideCompany = await _context.RideCompanies.FindAsync(id);
+      if (rideCompany == null)
       {
         return NotFound();
       }
 
-      _context.FlightCompanies.Remove(flightCompany);
+      _context.RideCompanies.Remove(rideCompany);
       await _context.SaveChangesAsync();
 
-      return flightCompany;
+      return rideCompany;
     }
 
-    private bool FlightCompanyExists(int id)
+    private bool RideCompanyExists(int id)
     {
-      return _context.FlightCompanies.Any(e => e.ID == id);
+      return _context.RideCompanies.Any(e => e.ID == id);
     }
+
+
   }
 }

@@ -3,54 +3,33 @@
     <table class="center">
 
         <tr>
-            <td>
-                <input name="Id" class="form-control" placeholder="Company ID" required>
+            <td colspan="4">
+                <input name="Name" #Name="ngModel" class="form-control" [(ngModel)]="service.formData.name" placeholder="The company's name" required>
             </td>
         </tr>
 
         <tr>
-            <td>
-                <input name="Name" class="form-control" placeholder="The company's name" required>
+            <td colspan="4">
+                <input name="Address" #Address="ngModel" class="form-control" [(ngModel)]="service.formData.address" placeholder="The company address" required>
             </td>
         </tr>
 
         <tr>
-            <td>
-                <input name="Address" class="form-control" placeholder="The company address" required>
+            <td colspan="4">
+                <input #file name="image" type="file" class="form-control" accept='image/*' (change)="onSelectFile($event)" placeholder="Choose company image" required>
+                <img [src]="url" height="200"> <br/>
+              </td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <input name="promoDescription" #promoDescription="ngModel" class="form-control" [(ngModel)]="service.formData.promoDescription" placeholder="A few words about the company" required>
             </td>
         </tr>
 
         <tr>
-            <td>
-              <input name="image" type="file" class="form-control" placeholder="Choose company image" required>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <input name="promoDescription" class="form-control" placeholder="A few words about the company" required>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <select
-                    name="carCompanyInfo">
-                        <option
-                            *ngFor="let option of cars">
-                                    {{ option.carMaker }} {{ option.carModel }} 
-                                    <!--
-                                        OVDE BI TREBALO DA SE ISPISU SVI AUTI IZ BAZE :(
-                                    -->
-                        </option>
-                </select>
-            </td>
-        </tr>
-        
-
-        <tr>
-            <td>
-                <button class="btn btn-success" id="add" (click)="addRideCompany()">
+            <td colspan="4">
+                <button class="btn btn-success" id="add" (click)="addRCompany(form)">
                     CREATE
                 </button>
             </td>
