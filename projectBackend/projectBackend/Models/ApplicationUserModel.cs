@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace projectBackend.Models
     public class ApplicationUserModel
     {
     public string ID { get; set; }
+
     public string Name { get; set; }
 
     public string Lastname { get; set; }
@@ -25,5 +27,7 @@ namespace projectBackend.Models
     public string Role { get; set; }
 
     public int Authenticate { get; set; }
+
+    public ICollection<ApplicationUser> FriendsList { get; set; }
   }
 }

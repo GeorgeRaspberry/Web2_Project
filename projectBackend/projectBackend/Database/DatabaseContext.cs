@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using projectBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,6 @@ namespace projectBackend.Database
     public DbSet<Location> Locations { get; set; }
     public DbSet<RideCompany> RideCompanies { get; set; }
     public DbSet<Ride> Rides { get; set; }
+    public DbSet<Requests> Requests { get; set; }
   }
 }

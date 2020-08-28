@@ -12,19 +12,29 @@ export class ProfilePageService {
 
   formData: User;
   readonly rootURL = 'http://localhost:37240/api';
-  list : User[];
   loggedUser:User = new User()
+  allUsers: Array<User>;
   constructor(private http: HttpClient) { }
 
   postUser() {
     return this.http.post(this.rootURL + '/User', this.formData);
   }
-  putUser() {
-    return this.http.put(this.rootURL + '/User/'+ this.formData.id, this.formData);
+  sendFriendRequest(potentialId: string) {
+    return this.http.put(this.rootURL + '/ApplicationUser/SendRequest/'+ this.loggedUser.id + '/' + potentialId, null);
   }
-  deleteUser(id) {
-    return this.http.delete(this.rootURL + '/User/'+ this.formData.id);
+
+  acceptFriendRequest(potentialId: string) {
+    return this.http.put(this.rootURL + '/ApplicationUser/AcceptRequest/'+ this.loggedUser.id + '/' + potentialId, null);
   }
+
+  rejectFriendRequest(potentialId: string) {
+    return this.http.put(this.rootURL + '/ApplicationUser/RejectRequest/'+ this.loggedUser.id + '/' + potentialId, null);
+  }
+
+  removeFriend(potentialId: string) {
+    return this.http.put(this.rootURL + '/ApplicationUser/RemoveFriend/'+ this.loggedUser.id + '/' + potentialId, null);
+  }
+
   getLoggedUser(token:string){
     this.http.get(this.rootURL + '/ApplicationUser/GetUserData/'+ token)
     .toPromise()
@@ -32,10 +42,34 @@ export class ProfilePageService {
       if (res == null){
         localStorage.removeItem('token')
       }
-      this.loggedUser = res as User
-    } );
-  }
+      this.loggedUser = res as User;
+      var splitter = this.loggedUser.fullName.split(' ', 2);
+      this.loggedUser.name = splitter[0];
+      this.loggedUser.lastname = splitter[1];
 
+      this.http.get(this.rootURL + '/ApplicationUser/GetAllFriends/'+ this.loggedUser.id)
+      .toPromise()
+      .then(res =>{
+      if (res == null){
+        localStorage.removeItem('token')
+      }
+      this.loggedUser.friendsList = res as Array<User>;
+      }
+      );
+
+      this.http.get(this.rootURL + '/ApplicationUser/GetAllUsers/'+ this.loggedUser.id)
+      .toPromise()
+      .then(res =>{
+      if (res == null){
+        localStorage.removeItem('token')
+      }
+      this.allUsers = res as Array<User>;
+      }
+      );
+
+    }
+    );
+  }
 
   login(form:NgForm) {
     return this.http.post(this.rootURL + '/ApplicationUser/Login', this.formData);
@@ -55,9 +89,7 @@ export class ProfilePageService {
     return this.http.post(this.rootURL + '/ApplicationUser/Register', body);
   }
 
-  refreshList(){
-    this.http.get(this.rootURL + '/User')
-    .toPromise()
-    .then(res => this.list = res as User[]);
+  updateProfilePage() {
+    this.getLoggedUser(localStorage.getItem('token'));
   }
 }

@@ -54,6 +54,16 @@ table #friendsHeader {
     font-weight: bold;
 }
 
+tr #accepted {
+    font-family: "Oswald";
+    font-size: 16px;
+    font-weight: 200;
+    margin: 5px;
+    background-color: rgba(184, 0, 0, 0.9);
+    border-color: rgba(255,255,255,0.7);
+    width: 100px;
+}
+
 tr #pending {
     font-family: "Oswald";
     font-size: 16px;
@@ -62,5 +72,4 @@ tr #pending {
     background-color: rgba(52,52,52,0.9);
     border-color: rgba(255,255,255,0.7);
     width: 100px;
-    display: none;
 }

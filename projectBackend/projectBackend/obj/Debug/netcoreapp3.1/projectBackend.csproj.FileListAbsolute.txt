@@ -334,5 +334,8 @@ P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBacke
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.dll
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.pdb
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.genruntimeconfig.cache
+<<<<<<< HEAD
 S:\FTN\Web2\Web2_Projekat\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.csprojAssemblyReference.cache
 P:\Cas\vebreactandnodejs\projectAngular\Web2_Project\projectBackend\projectBackend\obj\Debug\netcoreapp3.1\projectBackend.csprojAssemblyReference.cache
+=======
+>>>>>>> 1f4028538d2a78a67c0c0f291e49123dc7b7d72b
