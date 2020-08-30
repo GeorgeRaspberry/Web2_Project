@@ -181,6 +181,39 @@ namespace projectBackend.Controllers
     }
 
     [HttpPost]
+    [Route("UpdateUser/{id}")]
+    public async Task<Object> UpdateUser(string id, [FromBody] ApplicationUserModel model)
+    {
+      try
+      {
+        var currentUser = await _userManager.FindByIdAsync(id);
+
+        if (model.Password != currentUser.Password)
+        {
+          var result1 = await _userManager.RemovePasswordAsync(currentUser);
+          result1 = await _userManager.AddPasswordAsync(currentUser, model.Password);
+        }
+
+        currentUser.UserName = model.UserName;
+        currentUser.Email = model.Email;
+        currentUser.FullName = model.Name + ' ' + model.Lastname;
+        currentUser.PhoneNumber = model.PhoneNumber.ToString();
+        currentUser.City = model.City;
+        currentUser.Authenticate = 0;
+        currentUser.Role = model.Role;
+
+        var result = await _userManager.UpdateAsync(currentUser);
+
+        return Ok(result);
+      }
+      catch (Exception ex)
+      {
+
+        throw ex;
+      }
+    }
+
+    [HttpPost]
     [Route("Login")]
     //POST : /api/ApplicationUser/Login
     public async Task<IActionResult> Login(LoginModel model)
@@ -242,32 +275,6 @@ namespace projectBackend.Controllers
     [Route("RejectRequest/{id}/{potentialId}")]
     public async Task<IActionResult> RejectRequest(string id, string potentialId)
     {
-      //var user = await _userManager.FindByIdAsync(id);
-      //foreach (Requests req in user.ReceivedRequests.ToList())
-      //{
-      //  if (req.Status == 0)
-      //    if (req.UserID == potentialId)
-      //    {
-      //      user.ReceivedRequests.Remove(req);
-      //    }
-      //}
-
-      //var result = await _userManager.UpdateAsync(user);
-
-      //user = await _userManager.FindByIdAsync(potentialId);
-      //foreach (Requests req in user.SentRequests.ToList())
-      //{
-      //  if (req.Status == 0)
-      //    if (req.UserID == id)
-      //    {
-      //      user.SentRequests.Remove(req);
-      //    }
-      //}
-
-      //result = await _userManager.UpdateAsync(user);
-
-      //List<ApplicationUser> tempList = await _userManager.Users.ToListAsync();
-
       foreach(Requests req in _context.Requests.ToList())
       {
         if (req.FriendID == id)
@@ -323,52 +330,82 @@ namespace projectBackend.Controllers
 
     [HttpPost]
     [Route("SocialLogin")]
-    // POST: api/<controller>/Login
-    public async Task<IActionResult> SocialLogin([FromBody] LoginModel loginModel)
+    public async Task<IActionResult> SocialLogin(LoginModel model)
     {
-      var test = _appSettings.JWT_Secret;
-      if (VerifyToken(loginModel.IdToken))
+      var tokenVerification = await VerifyToken(model.IdToken);
+      if (tokenVerification.isValid)
       {
+        var user = await _userManager.FindByEmailAsync(tokenVerification.apiTokenInfo.email);
+
+        if (user is null)
+        {
+          user = new ApplicationUser()
+          {
+            UserName = tokenVerification.apiTokenInfo.email.Split("@")[0],
+            FullName = "User User",
+            Password = tokenVerification.apiTokenInfo.email.Split("@")[0],
+            Role = "Registered",
+            Email = tokenVerification.apiTokenInfo.email,
+            City = "default",
+            PhoneNumber = "123123123",
+            Authenticate = 1
+          };
+          try
+          {
+            await _userManager.CreateAsync(user, user.Password);
+          }
+          catch (Exception e)
+          {
+            Console.WriteLine(e);
+          }
+          
+        }
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-          Expires = DateTime.UtcNow.AddMinutes(5),
-          //Key min: 16 characters
+          Subject = new ClaimsIdentity(new Claim[]
+            {
+                        new Claim("UserID", user.Id.ToString()),
+            }),
+          Expires = DateTime.UtcNow.AddDays(1),
           SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
         };
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
         var token = tokenHandler.WriteToken(securityToken);
+
         return Ok(new { token });
       }
 
-      return Ok();
+      return BadRequest(new { message = "Error loging in with google" });
     }
 
-    public bool VerifyToken(string providerToken)
+    private async Task<(bool isValid, GoogleApiToken apiTokenInfo)> VerifyToken(string providerToken)
     {
       var httpClient = new HttpClient();
-      var requestUri = new Uri(string.Format(GoogleApiTokenInfoUrl, providerToken));
+      var requestUri = new Uri($"https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={providerToken}");
 
-      HttpResponseMessage httpResponseMessage;
+      HttpResponseMessage responseMessage;
 
       try
       {
-        httpResponseMessage = httpClient.GetAsync(requestUri).Result;
+        responseMessage = await httpClient.GetAsync(requestUri);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        return false;
+        return (false, null);
       }
 
-      if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
+      if (responseMessage.StatusCode != HttpStatusCode.OK)
       {
-        return false;
+        return (false, null);
       }
 
-      var response = httpResponseMessage.Content.ReadAsStringAsync().Result;
-      var googleApiTokenInfo = JsonConvert.DeserializeObject<GoogleApiTokenInfo>(response);
-
-      return true;
+      var response = await responseMessage.Content.ReadAsStringAsync();
+      var googleApiToken = JsonConvert.DeserializeObject<GoogleApiToken>(response);
+      return (true, googleApiToken);
     }
+
   }
 }

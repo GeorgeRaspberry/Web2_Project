@@ -12,16 +12,21 @@ import { User } from 'src/app/entities/users/user';
 export class ProfilePageComponent implements OnInit {
 
   saveChanges(form: NgForm) {
-    this.service.formData.id = "";
     if (window.confirm('Are you sure?'))
     {
-      this.service.postUser().subscribe(
-        res=>{
-          this.resetForm(form);
-        }, 
-        err=> {console.log(err);}
-    );
-      alert("Saved!");
+      if (this.service.formData.name === '' || this.service.formData.lastname === '' || this.service.formData.userName === ''
+      || this.service.formData.password === '' || this.service.formData.email === '') {
+        alert("There are empty fields!");
+      }
+      else {
+        this.service.updateUserDetails().subscribe(
+          res=>{
+            this.resetForm(form);
+          }, 
+          err=> {console.log(err);}
+      );
+        alert("Saved!");
+      }
     }
     else
     {

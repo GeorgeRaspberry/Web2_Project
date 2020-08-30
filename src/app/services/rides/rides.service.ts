@@ -12,11 +12,13 @@ export class RidesService {
   readonly rootURL = 'http://localhost:37240/api';
   rides : Ride[];
   ride : Ride;
+  sortParametar: string;
+  filterRideName: string;
   transfers: Array<Location> = new Array();
 
-  constructor(private http: HttpClient) {
-   }
-   loadTransfers(){
+  constructor(private http: HttpClient) {}
+
+  loadTransfers(){
     this.http.get(this.rootURL + '/Flights/GetLocations')
     .toPromise()
     .then(res =>  this.transfers = res as Array<Location>);

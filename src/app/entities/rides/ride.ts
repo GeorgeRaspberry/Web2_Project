@@ -4,7 +4,7 @@ import { RideCompany } from './ride-company';
 import { Location } from '../flights/location';
 
 export class Ride {
-    id: number
+    id: number;
     company: RideCompany;
     companyID: number
     carMaker: string;
@@ -12,8 +12,9 @@ export class Ride {
     productionYear: string;
     numberOfSeats: number;
     carType: string;
-    locationID:number
-    location:Location
+    locationID: number;
+    location: Location;
+    price: number;
 
     constructor() {
 

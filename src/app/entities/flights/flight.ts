@@ -15,7 +15,6 @@ export class Flight {
     company: FlightCompany;
     locationTransfers: Array<LocationTransfers>;
 
-
     constructor()
     {
     }

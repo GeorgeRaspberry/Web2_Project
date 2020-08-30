@@ -31,6 +31,8 @@ import { RideFilterComponent } from './components/ride-companies/ride-filter/rid
 import { RideCompaniesService } from './services/rides/ride-companies.service';
 import { RidesService } from './services/rides/rides.service';
 import { RidesComponent } from './components/ride-companies/rides/rides.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -64,8 +66,21 @@ import { RidesComponent } from './components/ride-companies/rides/rides.componen
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
+    SocialLoginModule,
   ],
-  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService],
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('526182753424-fkg7mn4nnf43luqv2vt26dbm8of93vgf.apps.googleusercontent.com'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

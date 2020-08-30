@@ -26,29 +26,31 @@ export class FlightRegisterComponent implements OnInit {
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
     this.service.formData.locationTransfers = new Array();
     this.service.loadTransfers()
-    
   }
 
   ngOnInit(): void {
   }
   addFlight(form:NgForm) {
-    /*if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
+    if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
       || /^[0-9][0-9]:[0-9][0-9]$/.test(this.service.formData.fullFlightTime) == false 
       || (this.service.formData.flightLength == null || this.service.formData.flightLength < 0) || (this.service.formData.price == null || this.service.formData.price < 0) )
     {
       alert("Not all inputs are filled correctly")
       return
-    }*/
+    }
 
     if (this.service.formData.numberOfTransfers > 1){
       for (let location of this.service.formData.locationTransfers){
         location.locationID = Number(location.locationID)
 
-        if (location.locationID == 0){
+        if (location.locationID == 0 || Number.isNaN(location.locationID)){
           alert("Not all transfers are entered.")
           return
         }
       }
+    }
+    else {
+      alert("Minimum 2 transfers required!");
     }
     this.service.formData.companyID = this.id;
     this.service.formData.locationTransfers[0].status = 1

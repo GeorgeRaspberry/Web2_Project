@@ -28,9 +28,6 @@ export class FcompanyRegisterComponent implements OnInit {
       return
      }
 
-
-
-
     if (this.service.formData.id == null || this.service.formData.id == 0)
     { 
       this.service.postFlightCompany().subscribe(

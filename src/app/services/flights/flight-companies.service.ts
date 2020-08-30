@@ -8,10 +8,11 @@ import { Location } from 'src/app/entities/flights/location';
 })
 export class FlightCompaniesService {
   formData: FlightCompany;
+  sortParametar: string;
   readonly rootURL = 'http://localhost:37240/api';
   companies : Array<FlightCompany>;
   company:FlightCompany = new FlightCompany()
-
+  filterCompanyName: string;
   constructor(private http: HttpClient) { }
 
 
@@ -21,6 +22,7 @@ export class FlightCompaniesService {
     .toPromise()
     .then(res =>  this.companies = res as Array<FlightCompany>);
   }
+
   loadCompanyData(id:number)
   {
     this.http.get(this.rootURL + '/FlightCompanies/'+id)
@@ -29,7 +31,6 @@ export class FlightCompaniesService {
       this.company = res as FlightCompany
     });
   }
-
 
   postFlightCompany() {
     return this.http.post(this.rootURL + '/FlightCompanies', this.formData);
@@ -40,8 +41,5 @@ export class FlightCompaniesService {
   deleteFlightCompany(id) {
     return this.http.delete(this.rootURL + '/FlightCompanies/'+ id);
   }
-
-
-
-
+  
 }

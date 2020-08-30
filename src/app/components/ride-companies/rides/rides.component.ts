@@ -13,9 +13,7 @@ export class RidesComponent implements OnInit {
   @Input()
   rides: Ride[];
 
-
 constructor(public service:RidesService, private router:Router) {
-  
 }
 
 book(): void {

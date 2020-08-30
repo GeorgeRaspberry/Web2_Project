@@ -1,5 +1,7 @@
 <body id="overrider">
-
+    <br>
+    <app-ride-filter state=1></app-ride-filter>
+    <br>
     <table class="table table-hover">
         <thead  class="thead-dark">
             <tr>
@@ -13,17 +15,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let car of rides">
+            <tr *ngFor="let car of this.service.rides">
                 <td>{{car.carMaker}}</td>
                 <td>{{car.carModel}}</td>
                 <td>{{car.productionYear}}</td>
                 <td>{{car.numberOfSeats}}</td>
                 <td>{{car.carType}}</td>
-                <td><button class="btn btn-success" (click)="book()">
+                <td>
+                <button class="btn btn-success" (click)="book()">
                     BOOK
                 </button>
-                </td>
-                <td><button class="btn btn-success" (click)="updateRide(car)">
+                <button class="btn btn-success" (click)="updateRide(car)">
                     EDIT
                 </button>
                 </td>

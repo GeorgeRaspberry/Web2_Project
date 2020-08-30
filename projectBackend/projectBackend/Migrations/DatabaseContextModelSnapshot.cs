@@ -327,6 +327,31 @@ namespace projectBackend.Migrations
                     b.ToTable("LocationTransfers");
                 });
 
+            modelBuilder.Entity("projectBackend.Models.Requests", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FriendID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FriendID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Requests");
+                });
+
             modelBuilder.Entity("projectBackend.Models.Ride", b =>
                 {
                     b.Property<int>("ID")
@@ -403,6 +428,9 @@ namespace projectBackend.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Role")
@@ -484,6 +512,17 @@ namespace projectBackend.Migrations
                         .HasForeignKey("LocationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("projectBackend.Models.Requests", b =>
+                {
+                    b.HasOne("projectBackend.Models.ApplicationUser", "Friend")
+                        .WithMany("ReceivedRequests")
+                        .HasForeignKey("FriendID");
+
+                    b.HasOne("projectBackend.Models.ApplicationUser", "User")
+                        .WithMany("SentRequests")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("projectBackend.Models.Ride", b =>

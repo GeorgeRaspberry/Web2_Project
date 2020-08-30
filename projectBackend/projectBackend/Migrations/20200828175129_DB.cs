@@ -83,6 +83,23 @@ namespace projectBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RideCompanies",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PromoDescription = table.Column<string>(nullable: true),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RideCompanies", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -241,6 +258,37 @@ namespace projectBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rides",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarMaker = table.Column<string>(nullable: true),
+                    CarModel = table.Column<string>(nullable: true),
+                    CarType = table.Column<string>(nullable: true),
+                    ProductionYear = table.Column<string>(nullable: true),
+                    NumberOfSeats = table.Column<int>(nullable: false),
+                    CompanyID = table.Column<int>(nullable: false),
+                    LocationID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rides", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Rides_RideCompanies_CompanyID",
+                        column: x => x.CompanyID,
+                        principalTable: "RideCompanies",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rides_Locations_LocationID",
+                        column: x => x.LocationID,
+                        principalTable: "Locations",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LocationTransfers",
                 columns: table => new
                 {
@@ -330,6 +378,16 @@ namespace projectBackend.Migrations
                 name: "IX_Requests_UserID",
                 table: "Requests",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rides_CompanyID",
+                table: "Rides",
+                column: "CompanyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rides_LocationID",
+                table: "Rides",
+                column: "LocationID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -356,16 +414,22 @@ namespace projectBackend.Migrations
                 name: "Requests");
 
             migrationBuilder.DropTable(
+                name: "Rides");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Flights");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "RideCompanies");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "FlightCompanies");
