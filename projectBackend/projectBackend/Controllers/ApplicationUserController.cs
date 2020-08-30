@@ -107,26 +107,33 @@ namespace projectBackend.Controllers
     [Route("GetAllUsers/{token}")]
     public async Task<Object> GetAllUsers(string token)
     {
-      var user = await _userManager.FindByIdAsync(token);
-      List<ApplicationUser> allRequests = userFunctions.GetAllFriends(user);
-      List<ApplicationUser> allUsers = await _userManager.Users.ToListAsync();
-      allUsers.Remove(user);
+      if (token != "undefined") {
+        var user = await _userManager.FindByIdAsync(token);
+        List<ApplicationUser> allRequests = userFunctions.GetAllFriends(user);
+        List<ApplicationUser> allUsers = await _userManager.Users.ToListAsync();
+        allUsers.Remove(user);
 
-      if (allRequests.Count() == 0)
-        return allUsers;
+        if (allRequests.Count() == 0)
+          return allUsers;
 
-      foreach (ApplicationUser tempUser in allUsers.ToList())
-      {
-        if (allRequests.Contains(tempUser))
+        foreach (ApplicationUser tempUser in allUsers.ToList())
         {
-          allUsers.Remove(tempUser);
+          if (allRequests.Contains(tempUser))
+          {
+            allUsers.Remove(tempUser);
+          }
         }
+
+        if (allUsers.Count() == 0)
+          return new List<ApplicationUser>();
+
+        return allUsers;
       }
-
-      if (allUsers.Count() == 0)
-        return new List<ApplicationUser>();
-
-      return allUsers;
+      else
+      {
+        //kada vracam sve korisnike a nemam ulogovanog korisnika
+        return _userManager.Users.ToListAsync();
+      }
     }
 
     [HttpPost]
@@ -134,6 +141,16 @@ namespace projectBackend.Controllers
     //POST : /api/ApplicationUser/Register
     public async Task<Object> PostApplicationUser([FromBody]ApplicationUserModel model)
     {
+      //check if username is unique
+      var allusers = await _userManager.Users.ToListAsync();
+      foreach (ApplicationUser au in allusers)
+      {
+        if (au.UserName == model.UserName)
+        {
+          return HttpStatusCode.InternalServerError;
+        }
+      }
+
       var applicationUser = new ApplicationUser()
       {
         UserName = model.UserName,
@@ -149,34 +166,33 @@ namespace projectBackend.Controllers
       try
       {
         var result = await _userManager.CreateAsync(applicationUser, model.Password);
-
+        
         #region Mail
-        MailMessage msg = new MailMessage();
-        msg.From = new MailAddress("helpertravel45@gmail.com");
-        msg.To.Add(new MailAddress(applicationUser.Email));
-        msg.Subject = "Email Confirmation";
-        msg.Body = "Please confirm your account by clicking this link: http://localhost:4200/confirm/" + applicationUser.Id;
+          MailMessage msg = new MailMessage();
+          msg.From = new MailAddress("helpertravel45@gmail.com");
+          msg.To.Add(new MailAddress(applicationUser.Email));
+          msg.Subject = "Email Confirmation";
+          msg.Body = "Please confirm your account by clicking this link: http://localhost:4200/confirm/" + applicationUser.Id;
 
-        //string text = string.Format("Please click on this link to {0}: {1}", msg.Subject, msg.Body);
-        //string html = "Please confirm your account by clicking this link: <a href=\"" + msg.Body + "\">link</a><br/>";
+          //string text = string.Format("Please click on this link to {0}: {1}", msg.Subject, msg.Body);
+          //string html = "Please confirm your account by clicking this link: <a href=\"" + msg.Body + "\">link</a><br/>";
 
-        //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-        //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+          //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+          //msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
-        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
-        smtpClient.UseDefaultCredentials = false;
-        System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("helpertravel45@gmail.com", "helpmeplease");
-        smtpClient.Credentials = credentials;
-        smtpClient.EnableSsl = true;
-        smtpClient.Send(msg);
-        #endregion
-
+          SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
+          smtpClient.UseDefaultCredentials = false;
+          System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("helpertravel45@gmail.com", "helpmeplease");
+          smtpClient.Credentials = credentials;
+          smtpClient.EnableSsl = true;
+          smtpClient.Send(msg);
+          #endregion
+        
         return Ok(result);
       }
       catch (Exception ex)
       {
-
-        throw ex;
+        return BadRequest(ex.Message);
       }
     }
 

@@ -30,27 +30,30 @@ export class LoginComponent implements OnInit {
   readonly rootURL = 'http://localhost:37240/api';
 
   registerUser(form: NgForm) {
-    if (this.verifiedPassword === this.service.formData.password) {
-      if (this.service.formData.name === undefined || this.service.formData.lastname === undefined || this.service.formData.userName === undefined
-      || this.service.formData.password === undefined || this.service.formData.email === undefined) {
-        alert("There are empty fields!");
-      }
-      else {
-        this.service.register(form.value).subscribe(
-          (res: any) => {
-            alert('Registration successful!');
-          },
-          err => {
-            if (err.status == 400)
-              alert('Incorrect username or password.');
-            else
-              console.log(err);
-          }
-        );
-      }
+    if (this.service.formData.name === undefined || this.service.formData.lastname === undefined || this.service.formData.userName === undefined
+    || this.service.formData.password === undefined || this.service.formData.email === undefined) {
+      alert("There are empty fields!");
     }
     else {
-      alert ("Password not verified!");
+      if (this.verifiedPassword === this.service.formData.password) {
+      this.service.register(form.value).subscribe(
+        res => {
+          if (res == 500)
+            alert('Username already in use!');
+          else
+            alert('Registration successful!');
+        },
+        err => {
+          if (err.status == 400)
+            alert('Email is not valid!');
+          else
+            console.log(err);
+        }
+      );
+      }
+      else {
+        alert ("Password not verified!");
+      }
     }
   }
 
