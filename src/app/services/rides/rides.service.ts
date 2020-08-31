@@ -47,7 +47,15 @@ export class RidesService {
     }
     );
   }
-
+  loadRides()
+  {
+    this.http.get(this.rootURL + '/Rides')
+    .toPromise()
+    .then(res =>{
+      this.rides = res as Array<Ride>
+    }
+    );
+  }
   
   postRide() {
     return this.http.post(this.rootURL + '/Rides', this.formData);

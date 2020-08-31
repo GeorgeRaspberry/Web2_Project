@@ -1,6 +1,6 @@
-<body id="overrider">
+<div id="overrider">
     <br>
-    <app-ride-filter state=1></app-ride-filter>
+    <app-ride-filter *ngIf="quickRent==0;" state=1></app-ride-filter>
     <br>
     <table class="table table-hover">
         <thead  class="thead-dark">
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let car of this.service.rides">
+            <tr *ngFor="let car of this.ridesService.company.rides">
                 <td>{{car.carMaker}}</td>
                 <td>{{car.carModel}}</td>
                 <td>{{car.productionYear}}</td>
@@ -27,12 +27,16 @@
                 <td>{{car.location.name}}/{{car.location.address}}</td>
                 <td>{{car.price}}</td>
 
-                <td *ngIf="quickRent==0;"><button class="btn btn-success" (click)="book(car)">
+                <td *ngIf="quickRent==0;">
+                <button class="btn btn-success" (click)="book(car)">
                     BOOK
                 </button>
                 </td>
                 <td *ngIf="quickRent==1;">
                     <button class="btn btn-success" (click)="bookQuick(car)">
+                        BOOK
+                    </button>
+                </td>
                 <td>
                 <button class="btn btn-success" (click)="updateRide(car)">
                     EDIT
@@ -42,4 +46,4 @@
         </tbody>
     </table>
 
-</body>
+</div>

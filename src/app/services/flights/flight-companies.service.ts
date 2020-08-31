@@ -29,7 +29,6 @@ export class FlightCompaniesService {
     .toPromise()
     .then(res => {
       this.company = res as FlightCompany
-      console.log(this.company)
     });
   }
 

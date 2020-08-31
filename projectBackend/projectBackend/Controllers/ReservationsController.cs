@@ -257,6 +257,7 @@ namespace projectBackend.Controllers
           {
             if (item.ID == id)
             {
+              item.Name = item.Type.ToString();
               item.Type = 4;
               item.ReservationID = seat.Key;
               _context.Entry(item).State = EntityState.Modified;
@@ -391,6 +392,7 @@ namespace projectBackend.Controllers
       {
         if (seat.ReservationID == reservation.ID)
         {
+          seat.Type =  Int32.Parse(seat.Name)-5;
           seat.ReservationID = null;
           _context.Entry(seat).State = EntityState.Modified;
           _context.SaveChanges();

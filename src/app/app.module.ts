@@ -80,14 +80,11 @@ import { GoogleLoginProvider} from 'angularx-social-login';
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
     MatButtonModule,
-    MatTooltipModule
-    
+    MatTooltipModule,
+    SocialLoginModule
   ],
   exports:[ MatButtonModule,MatTooltipModule  ],
-  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,ReservationService],
-    SocialLoginModule,
-  ],
-  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,ReservationService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

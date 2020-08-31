@@ -37,7 +37,6 @@ export class RideFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.loadTransfers();
-    this.ridesService.loadRides();
     this.selectedAddress = 1;
     this.rideSelectedAddress = 1;
   }
@@ -56,7 +55,7 @@ export class RideFilterComponent implements OnInit {
   }
 
   rideChangeState() {
-    this.ridesService.loadRides();
+    this.service.loadCompanyData(this.service.company.id)
     this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
   }
 
@@ -70,10 +69,10 @@ export class RideFilterComponent implements OnInit {
   }
 
   filterRides() {
-    for (let i = this.ridesService.rides.length-1; i >= 0; i--) {
-      var element = this.ridesService.rides[i];
+    for (let i = this.service.company.rides.length-1; i >= 0; i--) {
+      var element = this.service.company.rides[i];
       if (element.location.name != this.service.transfers[this.rideSelectedAddress-1].name){
-        this.ridesService.rides.splice(i, 1);
+        this.service.company.rides.splice(i, 1);
       }
     };  
   }
@@ -91,10 +90,10 @@ export class RideFilterComponent implements OnInit {
 
   searchRides() {
     if (this.ridesService.filterRideName != undefined){
-      for (let i = this.ridesService.rides.length-1; i >= 0; i--) {
-        var element = this.ridesService.rides[i];
+      for (let i = this.service.company.rides.length-1; i >= 0; i--) {
+        var element = this.service.company.rides[i];
         if (!element.carMaker.toUpperCase().includes(this.ridesService.filterRideName.toUpperCase())){
-          this.ridesService.rides.splice(i, 1);
+          this.service.company.rides.splice(i, 1);
         }
       };
     }
@@ -163,23 +162,23 @@ export class RideFilterComponent implements OnInit {
   rideSortUp() {
     if(this.ridesService.sortParametar != undefined){
       if (this.ridesService.sortParametar == 'CAR MAKER') {
-        for (let i = 0; i < this.ridesService.rides.length-1; i++) {
-          for (let j = i+1; j < this.ridesService.rides.length; j++) {
-            if (this.ridesService.rides[i].carMaker[0] > this.ridesService.rides[j].carMaker[0]) {
-              var temp = this.ridesService.rides[i];
-              this.ridesService.rides[i] = this.ridesService.rides[j];
-              this.ridesService.rides[j] = temp;
+        for (let i = 0; i < this.service.company.rides.length-1; i++) {
+          for (let j = i+1; j < this.service.company.rides.length; j++) {
+            if (this.service.company.rides[i].carMaker[0] > this.service.company.rides[j].carMaker[0]) {
+              var temp = this.service.company.rides[i];
+              this.service.company.rides[i] = this.service.company.rides[j];
+              this.service.company.rides[j] = temp;
             }
           }
         }
       }
       if (this.ridesService.sortParametar == 'PRICE') {
-        for (let i = 0; i < this.ridesService.rides.length-1; i++) {
-          for (let j = i+1; j < this.ridesService.rides.length; j++) {
-            if (this.ridesService.rides[i].price > this.ridesService.rides[j].price) {
-              var temp = this.ridesService.rides[i];
-              this.ridesService.rides[i] = this.ridesService.rides[j];
-              this.ridesService.rides[j] = temp;
+        for (let i = 0; i < this.service.company.rides.length-1; i++) {
+          for (let j = i+1; j < this.service.company.rides.length; j++) {
+            if (this.service.company.rides[i].price > this.service.company.rides[j].price) {
+              var temp = this.service.company.rides[i];
+              this.service.company.rides[i] = this.service.company.rides[j];
+              this.service.company.rides[j] = temp;
             }
           }
         }
@@ -193,23 +192,23 @@ export class RideFilterComponent implements OnInit {
   rideSortDown() {
     if(this.ridesService.sortParametar != undefined){
       if (this.ridesService.sortParametar == 'CAR MAKER') {
-        for (let i = 0; i < this.ridesService.rides.length-1; i++) {
-          for (let j = i+1; j < this.ridesService.rides.length; j++) {
-            if (this.ridesService.rides[i].carMaker[0] < this.ridesService.rides[j].carMaker[0]) {
-              var temp = this.ridesService.rides[i];
-              this.ridesService.rides[i] = this.ridesService.rides[j];
-              this.ridesService.rides[j] = temp;
+        for (let i = 0; i < this.service.company.rides.length-1; i++) {
+          for (let j = i+1; j < this.service.company.rides.length; j++) {
+            if (this.service.company.rides[i].carMaker[0] < this.service.company.rides[j].carMaker[0]) {
+              var temp = this.service.company.rides[i];
+              this.service.company.rides[i] = this.service.company.rides[j];
+              this.service.company.rides[j] = temp;
             }
           }
         }
       }
       if (this.ridesService.sortParametar == 'PRICE') {
-        for (let i = 0; i < this.ridesService.rides.length-1; i++) {
-          for (let j = i+1; j < this.ridesService.rides.length; j++) {
-            if (this.ridesService.rides[i].price < this.ridesService.rides[j].price) {
-              var temp = this.ridesService.rides[i];
-              this.ridesService.rides[i] = this.ridesService.rides[j];
-              this.ridesService.rides[j] = temp;
+        for (let i = 0; i < this.service.company.rides.length-1; i++) {
+          for (let j = i+1; j < this.service.company.rides.length; j++) {
+            if (this.service.company.rides[i].price < this.service.company.rides[j].price) {
+              var temp = this.service.company.rides[i];
+              this.service.company.rides[i] = this.service.company.rides[j];
+              this.service.company.rides[j] = temp;
             }
           }
         }

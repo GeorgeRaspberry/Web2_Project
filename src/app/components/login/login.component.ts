@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           if (err.status == 400)
             alert('Email is not valid!');
           else
-            console.log(err);
+            console.log(err); 
         }
       );
       }
