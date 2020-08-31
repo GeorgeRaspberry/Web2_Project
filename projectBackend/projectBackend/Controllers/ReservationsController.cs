@@ -148,7 +148,8 @@ namespace projectBackend.Controllers
       // SAVE POINTS USED
       foreach (var item in reservation.Users)
       {
-        _context.Entry(item).State = EntityState.Modified;
+        var user = _context.ApplicationUsers.Find(item);
+        _context.Entry(user).State = EntityState.Modified;
         _context.SaveChanges();
       }
 
@@ -218,6 +219,17 @@ namespace projectBackend.Controllers
               }
 
               msg.Body += "\nBag count : " + res.BagCount;
+
+              if (res.ReservationType == 2)
+              {
+                msg.Body += "\nCar booked from " + res.RentRideStart + " for "+ res.RideRentDays + " days";
+
+                var ride =  _context.Rides.FirstOrDefault(i => i.ID == res.RideID);
+
+                msg.Body += "\nCar maker/model/type " + ride.CarMaker +"/" + ride.CarModel+ "/" + ride.CarType;
+                msg.Body += "\nProduction year : " + ride.ProductionYear;
+              }
+
               msg.Body += "\n\nTotal price : " + res.Price;
 
 

@@ -32,12 +32,6 @@ updateRide(ride:Ride){
 }
 
 ngOnInit(): void {
-  if (this.quickRent == 1 || this.quickRent == 2){
-    this.ridesService.company = new RideCompany()
-    this.ridesService.company.rides = this.rides
-    alert(this.rides)
-  }
-
 }
 bookQuick(car:Ride){
   if (this.serviceReservation.formData.rideRentDays == null || this.serviceReservation.formData.rideRentDays < 5){

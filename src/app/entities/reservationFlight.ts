@@ -7,6 +7,6 @@ import { Seat } from './flights/seat';
 export class ReservationFlight{
     reservations:Array<Reservation>
     seats:Array<Seat>
-    users:Array<User>
+    users:Array<string>
 }
 

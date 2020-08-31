@@ -12,6 +12,8 @@
                 <th scope="col">LENGTH (KM)</th>
                 <th scope="col">PRICE (EUR)</th>
                 <th></th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,6 +25,9 @@
                 <td>{{flight.price}}</td>
                 <td><button *ngIf="userService.loggedUser.role=='Registered'" class="btn btn-success"routerLink="/flight/{{flight.id}}/book">
                     B00K
+                </button></td>
+                <td><button *ngIf="userService.loggedUser.role=='Registered'" class="btn btn-success" (click)="fastBook(flight)">
+                    FAST BOOK
                 </button></td>
             </tr>
         </tbody>        

@@ -6,6 +6,7 @@ import { Ride } from 'src/app/entities/rides/ride';
 import { NgForm } from '@angular/forms';
 import { Reservation } from 'src/app/entities/reservation';
 import { ProfilePageService } from 'src/app/services/users/profile-page.service';
+import { RideCompaniesService } from 'src/app/services/rides/ride-companies.service';
 
 @Component({
   selector: 'app-ride-reservation',
@@ -15,13 +16,13 @@ import { ProfilePageService } from 'src/app/services/users/profile-page.service'
 export class RideReservationComponent implements OnInit {
 
   id: number;
-  constructor(private route: ActivatedRoute, public service: ReservationService,public rideService:RidesService,public profileService:ProfilePageService, private router:Router) {
+  constructor(private route: ActivatedRoute, public service: ReservationService,public companyService:RideCompaniesService,public rideService:RidesService,public profileService:ProfilePageService, private router:Router) {
   }
 
   ngOnInit(): void {
     this.resetForm()
     this.route.params.subscribe(params => { this.id = params['id']; });
-    this.rideService.loadRide(this.id)
+    this.companyService.loadRide(this.id)
   }
 
   book(form:NgForm){

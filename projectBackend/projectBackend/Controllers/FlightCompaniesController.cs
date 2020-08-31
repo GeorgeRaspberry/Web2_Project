@@ -33,7 +33,7 @@ namespace projectBackend.Controllers
     public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
  
-      var companies = await _context.FlightCompanies.ToListAsync();
+      var companies = await _context.FlightCompanies.Include(r=>r.Flights).ToListAsync();
 
       foreach (var item in companies)
       {
