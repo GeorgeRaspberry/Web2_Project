@@ -49,11 +49,11 @@ export class RideReservationComponent implements OnInit {
     }
 
 
-    this.service.formData.rideID = this.rideService.ride.id
+    this.service.formData.rideID = this.companyService.ride.id
     this.service.formData.userID = this.profileService.loggedUser.id
     this.service.formData.statusRide = 0
     this.service.formData.reservationType = 0
-    this.service.formData.price = this.service.formData.rideRentDays * this.rideService.ride.price
+    this.service.formData.price = this.service.formData.rideRentDays * this.companyService.ride.price
     this.service.postRideReservation().subscribe(
       res=>{
         this.resetForm(form);

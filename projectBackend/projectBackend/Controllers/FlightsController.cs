@@ -36,8 +36,17 @@ namespace projectBackend.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Flight>> GetFlight(int id)
     {
-      var flight = await _context.Flights.FirstOrDefaultAsync(i => i.ID == id);
+      var flight = _context.Flights.Include(l => l.LocationTransfers).ThenInclude(r => r.Location).FirstOrDefault(i => i.ID == id);
 
+      List<Seat> seats = new List<Seat>();
+      foreach (var item in _context.Seats.ToList())
+      {
+        if (item.FlightID == flight.ID)
+        {
+          seats.Add(item);
+        }
+      }
+      flight.Seats = seats;
       if (flight == null)
       {
         return NotFound();
@@ -122,7 +131,7 @@ namespace projectBackend.Controllers
     public async Task<Object> FilterDates([FromBody] DateCluster dateCluster)
     {
       int id = dateCluster.ID;
-      List<FlightCompany> companies = await _context.FlightCompanies.ToListAsync();
+      List<FlightCompany> companies = await _context.FlightCompanies.Include(f=>f.Flights).ThenInclude(l => l.LocationTransfers).ThenInclude(r => r.Location).ToListAsync();
       List<Flight> tempList = new List<Flight>();
       DateTime date1 = dateCluster.FlyoffDate.AddHours(2);
       DateTime date2 = dateCluster.LandingDate.AddHours(2);

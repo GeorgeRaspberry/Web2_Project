@@ -21,7 +21,7 @@ export class ProfilePageComponent implements OnInit {
       else {
         this.service.updateUserDetails().subscribe(
           res=>{
-            this.resetForm(form);
+            this.service.updateProfilePage();
           }, 
           err=> {console.log(err);}
       );
@@ -39,6 +39,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.service.loggedUser)
     this.service.formData = this.service.loggedUser;
     this.service.updateProfilePage();
   }

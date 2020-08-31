@@ -19,7 +19,7 @@ namespace projectBackend.Database.DatabaseFunctions
       double sum = 0;
       int count = 0;
 
-      foreach (var reservation in Database.Reservations)
+      foreach (var reservation in Database.Reservations.Include(f=>f.Flight).ToList())
       {
         if (reservation.ReservationType != 0 && reservation.ReservationType != 3)
         {

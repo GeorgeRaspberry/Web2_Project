@@ -17,7 +17,7 @@ namespace projectBackend.Database.DatabaseFunctions
 
     public void UpdateReservationStatus()
     {
-      foreach (var reservation in Database.Reservations.ToList())
+      foreach (var reservation in Database.Reservations.Include(u=>u.User).Include(f=>f.Flight).ToList())
       {
         if (reservation.ReservationType == 0)
         {

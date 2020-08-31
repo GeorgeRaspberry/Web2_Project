@@ -42,7 +42,7 @@ namespace projectBackend
       services.AddDbContext<DatabaseContext>(options =>
       {
         options.UseSqlServer(Configuration.GetConnectionString("connectionString"));
-        options.UseLazyLoadingProxies();
+        options.UseLazyLoadingProxies(false);
       });
       // Ignore loop
       services.AddControllersWithViews().AddNewtonsoftJson(options =>

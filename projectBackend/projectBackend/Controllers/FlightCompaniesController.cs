@@ -32,21 +32,61 @@ namespace projectBackend.Controllers
     [HttpGet]
     public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
- 
-      var companies = await _context.FlightCompanies.Include(r=>r.Flights).ToListAsync();
+      var companies = await _context.FlightCompanies.ToListAsync();
+
+      
+
+      foreach (var company in companies)
+      {
+        List<Flight> flights = new List<Flight>();
+
+        foreach (var flight in _context.Flights.ToList())
+        {
+          if (flight.CompanyID == company.ID)
+          {
+            flights.Add(flight);
+          }
+        }
+        company.Flights = flights;
+      }
 
       foreach (var item in companies)
       {
         item.Rating = flightCompanyFunction.calculateFlightRating(item.ID);
       }
+      foreach (var item in companies.ToList())
+      {
+        foreach (var item2 in item.Flights.ToList())
+        {
+          item2.Seats = null;
+        }
+      }
       return companies;
+
+
     }
 
     // GET: api/FlightCompanies/5
     [HttpGet("{id}")]
     public async Task<ActionResult<FlightCompany>> GetFlightCompany(int id)
     {
-      var flightCompany = await _context.FlightCompanies.FirstOrDefaultAsync(i=>i.ID == id);
+
+
+       var flightCompany = await _context.FlightCompanies.Include(f => f.Flights).ThenInclude(l => l.LocationTransfers).ThenInclude(r => r.Location).FirstOrDefaultAsync(i => i.ID == id);
+
+
+      foreach (var flight in flightCompany.Flights)
+      {
+        List<Seat> seats = new List<Seat>();
+        foreach (var seat in _context.Seats)
+        {
+          if (flight.ID == seat.FlightID)
+          {
+            seats.Add(seat);
+          }
+        }
+        flight.Seats = seats;
+      }
 
       if (flightCompany == null)
       {
@@ -61,6 +101,7 @@ namespace projectBackend.Controllers
 
       flightCompany.Rating = flightCompanyFunction.calculateFlightRating(flightCompany.ID);
       return flightCompany;
+
     }
 
     // PUT: api/FlightCompanies/5

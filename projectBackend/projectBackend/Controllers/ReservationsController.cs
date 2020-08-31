@@ -33,7 +33,7 @@ namespace projectBackend.Controllers
     public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
     {
       reservationFunctions.UpdateReservationStatus();
-      var reservations = await _context.Reservations.ToListAsync();
+      var reservations = await _context.Reservations.Include(f=>f.Flight).ThenInclude(l=>l.LocationTransfers).ThenInclude(r => r.Location).ToListAsync();
       foreach (var item in reservations)
       {
         if (item.ReservationType == 1 || item.ReservationType == 2)
@@ -60,7 +60,7 @@ namespace projectBackend.Controllers
       string id = userToken.Payload["UserID"].ToString();
 
       reservationFunctions.UpdateReservationStatus();
-      var reservations = await _context.Reservations.ToListAsync();
+      var reservations = await _context.Reservations.Include(r=>r.Ride).Include(f => f.Flight).ThenInclude(l => l.LocationTransfers).ThenInclude(r => r.Location).ToListAsync();
       foreach (var item in reservations.ToList())
       {
         if(item.UserID!= id)

@@ -73,7 +73,7 @@ namespace projectBackend.Controllers
 
       string userId = userToken.Payload["UserID"].ToString();
 
-      var user = await _userManager.FindByIdAsync(userId);
+      var user = await _userManager.Users.Include(s => s.SentRequests).ThenInclude(fr => fr.Friend).Include(r => r.ReceivedRequests).ThenInclude(us => us.User).FirstOrDefaultAsync(i => i.Id == userId);
       if (user != null)
       {
         return user;
@@ -116,7 +116,7 @@ namespace projectBackend.Controllers
     [Route("GetAllFriends/{token}")]
     public async Task<Object> GetAllFriends(string token)
     {
-      var user = await _userManager.FindByIdAsync(token);
+      var user = await _userManager.Users.Include(s=>s.SentRequests).ThenInclude(fr=>fr.Friend).Include(r=>r.ReceivedRequests).ThenInclude(us=>us.User).FirstOrDefaultAsync(i => i.Id == token);
       return userFunctions.GetAllFriendsStatus(user);
     }
 
@@ -125,7 +125,7 @@ namespace projectBackend.Controllers
     public async Task<Object> GetAllUsers(string token)
     {
       if (token != "undefined") {
-        var user = await _userManager.FindByIdAsync(token);
+        var user = await _userManager.Users.Include(r=>r.ReceivedRequests).ThenInclude(us=>us.User).Include(s=>s.SentRequests).ThenInclude(fr=>fr.Friend).FirstOrDefaultAsync(i => i.Id == token);
         List<ApplicationUser> allRequests = userFunctions.GetAllFriends(user);
         List<ApplicationUser> allUsers = await _userManager.Users.ToListAsync();
         allUsers.Remove(user);
@@ -135,9 +135,13 @@ namespace projectBackend.Controllers
 
         foreach (ApplicationUser tempUser in allUsers.ToList())
         {
-          if (allRequests.Contains(tempUser))
+          foreach (var item in allRequests.ToList())
           {
-            allUsers.Remove(tempUser);
+            if (item.Id == tempUser.Id)
+            {
+              allUsers.Remove(tempUser);
+              break;
+            }
           }
         }
 
@@ -302,7 +306,7 @@ namespace projectBackend.Controllers
     [Route("SendRequest/{id}/{potentialId}")]
     public async Task<IActionResult> SendRequest(string id, string potentialId)
     {
-      var user = await _userManager.FindByIdAsync(id);
+      var user = await _userManager.Users.Include(r=>r.ReceivedRequests).Include(s=>s.SentRequests).FirstOrDefaultAsync(i => i.Id == id);
       user.SentRequests.Add(new Requests() {FriendID = potentialId, Status = 0});
 
       var result = await _userManager.UpdateAsync(user);
@@ -332,7 +336,7 @@ namespace projectBackend.Controllers
     [Route("AcceptRequest/{id}/{potentialId}")]
     public async Task<IActionResult> AcceptRequest(string id, string potentialId)
     {
-      var user = await _userManager.FindByIdAsync(id);
+      var user = await _userManager.Users.Include(r => r.ReceivedRequests).FirstOrDefaultAsync(i => i.Id == id);
       foreach (Requests req in user.ReceivedRequests.ToList())
       {
         if (req.UserID == potentialId)

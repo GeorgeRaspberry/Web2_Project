@@ -63,7 +63,7 @@ export class ProfilePageService {
       var splitter = this.loggedUser.fullName.split(' ', 2);
       this.loggedUser.name = splitter[0];
       this.loggedUser.lastname = splitter[1];
-
+      this.formData = this.loggedUser
       this.http.get(this.rootURL + '/ApplicationUser/GetAllFriends/'+ this.loggedUser.id)
       .toPromise()
       .then(res =>{

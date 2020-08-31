@@ -16,6 +16,7 @@ export class RideCompaniesService {
   companies : Array<RideCompany>;
   company:RideCompany = new RideCompany()
   transfers: Array<Location>
+  ride: Ride = new Ride()
   constructor(private http: HttpClient) { }
 
   loadTransfers(){
@@ -41,9 +42,9 @@ export class RideCompaniesService {
     this.http.get(this.rootURL + '/Rides/'+id+"/"+id)
     .toPromise()
     .then(res =>{
-      let ride = res as Ride
+      this.ride = res as Ride
       this.company.rides = new Array()
-      this.company.rides.push(ride)
+      this.company.rides.push(this.ride)
     }
     );
   }

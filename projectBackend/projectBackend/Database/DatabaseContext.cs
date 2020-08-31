@@ -15,7 +15,11 @@ namespace projectBackend.Database
     {
      
     }
-  
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      base.OnModelCreating(modelBuilder);
+    }
+
 
 
     public DbSet<Flight> Flights { get; set; }

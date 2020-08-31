@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projectBackend.Database;
+using projectBackend.Database.DatabaseFunctions;
 using projectBackend.Models;
 
 namespace projectBackend.Controllers
@@ -15,10 +16,11 @@ namespace projectBackend.Controllers
   public class RidesController : ControllerBase
   {
     private readonly DatabaseContext _context;
-
+    private readonly RideCompanyFunctions rideCompanyFunction;
     public RidesController(DatabaseContext context)
     {
       _context = context;
+      rideCompanyFunction = new RideCompanyFunctions(_context);
     }
 
     // GET: api/Rides
@@ -27,7 +29,7 @@ namespace projectBackend.Controllers
     public async Task<ActionResult<IEnumerable<Ride>>> GetRides(string location)
     {
 
-      var rides = await _context.Rides.ToListAsync();
+      var rides = await _context.Rides.Include(l=>l.Location).ToListAsync();
 
       foreach (var item in rides.ToList())
       {
@@ -36,7 +38,7 @@ namespace projectBackend.Controllers
           rides.Remove(item);
         }
       }
-
+      rides = rideCompanyFunction.GetFreeCars(rides);
       return rides;
     }
 
@@ -44,7 +46,7 @@ namespace projectBackend.Controllers
     [HttpGet("{id}/{id2}")]
     public async Task<ActionResult<Ride>> GetRide(int id, int id2)
     {
-      var ride = await _context.Rides.FirstOrDefaultAsync(i => i.ID == id);
+      var ride = await _context.Rides.Include(l=>l.Location).FirstOrDefaultAsync(i => i.ID == id);
 
       if (ride == null)
       {

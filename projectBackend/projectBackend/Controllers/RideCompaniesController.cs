@@ -43,7 +43,7 @@ namespace projectBackend.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<RideCompany>> GetRideCompany(int id)
     {
-      var rideCompany = await _context.RideCompanies.FirstOrDefaultAsync(i => i.ID == id);
+      var rideCompany = await _context.RideCompanies.Include(r=>r.Rides).ThenInclude(l=>l.Location).FirstOrDefaultAsync(i => i.ID == id);
 
       if (rideCompany == null)
       {
