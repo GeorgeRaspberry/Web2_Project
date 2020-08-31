@@ -3,6 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { FlightCompany } from 'src/app/entities/flights/flight-company';
 import { FlightCompaniesService } from 'src/app/services/flights/flight-companies.service';
 import { Router } from '@angular/router';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-fcompany-register',
@@ -12,11 +13,12 @@ import { Router } from '@angular/router';
 export class FcompanyRegisterComponent implements OnInit {
 
   url: any;
-  constructor(public service: FlightCompaniesService,private router: Router) {
+  constructor(public service: FlightCompaniesService,public userService:ProfilePageService,private router: Router) {
     this.url = this.service.formData.image
   }
 
   ngOnInit(): void {
+    this.userService.getAllUsers()
   }
   addFCompany(form:NgForm) {
     if (   (this.service.formData.address == null || this.service.formData.address == "") 

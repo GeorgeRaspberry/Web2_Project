@@ -21,7 +21,7 @@
                 <td>{{flight.fullFlightTime}}</td>
                 <td>{{flight.flightLength}}</td>
                 <td>{{flight.price}}</td>
-                <td><button class="btn btn-success"routerLink="/flight/{{flight.id}}/book">
+                <td><button *ngIf="userService.loggedUser.role=='Registered'" class="btn btn-success"routerLink="/flight/{{flight.id}}/book">
                     B00K
                 </button></td>
             </tr>

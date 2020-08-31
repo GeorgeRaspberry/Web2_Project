@@ -28,7 +28,7 @@
                 <td>{{car.price}}</td>
 
                 <td *ngIf="quickRent==0;">
-                <button class="btn btn-success" (click)="book(car)">
+                <button *ngIf="userService.loggedUser.role=='Registered'" class="btn btn-success" (click)="book(car)">
                     BOOK
                 </button>
                 </td>
@@ -38,7 +38,7 @@
                     </button>
                 </td>
                 <td>
-                <button class="btn btn-success" (click)="updateRide(car)">
+                <button *ngIf="userService.loggedUser.id == ridesService.company.userID" class="btn btn-success" (click)="updateRide(car)">
                     EDIT
                 </button>
                 </td>

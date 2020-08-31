@@ -11,7 +11,7 @@ export class RideCompany {
     rides: Array<Ride>;
     numberOfTransfers:number;
     rideLocationTransfers: Array<RideLocationTransfers>;
-
+    userID:string
     constructor()
     {
     }

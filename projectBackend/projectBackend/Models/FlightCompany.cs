@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace projectBackend.Models
 {
-    public class FlightCompany
-    {
-       [Key]
-       public int ID { get; set; }
-       public string Name { get; set; }
-       public string Image { get; set; }
-       public string Address { get; set; }
-       public string PromoDescription { get; set; }
-       public double Rating { get; set; }
-       public virtual List<Flight> Flights { get; set; }
-
-    }
+  public class FlightCompany
+  {
+    [Key]
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Image { get; set; }
+    public string Address { get; set; }
+    public string PromoDescription { get; set; }
+    public double Rating { get; set; }
+    public virtual List<Flight> Flights { get; set; }
+    public string UserID { get; set; }
+  }
 }

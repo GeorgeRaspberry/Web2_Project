@@ -4,11 +4,11 @@
             <tr *ngFor="let location of service.transfers">
                 <td>{{location.name}}</td>
                 <td>{{location.address}}</td>
-                <td><button (click)="deleteLocation(location)">Delete</button></td>
+                <td><button *ngIf="profileService.loggedUser.role == 'Administrator'" (click)="deleteLocation(location)">Delete</button></td>
             </tr>
         </thead>
     </table>
-    <form #form="ngForm" autocomplete="off">
+    <form *ngIf="profileService.loggedUser.role != '' && profileService.loggedUser.role != 'Registered'" #form="ngForm" autocomplete="off">
         <table id="overrider" class="table table-hover" >
             <tr>
                 <td>
@@ -18,7 +18,7 @@
                     <input name="address" #address="ngModel" [(ngModel)]="location.address" class="form-control" placeholder="Address" required>
                 </td>
                 <td>
-                    <button class="btn btn-success" id="add" (click)="addLocation()">
+                    <button  class="btn btn-success" id="add" (click)="addLocation()">
                         CREATE
                     </button>
                 </td>

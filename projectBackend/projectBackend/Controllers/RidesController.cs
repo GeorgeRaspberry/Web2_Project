@@ -41,8 +41,8 @@ namespace projectBackend.Controllers
     }
 
     // GET: api/Rides/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Ride>> GetRide(int id)
+    [HttpGet("{id}/{id2}")]
+    public async Task<ActionResult<Ride>> GetRide(int id, int id2)
     {
       var ride = await _context.Rides.FirstOrDefaultAsync(i => i.ID == id);
 
@@ -52,6 +52,7 @@ namespace projectBackend.Controllers
       }
       //RideModel rideModel = new RideModel(ride.ID,ride.FlyOffTime,ride.LandingTime, ride.FullRideTime, ride.RideLength,ride.NumberOfTransfers,ride.Price,ride.CompanyID,ride.LocationTransfers)
 
+     
       return ride;
     }
 
@@ -126,7 +127,7 @@ namespace projectBackend.Controllers
       _context.Rides.Add(ride);
       await _context.SaveChangesAsync();
 
-      return CreatedAtAction("GetRide", new { id = ride.ID }, ride);
+      return Ok();
     }
 
     // DELETE: api/Rides/5

@@ -17,6 +17,6 @@ namespace projectBackend.Models
     public string PromoDescription { get; set; }
     public double Rating { get; set; }
     public virtual List<Ride> Rides { get; set; }
- 
+    public string UserID { get; set; }
   }
 }

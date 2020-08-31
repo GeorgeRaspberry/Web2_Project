@@ -27,6 +27,7 @@ export class RideReservationComponent implements OnInit {
   book(form:NgForm){
     if (this.service.formData.rentRideStart == null){
       alert("Not all inputs are entered.")
+      return
     }
     if (this.service.formData.rideRentDays == null || this.service.formData.rideRentDays < 5){
       alert("Rent should last at leats 5 days.")

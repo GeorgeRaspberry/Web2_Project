@@ -101,6 +101,13 @@ namespace projectBackend.Controllers
     [HttpPost]
     public async Task<ActionResult<FlightCompany>> PostFlightCompany(FlightCompany flightCompany)
     {
+
+      var user = await _context.ApplicationUsers.FindAsync(flightCompany.UserID);
+      user.Role = "FlightAdministrator";
+
+      _context.Entry(user).State = EntityState.Modified;
+      _context.SaveChanges();
+
       _context.FlightCompanies.Add(flightCompany);
       await _context.SaveChangesAsync();
 
