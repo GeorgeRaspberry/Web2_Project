@@ -25,8 +25,8 @@
                     <td>{{reservation.price}}</td>
 
                     <td *ngIf="reservation.statusFlight == 0">
-                        <button (click)="cancelReservation(reservation)">
-                            OTKAZI
+                        <button id="cancel" (click)="cancelReservation(reservation)">
+                            CANCEL
                         </button>
                     </td>
                     <td *ngIf="reservation.statusFlight == 1">
@@ -52,13 +52,13 @@
     <table id="overrider" class="table table-hover" >
         <thead  class="thead-dark">
             <tr>
-                <th scope="col">CAR MAKER</th>
-                <th scope="col">CAR MODEL</th>
-                <th scope="col">YEAR</th>
-                <th scope="col">CAR TYPE</th>
-                <th scope="col">START DATE</th>
-                <th scope="col">DAY COUNT</th>
-                <th scope="col">PRICE</th>
+                <th id="friendsHeader" scope="col">CAR MAKER</th>
+                <th id="friendsHeader" scope="col">CAR MODEL</th>
+                <th id="friendsHeader" scope="col">YEAR</th>
+                <th id="friendsHeader" scope="col">CAR TYPE</th>
+                <th id="friendsHeader" scope="col">START DATE</th>
+                <th id="friendsHeader" scope="col">DAY COUNT</th>
+                <th id="friendsHeader" scope="col">PRICE</th>
                 <th></th>
             </tr>
         </thead>
@@ -73,8 +73,8 @@
                     <td>{{reservation.rideRentDays}}</td>
                     <td>{{reservation.price}}</td>
                     <td *ngIf="reservation.statusRide == 0">
-                        <button (click)="cancelReservation(reservation)">
-                            OTKAZI
+                        <button id="cancel" (click)="cancelReservation(reservation)">
+                            CANCEL
                         </button>
                     </td>
                     <td *ngIf="reservation.statusRide == 1">

@@ -163,12 +163,13 @@ namespace projectBackend.Controllers
     public async Task<Object> PostApplicationUser([FromBody]ApplicationUserModel model)
     {
       //check if username is unique
-      var allusers = await _userManager.Users.ToListAsync();
-      foreach (ApplicationUser au in allusers)
-      {
-        if (au.UserName == model.UserName)
+        var allusers = await _userManager.Users.ToListAsync();
+        foreach (ApplicationUser au in allusers)
         {
-          return HttpStatusCode.InternalServerError;
+          if (au.UserName == model.UserName)
+          {
+            return HttpStatusCode.InternalServerError;
+          }
         }
       }
       string role = "Registered";
