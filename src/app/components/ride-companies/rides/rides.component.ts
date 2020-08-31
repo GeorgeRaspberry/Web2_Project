@@ -18,9 +18,7 @@ export class RidesComponent implements OnInit {
 
 
 constructor(public service:RidesService, private router:Router, public serviceReservation: ReservationService) {
-  
 }
-
 book(car:Ride): void {
   this.router.navigateByUrl("ride/"+car.id+"/book")
 }

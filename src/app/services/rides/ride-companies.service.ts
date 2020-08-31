@@ -10,6 +10,8 @@ export class RideCompaniesService {
 
   formData: RideCompany;
   readonly rootURL = 'http://localhost:37240/api';
+  sortParametar: string;
+  filterCompanyName: string;
   companies : Array<RideCompany>;
   company:RideCompany = new RideCompany()
   transfers: Array<Location>
@@ -31,15 +33,14 @@ export class RideCompaniesService {
     .toPromise()
     .then(res =>  this.companies = res as Array<RideCompany>);
   }
-  loadCompanyData(id:number)
-  {
+
+  loadCompanyData(id:number) {
     this.http.get(this.rootURL + '/RideCompanies/'+id)
     .toPromise()
     .then(res => {
       this.company = res as RideCompany
     });
   }
-
 
   postRideCompany() {
     return this.http.post(this.rootURL + '/RideCompanies', this.formData);

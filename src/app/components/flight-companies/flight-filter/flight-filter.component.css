@@ -7,6 +7,12 @@
     background-color: rgba(52,52,52,1);
 }
 
+#buttonOverrider:focus {
+    background-color: rgba(52,52,52,1);
+    box-shadow: none;
+}
+
+
 .filterTable
 {
     font-family: "Oswald";
@@ -16,10 +22,43 @@
     width: 80%;
 }
 
+.filterTableFlightCompanies {
+    font-family: "Oswald";
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+
+#filterButton {
+    background-color: rgba(255,53,139,1);
+    color: white;
+    width: 100px;
+}
 
 button {
     margin-left:12.5%;
     font-family: "Oswald";
     background-color: rgba(52,52,52,1);
     border-color: rgba(255,255,255,0.7)
+}
+
+#sort {
+    padding: 0,0,0,0;
+    text-align: right;
+    display: inline-block;
+    width: 70%;
+}
+
+#sortButton {
+    margin-left: 10px;
+    background-color: rgba(52,52,52,1);
+    color: white;
+    width: 25px;
+}
+
+#sortButton:focus {
+    background-color: white;
+    color: rgba(52,52,52,1);
 }

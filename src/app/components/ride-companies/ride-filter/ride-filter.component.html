@@ -1,17 +1,86 @@
-<div class="filterSlideOut" [@fadeInOut]=currentState>
-    <table class= "filterTable"> 
-        <tr>
-        <td class="filterColumn">Company location: </td>
-        <td><input style="width:120px;" type="text" placeholder="Enter here" /> </td>
-        <td class="filterColumn">Company name: </td>
-        <td><input style="width:100px;" type="text" placeholder="Enter here" /></td>
-        <td class="filterColumn">Start date: </td>
-        <td><input style="width:120px;" type="datetime" placeholder="Enter here" /></td>
-        <td class="filterColumn">End date: </td>
-        <td><input style="width:120px;" type="datetime" placeholder="Enter here" /></td>
-        </tr>
-    </table>
-
+<div *ngIf="this.state == 0; else SingleRideBlock" data-toggle="modal">
+    <div class="filterSlideOut" [@fadeInOut]=currentState>
+        <table class= "filterTable"> 
+            <tr>
+            <td class="filterColumn">Company location: </td>
+            <td>
+                <select (change)="selectChangeHandler($event)">
+                    <option *ngFor="let location of service.transfers" [value]=location.id>
+                        {{location.name}}
+                    </option>
+                </select>
+            </td>
+            <td>
+                <button id="filterButton" (click)="filterRideCompanies()">
+                    Filter
+                </button>
+            </td>
+            <td class="filterColumn">Company name: </td>
+            <td><input [(ngModel)]="service.filterCompanyName" style="width:100px;" type="text" placeholder="Enter here" /></td>
+            <td>
+                <button id="filterButton" (click)="searchRideCompanies()">
+                    Search
+                </button>
+            </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <button id="buttonOverrider" class="btn btn-success" (click)="changeState()">Filter options</button>
+    <div id="sort">
+        <button (click)="sortDown()" id="sortButton">↓</button>
+        <button (click)="sortUp()" id="sortButton">↑</button>
+        <select id="flightCompanyFilterParameter" [(ngModel)]="service.sortParametar"  style="margin-left: 10px; font-family: 'Oswald Light';">
+            <option>
+                NAME
+            </option>
+            <option>
+                RATING
+            </option>
+        </select>
+    </div>
 </div>
-<br>
-<button id="buttonOverrider" class="btn btn-success" (click)="changeState()">Filter</button>
+
+<ng-template #SingleRideBlock>
+    <div class="filterSlideOut" [@fadeInOut]=currentState>
+        <table class= "filterTable"> 
+            <tr>
+            <td class="filterColumn">Ride location: </td>
+            <td>
+                <select (change)="rideSelectChangeHandler($event)">
+                    <option *ngFor="let location of service.transfers" [value]=location.id>
+                        {{location.name}}
+                    </option>
+                </select>
+            </td>
+            <td>
+                <button id="filterButton" (click)="filterRides()">
+                    Filter
+                </button>
+            </td>
+            <td class="filterColumn">Ride name: </td>
+            <td><input [(ngModel)]="ridesService.filterRideName" style="width:100px;" type="text" placeholder="Enter here" /></td>
+            <td>
+                <button id="filterButton" (click)="searchRides()">
+                    Search
+                </button>
+            </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <button id="buttonOverrider" class="btn btn-success" (click)="rideChangeState()">Filter options</button>
+    <div id="sort">
+        <button (click)="rideSortDown()" id="sortButton">↓</button>
+        <button (click)="rideSortUp()" id="sortButton">↑</button>
+        <select id="flightCompanyFilterParameter" [(ngModel)]="ridesService.sortParametar"  style="margin-left: 10px; font-family: 'Oswald Light';">
+            <option>
+                CAR MAKER
+            </option>
+            <option>
+                PRICE
+            </option>
+        </select>
+    </div>
+</ng-template>
+

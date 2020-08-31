@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace projectBackend.Models
 {
-    public class GoogleApiTokenInfo
+    public class GoogleApiToken
     {
         /// <summary>
         /// The Issuer Identifier for the Issuer of the response. Always https://accounts.google.com or accounts.google.com for Google ID tokens.

@@ -33,6 +33,7 @@ export class FlightRegisterComponent implements OnInit {
     this.service.formData.locationTransfers = new Array();
     this.service.loadTransfers()
   }
+
   addFlight(form:NgForm) {
     if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
       || /^[0-9][0-9]:[0-9][0-9]$/.test(this.service.formData.fullFlightTime) == false 
@@ -56,11 +57,14 @@ export class FlightRegisterComponent implements OnInit {
       for (let location of this.service.formData.locationTransfers){
         location.locationID = Number(location.locationID)
 
-        if (location.locationID == 0){
+        if (location.locationID == 0 || Number.isNaN(location.locationID)){
           alert("Not all transfers are entered.")
           return
         }
       }
+    }
+    else {
+      alert("Minimum 2 transfers required!");
     }
     this.service.formData.companyID = this.id;
     this.service.formData.locationTransfers[0].status = 1

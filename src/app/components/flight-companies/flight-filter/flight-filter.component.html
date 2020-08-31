@@ -1,25 +1,87 @@
-<div class="filterSlideOut" [@fadeInOut]=currentState>
-    <table class= "filterTable"> 
-        <tr>
-        <td class="filterColumn">Lokacija: 
-        <input style="width:120px;" type="text" class="filterPolja" id="filterLokacija" /> </td>
-        <td class="filterColumn">Uneti broj osoba: 
-        <input style="width:100px;" type="number" class="filterPolja" id="filterBrojOsoba" /></td>
-        <td class="filterColumn">Cena od: 
-        <input style="width:120px;" type="number" placeholder="Izraženo u dinarima" class="filterPolja" id="filterCenaOd" /></td>
-        <td class="filterColumn">Do: 
-        <input style="width:120px;" type="number" placeholder="Izraženo u dinarima" class="filterPolja" id="filterCenaDo" /></td>
-        <td class="filterColumn">Broj soba od: 
-        <input style="width:120px;" type="number" class="filterPolja" id="filterBrojSobaOd" /></td>
-        <td class="filterColumn">Do: 
-        <input style="width:120px;" type="number" class="filterPolja" id="filterBrojSobaDo" /></td>
-        <td class="filterColumn"> Datum od: 
-        <input style="width:120px;" type="text" class="filterPolja" id="filterdatum" /></td>
-        <td class="filterColumn">Do: 
-        <input style="width:120px;" type="text" class="filterPolja" id="filterdatum" /></td>
-        </tr>
-    </table>
-
+<div *ngIf="this.state == 0; else SingleRideBlock" data-toggle="modal">
+    <div class="filterSlideOut" [@fadeInOut]=currentState>
+        <table class= "filterTableFlightCompanies"> 
+            <tr>
+                <td class="filterColumn">Company name: </td>
+                <td><input [(ngModel)]="service.filterCompanyName" style="width:100px;" type="text" placeholder="Enter here" /></td>
+                <td>
+                    <button id="filterButton" (click)="searchFlightCompanies()">
+                        Search
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <button id="buttonOverrider" class="btn btn-success" (click)="changeState()">Filter options</button>
+    <div id="sort">
+        <button (click)="sortDown()" id="sortButton">↓</button>
+        <button (click)="sortUp()" id="sortButton">↑</button>
+        <select id="flightCompanyFilterParameter" [(ngModel)]="service.sortParametar"  style="margin-left: 10px; font-family: 'Oswald Light';">
+            <option>
+                NAME
+            </option>
+            <option>
+                RATING
+            </option>
+        </select>
+    </div>
 </div>
-<br>
-<button id="buttonOverrider" class="btn btn-success" (click)="changeState()">Search</button>
+    <ng-template #SingleRideBlock>
+    <div class="filterSlideOut" [@fadeInOut]=currentState>
+        <table class= "filterTable">
+            <tr>
+                <td class="filterColumn">Date between: </td>
+                <td>
+                    <input style="width: 100px;" [(ngModel)]="this.flyOffTime" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Fly off time">
+                    <owl-date-time #dt1></owl-date-time>
+                </td>
+                <td class="filterColumn">And: </td>
+                <td>
+                    <input style="width: 100px;" [(ngModel)]="this.landingTime" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" class="form-control" placeholder="Fly off time">
+                    <owl-date-time #dt2></owl-date-time>
+                </td>
+                <td>
+                    <button id="filterButton" (click)="filterFlightsDate()">
+                        Filter
+                    </button>
+                </td>
+                <td class="filterColumn">Starting destination: </td>
+                <td>
+                    <select (change)="startingDestinationChangeHandler($event)">
+                        <option *ngFor="let transfer of flightsService.transfers" [value]=transfer.id>
+                            {{transfer.name}}
+                        </option>
+                    </select>
+                </td>
+                <td class="filterColumn">Ending destination: </td>
+                <td>
+                    <select (change)="endingDestinationChangeHandler($event)">
+                        <option *ngFor="let transfer of flightsService.transfers" [value]=transfer.id>
+                            {{transfer.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <button id="filterButton" (click)="filterFlightsDestination()">
+                        Filter
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <button id="buttonOverrider" class="btn btn-success" (click)="flightChangeState()">Filter options</button>
+    <div id="sort">
+        <button (click)="flightSortDown()" id="sortButton">↓</button>
+        <button (click)="flightSortUp()" id="sortButton">↑</button>
+        <select id="flightCompanyFilterParameter" [(ngModel)]="flightsService.sortParametar"  style="margin-left: 10px; font-family: 'Oswald Light';">
+            <option>
+                TRANSFER NUMBER
+            </option>
+            <option>
+                PRICE
+            </option>
+        </select>
+    </div>
+</ng-template>

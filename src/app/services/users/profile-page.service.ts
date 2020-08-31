@@ -4,6 +4,7 @@ import { ProfilePageComponent } from './../../components/login/profile-page/prof
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { NgxMaterialTimepickerHoursFace } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-hours-face/ngx-material-timepicker-hours-face';
+import { SocialUser } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class ProfilePageService {
   allUsers: Array<User>;
   constructor(private http: HttpClient) { }
 
-  postUser() {
-    return this.http.post(this.rootURL + '/User', this.formData);
+  updateUserDetails() {
+    return this.http.post(this.rootURL + '/ApplicationUser/UpdateUser/' + this.loggedUser.id, this.formData);
   }
   sendFriendRequest(potentialId: string) {
     return this.http.put(this.rootURL + '/ApplicationUser/SendRequest/'+ this.loggedUser.id + '/' + potentialId, null);
@@ -110,5 +111,9 @@ export class ProfilePageService {
 
   updateProfilePage() {
     this.getLoggedUser(localStorage.getItem('token'));
+  }
+
+  socialLogin(user: SocialUser) {
+    return this.http.post(this.rootURL + '/ApplicationUser/SocialLogin', user).toPromise();
   }
 }

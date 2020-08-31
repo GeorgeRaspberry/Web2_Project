@@ -40,6 +40,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReserveInviteComponent } from './components/flight-companies/reserve-invite/reserve-invite.component';
 
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,21 @@ import { ReserveInviteComponent } from './components/flight-companies/reserve-in
   ],
   exports:[ MatButtonModule,MatTooltipModule  ],
   providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,ReservationService],
+    SocialLoginModule,
+  ],
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('526182753424-fkg7mn4nnf43luqv2vt26dbm8of93vgf.apps.googleusercontent.com'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

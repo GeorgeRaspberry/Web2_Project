@@ -117,6 +117,39 @@ namespace projectBackend.Controllers
       return NoContent();
     }
 
+    [HttpPost]
+    [Route("FilterDates")]
+    public async Task<Object> FilterDates([FromBody] DateCluster dateCluster)
+    {
+      int id = dateCluster.ID;
+      List<FlightCompany> companies = await _context.FlightCompanies.ToListAsync();
+      List<Flight> tempList = new List<Flight>();
+      DateTime date1 = dateCluster.FlyoffDate.AddHours(2);
+      DateTime date2 = dateCluster.LandingDate.AddHours(2);
+
+      foreach (FlightCompany fc in companies)
+      {
+        if (fc.ID == id)
+        {
+          tempList = fc.Flights.ToList();
+          foreach (Flight f in tempList.ToList())
+          {
+            int result = DateTime.Compare(f.FlyOffTime, date1);
+            result = DateTime.Compare(f.FlyOffTime, date2);
+            result = DateTime.Compare(f.LandingTime, date2);
+            result = DateTime.Compare(f.LandingTime, date1);
+            if (!((DateTime.Compare(f.FlyOffTime, date1) >= 0 && DateTime.Compare(f.FlyOffTime, date2) < 0) && (DateTime.Compare(f.LandingTime, date2) <= 0 && DateTime.Compare(f.LandingTime, date1) > 0)))
+            {
+              tempList.Remove(f);
+            }
+          }
+          break;
+        }
+      }
+
+      return tempList;
+    }
+
     // POST: api/Flights
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for
     // more details see https://aka.ms/RazorPagesCRUD.
