@@ -141,14 +141,22 @@ namespace projectBackend.Controllers
     //POST : /api/ApplicationUser/Register
     public async Task<Object> PostApplicationUser([FromBody]ApplicationUserModel model)
     {
+      
+
+      try { 
       //check if username is unique
-      var allusers = await _userManager.Users.ToListAsync();
-      foreach (ApplicationUser au in allusers)
-      {
-        if (au.UserName == model.UserName)
+        var allusers = await _userManager.Users.ToListAsync();
+        foreach (ApplicationUser au in allusers)
         {
-          return HttpStatusCode.InternalServerError;
+          if (au.UserName == model.UserName)
+          {
+            return HttpStatusCode.InternalServerError;
+          }
         }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
       }
 
       var applicationUser = new ApplicationUser()

@@ -2,7 +2,6 @@
     <app-rides [rides]="rideService.rides" ></app-rides>
 
     <table class="center">
-  
       <tr>
         <td>
           <input name="rentRideStart" #rentRideStart="ngModel" [(ngModel)]="service.formData.rentRideStart" name="rentRideStart" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select start date">
@@ -16,8 +15,10 @@
       </tr>
       <tr>
         <td>
-            <button (click)="book(form)">Create reservation</button>
+            <button id="createReservation" (click)="book(form)">
+              Create reservation
+            </button>
         </td>
       </tr>
     </table>
-</form>>
+</form>
