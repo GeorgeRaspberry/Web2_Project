@@ -13,9 +13,9 @@ namespace projectBackend.Database
   {
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
-      
+     
     }
-
+  
 
 
     public DbSet<Flight> Flights { get; set; }

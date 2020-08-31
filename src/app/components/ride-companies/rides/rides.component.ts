@@ -6,6 +6,7 @@ import { RidesService } from 'src/app/services/rides/rides.service';
 import { Router } from '@angular/router';
 import { ReservationService } from 'src/app/services/reservation-service';
 import { RideCompany } from 'src/app/entities/rides/ride-company';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-rides',
@@ -20,7 +21,7 @@ export class RidesComponent implements OnInit {
   quickRent: number;
 
 
-constructor(public service:RidesService,public ridesService:RideCompaniesService, private router:Router, public serviceReservation: ReservationService) {
+constructor(public userService:ProfilePageService,public service:RidesService,public ridesService:RideCompaniesService, private router:Router, public serviceReservation: ReservationService) {
 }
 book(car:Ride): void {
   this.router.navigateByUrl("ride/"+car.id+"/book")
@@ -31,13 +32,6 @@ updateRide(ride:Ride){
 }
 
 ngOnInit(): void {
-  console.log(this.rides)
-  if (this.quickRent == 1){
-    this.ridesService.company = new RideCompany()
-    this.ridesService.company.rides = this.rides
-    alert(this.rides)
-  }
-
 }
 bookQuick(car:Ride){
   if (this.serviceReservation.formData.rideRentDays == null || this.serviceReservation.formData.rideRentDays < 5){

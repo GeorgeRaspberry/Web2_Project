@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightsService } from 'src/app/services/flights/flights.service';
 import { Location } from 'src/app/entities/flights/location';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-location-page',
@@ -10,7 +11,7 @@ import { Location } from 'src/app/entities/flights/location';
 export class LocationPageComponent implements OnInit {
   location:Location
 
-  constructor(public service: FlightsService) { 
+  constructor(public service: FlightsService, public profileService:ProfilePageService) { 
     this.service.loadTransfers()
     this.location = new Location()
   }

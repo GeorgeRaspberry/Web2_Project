@@ -9,6 +9,6 @@ namespace projectBackend.Models
   {
     public List<Reservation> Reservations { get; set; }
     public List<Seat> Seats { get; set; }
-    public List<ApplicationUser> Users { get; set; }
+    public List<string> Users { get; set; }
   }
 }

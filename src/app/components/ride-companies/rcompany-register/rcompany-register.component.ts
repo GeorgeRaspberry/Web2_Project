@@ -5,6 +5,7 @@ import { RideCompaniesService } from 'src/app/services/rides/ride-companies.serv
 import { RideCompany } from 'src/app/entities/rides/ride-company';
 import { Router } from '@angular/router';
 import { LocationTransfers, RideLocationTransfers } from 'src/app/entities/flights/location-transfers';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-rcompany-register',
@@ -14,11 +15,13 @@ import { LocationTransfers, RideLocationTransfers } from 'src/app/entities/fligh
 export class RcompanyRegisterComponent implements OnInit {
 
   url: any;
-  constructor(public service: RideCompaniesService,private router: Router) {
+  constructor(public service: RideCompaniesService,public userService:ProfilePageService, private router: Router) {
     this.url = this.service.formData.image
   }
 
   ngOnInit(): void {
+    this.userService.getAllUsers()
+
     if (this.service.formData.rideLocationTransfers!=null){
       this.service.formData.rideLocationTransfers.forEach(element => {
       });

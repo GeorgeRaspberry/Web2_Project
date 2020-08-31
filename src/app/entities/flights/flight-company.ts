@@ -8,7 +8,7 @@ export class FlightCompany {
     promoDescription: string;
     rating: number;
     flights: Array<Flight>;
-
+    userID:string
     constructor()
     {
     }

@@ -2,12 +2,14 @@
     <div id="companyInfo">
         <img src={{service.company.image}}>
         <app-rating-star [rating]="service.company.rating" rateOrShow="1"></app-rating-star>
+        <p class="promo">{{service.company.address}}</p>
+        <br>
         <p class="promo">{{service.company.promoDescription}}</p>
                 
     </div>
 
 <app-flights [flights]="service.company.flights"></app-flights>
-        <button class="btn btn-success" id="add" routerLink="/flight/{{id}}/register">
+        <button *ngIf="userService.loggedUser.id == service.company.userID" class="btn btn-success" id="add" routerLink="/flight/{{id}}/register">
             CREATE NEW FLIGHT
         </button>
 </div>

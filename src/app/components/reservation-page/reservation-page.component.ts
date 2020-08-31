@@ -14,15 +14,18 @@ export class ReservationPageComponent implements OnInit {
   constructor(public service: ReservationService, private profileService:ProfilePageService) { }
 
   ngOnInit(): void {
-    this.service.reservations = new Array()
-    this.service.loadReservations()
-    if (localStorage.getItem('token')!= null)
+    if (this.profileService.loggedUser.role != "")
     {
-      this.profileService.refreshLogged(localStorage.getItem('token'));
-    }
-    else
-    {
-      this.profileService.loggedUser = new User()
+      this.service.reservations = new Array()
+      this.service.loadReservations()
+      if (localStorage.getItem('token')!= null)
+      {
+        this.profileService.refreshLogged(localStorage.getItem('token'));
+      }
+      else
+      {
+        this.profileService.loggedUser = new User()
+      }
     }
   }
 

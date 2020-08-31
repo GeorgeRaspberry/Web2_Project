@@ -94,6 +94,14 @@ namespace projectBackend.Controllers
     [HttpPost]
     public async Task<ActionResult<RideCompany>> PostRideCompany(RideCompany rideCompany)
     {
+
+      var user = await _context.ApplicationUsers.FindAsync(rideCompany.UserID);
+      user.Role = "RideAdministrator";
+
+      _context.Entry(user).State = EntityState.Modified;
+      _context.SaveChanges();
+
+
       _context.RideCompanies.Add(rideCompany);
       await _context.SaveChangesAsync();
 

@@ -38,7 +38,7 @@ export class RidesService {
 
   loadRide(id:number)
   {
-    this.http.get(this.rootURL + '/Rides/'+id)
+    this.http.get(this.rootURL + '/Rides/'+id+"/"+id)
     .toPromise()
     .then(res =>{
       this.ride = res as Ride

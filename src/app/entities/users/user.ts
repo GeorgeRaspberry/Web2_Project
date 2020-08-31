@@ -19,6 +19,7 @@ export class User {
     points:number
     constructor()
     {
+        this.id = ""
         this.role = "";
     } 
 }

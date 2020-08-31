@@ -43,6 +43,23 @@ namespace projectBackend.Controllers
       userFunctions = new ApplicationUserFunctions();
     }
 
+    // GET: api/Flights
+    [HttpGet]
+    [Route("GetRegisteredUsers")]
+    public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetRegisteredUsers()
+    {
+      var users = await _context.ApplicationUsers.ToListAsync();
+      foreach (var item in users.ToList())
+      {
+        if (item.Role != "Registered")
+        {
+          users.Remove(item);
+        }
+      }
+
+      return users;
+    }
+
     [HttpGet]
     [Route("GetUserData/{token}")]
     public async Task<Object> GetUserData(string token)
@@ -141,9 +158,6 @@ namespace projectBackend.Controllers
     //POST : /api/ApplicationUser/Register
     public async Task<Object> PostApplicationUser([FromBody]ApplicationUserModel model)
     {
-      
-
-      try { 
       //check if username is unique
         var allusers = await _userManager.Users.ToListAsync();
         foreach (ApplicationUser au in allusers)
@@ -154,9 +168,10 @@ namespace projectBackend.Controllers
           }
         }
       }
-      catch (Exception e)
+      string role = "Registered";
+      if (model.UserName == "admin")
       {
-        Console.WriteLine(e.Message);
+        role = "Administrator";
       }
 
       var applicationUser = new ApplicationUser()
@@ -167,7 +182,7 @@ namespace projectBackend.Controllers
         PhoneNumber = model.PhoneNumber.ToString(),
         City = model.City,
         Authenticate = model.Authenticate,
-        Role = "Registered",
+        Role = role,
         Password = model.Password
       };
 
@@ -243,6 +258,7 @@ namespace projectBackend.Controllers
     public async Task<IActionResult> Login(LoginModel model)
     {
       var user = await _userManager.FindByNameAsync(model.Username);
+
       if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
       {
         if (user.Authenticate == 0)

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RideCompany } from 'src/app/entities/rides/ride-company';
 import { Location } from 'src/app/entities/flights/location';
+import { Ride } from 'src/app/entities/rides/ride';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,30 @@ export class RideCompaniesService {
     this.http.get(this.rootURL + '/Flights/GetLocations')
     .toPromise()
     .then(res =>  this.transfers = res as Array<Location>);
+  }
+
+  loadRidesOnLocation(location:string) {
+    this.company = new RideCompany()
+    this.http.get(this.rootURL + '/Rides/LoadRidesLocation/'+location)
+    .toPromise()
+    .then(res => {
+      this.company = new RideCompany()
+      this.company.rides = res as Ride[]
+    });
+  }
+
+  loadRide(id:number)
+  {
+    this.company = new RideCompany()
+
+    this.http.get(this.rootURL + '/Rides/'+id+"/"+id)
+    .toPromise()
+    .then(res =>{
+      let ride = res as Ride
+      this.company.rides = new Array()
+      this.company.rides.push(ride)
+    }
+    );
   }
 
   postLocation(location:Location){

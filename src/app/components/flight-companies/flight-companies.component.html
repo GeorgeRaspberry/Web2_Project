@@ -12,8 +12,8 @@
                 <td><app-rating-star [rating]="company.rating" [rateOrShow]="1"></app-rating-star></td>
                 <td>
                     <button class="btn btn-success" routerLink="/flight/{{company.id}}/details">Details</button>
-                    <button class="btn btn-success" (click)="updateCompany(company)">Update</button>
-                    <button class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button>
+                    <button *ngIf="company.userID==service.loggedUser.id" class="btn btn-success" (click)="updateCompany(company)">Update</button>
+                    <button *ngIf="service.loggedUser.role=='Administrator'" class="btn btn-success" (click)="deleteCompany(company.id)">Remove</button>
                 </td>
             </tr>
         </tbody>
@@ -23,7 +23,7 @@
             <td></td>
             <td></td>
             <td>
-                <button  class="btn btn-success" id="add" (click)="addCompany()">
+                <button *ngIf="service.loggedUser.role=='Administrator'"  class="btn btn-success" id="add" (click)="addCompany()">
                     NEW COMPANY
                 </button>
             </td>

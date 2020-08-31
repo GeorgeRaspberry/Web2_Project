@@ -27,6 +27,14 @@
             </td>
         </tr>
 
+        <tr *ngIf="service.formData.id == null || service.formData.id == 0">
+            <td>
+                <select name="userID" [(ngModel)]="service.formData.userID">
+                    <option *ngFor="let user of userService.registeredUsers" [value]=user.id>{{user.userName}}</option>
+                </select> 
+            </td>
+        </tr>
+
         <tr>
             <td colspan="4">
                 <button class="btn btn-success" id="add" (click)="addRCompany(form)">

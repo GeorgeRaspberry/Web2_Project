@@ -33,7 +33,7 @@ namespace projectBackend.Controllers
     public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
  
-      var companies = await _context.FlightCompanies.ToListAsync();
+      var companies = await _context.FlightCompanies.Include(r=>r.Flights).ToListAsync();
 
       foreach (var item in companies)
       {
@@ -101,6 +101,13 @@ namespace projectBackend.Controllers
     [HttpPost]
     public async Task<ActionResult<FlightCompany>> PostFlightCompany(FlightCompany flightCompany)
     {
+
+      var user = await _context.ApplicationUsers.FindAsync(flightCompany.UserID);
+      user.Role = "FlightAdministrator";
+
+      _context.Entry(user).State = EntityState.Modified;
+      _context.SaveChanges();
+
       _context.FlightCompanies.Add(flightCompany);
       await _context.SaveChangesAsync();
 

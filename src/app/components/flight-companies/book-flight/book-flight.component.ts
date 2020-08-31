@@ -10,6 +10,7 @@ import { ReservationFlight } from 'src/app/entities/reservationFlight';
 import { Seat } from 'src/app/entities/flights/seat';
 import { Flight } from 'src/app/entities/flights/flight';
 import { RidesService } from 'src/app/services/rides/rides.service';
+import { RideCompaniesService } from 'src/app/services/rides/ride-companies.service';
 
 @Component({
   selector: 'app-book-flight',
@@ -20,7 +21,7 @@ export class BookFlightComponent implements OnInit {
 
   step:number
   id:number
-  constructor(public rideService:RidesService,public service: FlightsService,public serviceReservation: ReservationService, public profileService:ProfilePageService, public route: ActivatedRoute, private router:Router) { 
+  constructor(public rideService:RidesService, public companyService:RideCompaniesService,public service: FlightsService,public serviceReservation: ReservationService, public profileService:ProfilePageService, public route: ActivatedRoute, private router:Router) { 
     this.service.formData = new Flight()
     this.resetForm()
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
@@ -84,7 +85,7 @@ export class BookFlightComponent implements OnInit {
     let reservations = new Array<Reservation>()
 
     let seatNumber = 0
-    let users = new Array<User>()
+    let users = new Array<string>()
     this.profileService.loggedUser.friendsList.forEach(element => {
       if (element.status == 1){
         let reservation = new Reservation()
@@ -100,8 +101,9 @@ export class BookFlightComponent implements OnInit {
         if (element.points >=5){
           reservation.price = reservation.price - (reservation.price*0.2)
           element.points = element.points - 5
+          users.push(element.id)
+
         }
-        users.push(element)
 
         reservations.push(reservation)
       }
@@ -134,8 +136,9 @@ export class BookFlightComponent implements OnInit {
     if(this.profileService.loggedUser.points >= 5){
       this.serviceReservation.formData.price = this.serviceReservation.formData.price - (this.serviceReservation.formData.price*0.2)
       this.profileService.loggedUser.points = this.profileService.loggedUser.points - 5
+      users.push(this.profileService.loggedUser.id)
+
     }
-    users.push(this.profileService.loggedUser)
 
     
     reservations.push(this.serviceReservation.formData)
@@ -146,6 +149,7 @@ export class BookFlightComponent implements OnInit {
     reservationFlight.reservations = reservations
     reservationFlight.seats = seats
     reservationFlight.users = users
+    console.log(users)
     this.serviceReservation.postFlightReservation(reservationFlight).subscribe(
       res=>{
         this.resetForm(form);
@@ -156,11 +160,15 @@ export class BookFlightComponent implements OnInit {
 
   }
   rentACar(){
-
-    this.rideService.loadRidesOnLocation(this.service.formData.locationTransfers[this.service.formData.locationTransfers.length-1].location.name)
+    if (this.serviceReservation.picked != 0){
+      alert("Need to select all seats.")
+      return
+    }
+    this.companyService.loadRidesOnLocation(this.service.formData.locationTransfers[this.service.formData.locationTransfers.length-1].location.name)
 
 
     this.step = 3
   }
+
 
 }

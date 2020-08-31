@@ -91,6 +91,16 @@ export class ProfilePageService {
     );
   }
 
+  registeredUsers:Array<User> = new Array()
+  getAllUsers(){
+    this.http.get(this.rootURL + '/ApplicationUser/GetRegisteredUsers')
+    .toPromise()
+    .then(res =>{
+    this.registeredUsers = res as Array<User>;
+    }
+    );
+  }
+
   login(form:NgForm) {
     return this.http.post(this.rootURL + '/ApplicationUser/Login', this.formData);
   }

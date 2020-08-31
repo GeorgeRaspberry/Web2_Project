@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RideCompany } from 'src/app/entities/rides/ride-company';
 import { RideCompaniesService } from 'src/app/services/rides/ride-companies.service';
 import { Router } from '@angular/router';
+import { ProfilePageService } from 'src/app/services/users/profile-page.service';
 
 @Component({
   selector: 'app-ride-companies',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class RideCompaniesComponent implements OnInit {
   selectedCompany: RideCompany;
 
-  constructor(public companiesService: RideCompaniesService, private router: Router) {
+  constructor(public companiesService: RideCompaniesService,public userService:ProfilePageService, private router: Router) {
     this.companiesService.companies = new Array()
     this.companiesService.loadCompanies();
   }
