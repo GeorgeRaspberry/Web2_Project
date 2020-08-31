@@ -12,6 +12,7 @@ export class RideCompaniesComponent implements OnInit {
   selectedCompany: RideCompany;
 
   constructor(public companiesService: RideCompaniesService, private router: Router) {
+    this.companiesService.companies = new Array()
     this.companiesService.loadCompanies();
   }
 
@@ -38,6 +39,7 @@ export class RideCompaniesComponent implements OnInit {
   {
     this.companiesService.deleteRideCompany(id).subscribe(
       res=>{
+        this.companiesService.companies = new Array()
         this.companiesService.loadCompanies();
       }, 
       err=> {console.log(err);}

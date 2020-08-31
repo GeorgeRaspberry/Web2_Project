@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using projectBackend.Database;
+using projectBackend.Database.DatabaseFunctions;
 using projectBackend.Models;
 
 namespace projectBackend.Controllers
@@ -15,17 +17,19 @@ namespace projectBackend.Controllers
   public class FlightsController : ControllerBase
   {
     private readonly DatabaseContext _context;
-
+    private readonly FlightFunctions flightFunctions;
     public FlightsController(DatabaseContext context)
     {
       _context = context;
+      flightFunctions = new FlightFunctions(_context);
     }
 
     // GET: api/Flights
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
     {
-      return await _context.Flights.ToListAsync();
+      var flights = await _context.Flights.ToListAsync(); 
+      return flights;
     }
 
     // GET: api/Flights/5
@@ -38,7 +42,8 @@ namespace projectBackend.Controllers
       {
         return NotFound();
       }
-      //FlightModel flightModel = new FlightModel(flight.ID,flight.FlyOffTime,flight.LandingTime, flight.FullFlightTime, flight.FlightLength,flight.NumberOfTransfers,flight.Price,flight.CompanyID,flight.LocationTransfers)
+      
+      flightFunctions.locationTransfersOrder(flight);
 
       return flight;
     }
@@ -60,6 +65,25 @@ namespace projectBackend.Controllers
     {
       return await _context.Locations.ToListAsync();
     }
+
+    // DELETE: api/Flights/5
+    [HttpDelete("{id}")]
+    [Route("DeleteLocation/{id}")]
+    public async Task<ActionResult<Location>> DeleteLocation(int id)
+    {
+      var location = await _context.Locations.FindAsync(id);
+      if (location == null)
+      {
+        return NotFound();
+      }
+
+      _context.Locations.Remove(location);
+      await _context.SaveChangesAsync();
+
+      return location;
+    }
+
+
 
     // PUT: api/Flights/5
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for

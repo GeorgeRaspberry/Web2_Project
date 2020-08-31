@@ -19,6 +19,7 @@ namespace projectBackend
 {
   public class Startup
   {
+    readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
@@ -58,7 +59,15 @@ namespace projectBackend
       }
       );
 
-      services.AddCors();
+      services.AddCors(options =>
+      {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+                          builder =>
+                          {
+                            builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                            builder.WithOrigins("http://localhost:65000").AllowAnyHeader().AllowAnyMethod();
+                          });
+      });
 
       //Jwt Authentication
 

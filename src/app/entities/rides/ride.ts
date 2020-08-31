@@ -14,8 +14,6 @@ export class Ride {
     carType: string;
     locationID:number
     location:Location
-
-    constructor() {
-
-    }
+    price:number
+    constructor() {}
 }

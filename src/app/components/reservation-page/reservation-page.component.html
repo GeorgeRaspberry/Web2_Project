@@ -1,0 +1,92 @@
+<div style="margin-top: 2%;">
+    <div class="promo">
+        Flight reservations :
+    </div>
+    <table id="overrider" class="table table-hover" >
+        <thead  class="thead-dark">
+            <tr>
+                <th scope="col">TAKE OFF/LANDING DATE</th>
+                <th scope="col">TAKE OFF/LANDING CITY</th>
+                <th scope="col">BAG COUNT</th>
+                <th scope="col">PRICE</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <ng-container *ngFor="let reservation of service.reservations">
+                <tr *ngIf="reservation.reservationType != 0 && reservation.reservationType != 3">
+                    <td>{{reservation.flight.flyOffTime | date: 'short'}} <b>-></b> {{reservation.flight.landingTime | date: 'short'}}</td>
+                    <td>{{reservation.flight.locationTransfers[0].location.name}} <b>-></b> {{reservation.flight.locationTransfers[reservation.flight.locationTransfers.length-1].location.name}}</td>
+                    <td>{{reservation.bagCount}}</td>
+                    <td>{{reservation.price}}</td>
+
+                    <td *ngIf="reservation.statusFlight == 0">
+                        <button (click)="cancelReservation(reservation)">
+                            OTKAZI
+                        </button>
+                    </td>
+                    <td *ngIf="reservation.statusFlight == 1">
+                        HAPPENING
+                    </td>
+                    <td *ngIf="reservation.statusFlight == 2">
+                        <div *ngIf="reservation.flightRating == 0; else elseBlock">
+                            <app-rating-star  [rating]="reservation.flightRating" [id]="reservation.id" flightOrRide="0" rateOrShow="0"></app-rating-star>
+                        </div>
+                        <ng-template #elseBlock>
+                            <app-rating-star  [rating]="reservation.flightRating" [id]="reservation.id" rateOrShow="1"></app-rating-star>             
+                        </ng-template>
+                    </td>            
+                </tr>
+                
+            </ng-container>
+        </tbody>
+    </table>
+
+    <div class="promo">
+        Ride reservations :
+    </div>    
+    <table id="overrider" class="table table-hover" >
+        <thead  class="thead-dark">
+            <tr>
+                <th scope="col">CAR MAKER</th>
+                <th scope="col">CAR MODEL</th>
+                <th scope="col">YEAR</th>
+                <th scope="col">CAR TYPE</th>
+                <th scope="col">START DATE</th>
+                <th scope="col">DAY COUNT</th>
+                <th scope="col">PRICE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let reservation of service.reservations">
+                <tr *ngIf="reservation.reservationType != 1 && reservation.reservationType != 3">
+                    <td>{{reservation.ride.carMaker}}</td>
+                    <td>{{reservation.ride.carModel}}</td>
+                    <td>{{reservation.ride.productionYear}}</td>
+                    <td>{{reservation.ride.carType}}</td>
+                    <td>{{reservation.rentRideStart | date: 'short'}}</td>
+                    <td>{{reservation.rideRentDays}}</td>
+                    <td>{{reservation.price}}</td>
+                    <td *ngIf="reservation.statusRide == 0">
+                        <button (click)="cancelReservation(reservation)">
+                            OTKAZI
+                        </button>
+                    </td>
+                    <td *ngIf="reservation.statusRide == 1">
+                        HAPPENING
+                    </td>
+                    <td *ngIf="reservation.statusRide == 2">
+                        <div *ngIf="reservation.rideRating == 0; else elseBlock">
+                            <app-rating-star  [rating]="reservation.rideRating" [id]="reservation.id" flightOrRide="1" rateOrShow="0"></app-rating-star>
+                        </div>
+                        <ng-template #elseBlock>
+                            <app-rating-star  [rating]="reservation.rideRating" [id]="reservation.id" rateOrShow="1"></app-rating-star>             
+                        </ng-template>
+                    </td>
+                </tr> 
+            </ng-container>
+        </tbody>
+    </table>
+</div>

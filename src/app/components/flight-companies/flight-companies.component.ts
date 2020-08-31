@@ -17,6 +17,7 @@ export class FlightCompaniesComponent implements OnInit {
   isButtonVisible:boolean;
 
   constructor(public companiesService: FlightCompaniesService, public service:ProfilePageService, private router: Router) {
+    this.companiesService.companies = new Array()
     this.companiesService.loadCompanies();
     this.isButtonVisible = false;
   }
@@ -42,6 +43,7 @@ export class FlightCompaniesComponent implements OnInit {
   {
     this.companiesService.deleteFlightCompany(id).subscribe(
       res=>{
+        this.companiesService.companies = new Array()
         this.companiesService.loadCompanies();
       }, 
       err=> {console.log(err);}

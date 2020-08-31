@@ -13,7 +13,7 @@ namespace projectBackend.Models
     public string FullFlightTime { get; set; }
     public int FlightLength { get; set; }
     public int NumberOfTransfers { get; set; }
-    public int Price { get; set; }
+    public double Price { get; set; }
     public int CompanyID { get; set; }
 
     public FlightModel(int iD, DateTime flyOffTime, DateTime landingTime, string fullFlightTime, int flightLength, int numberOfTransfers, int price, int companyID, ICollection<Location> locationTransfers)

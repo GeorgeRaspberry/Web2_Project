@@ -1,4 +1,4 @@
-<div class="profile-stars">
+<div class="profile-stars" *ngIf="rateOrShow == 1; else rateStars">
     <!-- START NO 1-->
     <div *ngIf="rating < 0.5; then thenBlock1 else elseBlock1"></div>
     <ng-template #thenBlock1><i class="material-icons">star_border</i></ng-template>
@@ -40,3 +40,12 @@
         <ng-template #elseBlock55><i class="material-icons">star</i></ng-template>
     </ng-template>
 </div>
+
+
+<ng-template #rateStars>
+    <i class="material-icons" (click)="rate(1)">star_border</i>
+    <i class="material-icons" (click)="rate(2)">star_border</i>
+    <i class="material-icons" (click)="rate(3)">star_border</i>
+    <i class="material-icons" (click)="rate(4)">star_border</i>
+    <i class="material-icons" (click)="rate(5)">star_border</i>
+</ng-template>

@@ -15,6 +15,7 @@ export class FlightsService {
   transfers: Array<Location> = new Array();
 
   constructor(private http: HttpClient) {
+
    }
   loadTransfers(){
     this.http.get(this.rootURL + '/Flights/GetLocations')
@@ -24,6 +25,10 @@ export class FlightsService {
 
   postLocation(location:Location){
     return this.http.post(this.rootURL + '/Flights/PostLocation', location);
+  }
+
+  removeLocation(location:Location){
+    return this.http.delete(this.rootURL + '/Flights/DeleteLocation/'+ location.id);
   }
 
   loadFlights() {
@@ -36,7 +41,23 @@ export class FlightsService {
   {
     this.http.get(this.rootURL + '/Flights/'+id)
     .toPromise()
-    .then(res => this.flight = res as Flight);
+    .then(res =>{
+
+     this.formData = res as Flight
+     
+      for (let i = 0 ; i < this.formData.seats.length-1;i++){
+        for (let j = i+1 ; j < this.formData.seats.length;j++)
+        {
+          if (this.formData.seats[i].order > this.formData.seats[j].order){
+            let temp = this.formData.seats[i]
+            this.formData.seats[i] = this.formData.seats[j]
+            this.formData.seats[j] = temp
+          }
+        }
+      }
+
+    }
+    );
   }
 
   
@@ -47,7 +68,6 @@ export class FlightsService {
     return this.http.put(this.rootURL + '/Flights/'+ this.formData.companyID, this.formData);
   }
   deleteFlight(id) {
-    alert("delete")
     return this.http.delete(this.rootURL + '/Flights/'+ this.formData.id);
   }
 }

@@ -8,6 +8,7 @@ import { FlightsService } from 'src/app/services/flights/flights.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/entities/flights/location';
 import { LocationTransfers } from 'src/app/entities/flights/location-transfers';
+import { Seat } from 'src/app/entities/flights/seat';
 
 
 @Component({
@@ -21,24 +22,35 @@ export class FlightRegisterComponent implements OnInit {
 
   transfers: Array<Location>;
   id: number;
+
+
   constructor(public service: FlightsService,public route: ActivatedRoute, private router: Router) { 
+  }
+
+  ngOnInit(): void {
     this.resetForm();
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
     this.service.formData.locationTransfers = new Array();
     this.service.loadTransfers()
-    
-  }
-
-  ngOnInit(): void {
   }
   addFlight(form:NgForm) {
-    /*if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
+    if (this.service.formData.flyOffTime == null || this.service.formData.landingTime == null 
       || /^[0-9][0-9]:[0-9][0-9]$/.test(this.service.formData.fullFlightTime) == false 
       || (this.service.formData.flightLength == null || this.service.formData.flightLength < 0) || (this.service.formData.price == null || this.service.formData.price < 0) )
     {
       alert("Not all inputs are filled correctly")
       return
-    }*/
+    }
+
+    let now = new Date()
+    if (this.service.formData.flyOffTime < now){
+      alert("Time must be ahead of current date")
+      return
+    }
+    if (this.service.formData.flyOffTime > this.service.formData.landingTime){
+      alert("Fly off time must be before landing time")
+      return
+    }
 
     if (this.service.formData.numberOfTransfers > 1){
       for (let location of this.service.formData.locationTransfers){

@@ -1,0 +1,101 @@
+.mat-button.mat-0{
+    color:white;
+    background: blue;
+    border:1px solic blue;
+    transition: background 0.5s;
+}
+.mat-button.mat-0:hover:enabled{
+    color:blue;
+    background-color: white;
+    border: 1px solid blue;
+}
+.mat-button.mat-1{
+    color:white;
+    background: red;
+    border:1px solic red;
+    transition: background 0.5s;
+}
+.mat-button.mat-1:hover:enabled{
+    color:red;
+    background-color: white;
+    border: 1px solid red;
+}
+
+
+.mat-button.mat-2{
+    color:white;
+    background: gray;
+    border:1px solic gray;
+    transition: background 0.5s;
+}
+.mat-button.mat-2:hover:enabled{
+    color:gray;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.mat-button.mat-3{
+    color:white;
+    background: black;
+    border:1px solic black;
+    transition: background 0.5s;
+}
+.mat-button.mat-3:hover:enabled{
+    color:black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+
+
+
+.mat-button.mat-4{
+    color:white;
+    background: orange;
+    border:1px solic orange;
+    transition: background 0.5s;
+}
+.mat-button.mat-4:hover:enabled{
+    color:orange;
+    background-color: white;
+    border: 1px solid orange;
+}
+.mat-button.mat-5{
+    color:white;
+    background: purple;
+    border:1px solic purple;
+    transition: background 0.5s;
+}
+.mat-button.mat-5:hover:enabled{
+    color:purple;
+    background-color: white;
+    border: 1px solid purple;
+}
+.mat-button.mat-6{
+    color:white;
+    background: purple;
+    border:1px solic purple;
+    transition: background 0.5s;
+}
+.mat-button.mat-6:hover:enabled{
+    color:purple;
+    background-color: white;
+    border: 1px solid purple;
+}
+.mat-button.mat-7{
+    color:white;
+    background: purple;
+    border:1px solic purple;
+    transition: background 0.5s;
+}
+.mat-button.mat-7:hover:enabled{
+    color:purple;
+    background-color: white;
+    border: 1px solid purple;
+}
+
+
+table td button{
+    width: 70px;
+    height :70px;
+}

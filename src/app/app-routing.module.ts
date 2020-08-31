@@ -14,6 +14,9 @@ import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-
 import { LocationPageComponent } from './components/location-page/location-page.component';
 import { BookFlightComponent } from './components/flight-companies/book-flight/book-flight.component';
 import { RidesComponent } from './components/ride-companies/rides/rides.component';
+import { RideReservationComponent } from './components/ride-companies/ride-reservation/ride-reservation.component';
+import { ReservationPageComponent } from './components/reservation-page/reservation-page.component';
+import { ReserveInviteComponent } from './components/flight-companies/reserve-invite/reserve-invite.component';
 
 const routes: Routes = [
 {
@@ -22,7 +25,7 @@ const routes: Routes = [
 },
 {
   path: "showLocation",
-  component: LocationPageComponent
+  component: LocationPageComponent 
 },
 {
   path: "rideCompanies",
@@ -41,12 +44,22 @@ const routes: Routes = [
   component: ProfilePageComponent
 },
 {
+  path: "reservationPage",
+  component: ReservationPageComponent
+},
+{
   path: "flight",
   children: [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: FcompanypageComponent },
     { path: ":id/register", component: FlightRegisterComponent },
     { path: ":id/book", component: BookFlightComponent }
+  ]
+},
+{
+  path: "reserveInvite",
+  children: [
+    { path: ":id/:id2", component: ReserveInviteComponent },
   ]
 },
 {
@@ -61,7 +74,7 @@ const routes: Routes = [
     { path: "", component: RidesComponent },  //placeholder
     { path: ":id/details", component: RcompanypageComponent },
     { path: ":id/register", component: RideRegisterComponent },
-    { path: ":id/book", component: RidesComponent } //placeholder
+    { path: ":id/book", component: RideReservationComponent } //placeholder
   ]
 },
 ];

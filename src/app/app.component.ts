@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { LoginComponent } from './components/login/login.component';
 import { ProfilePageService } from './services/users/profile-page.service';
 import { User } from './entities/users/user';
+import { ReservationService } from './services/reservation-service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   @ViewChild(LoginComponent) loginInfo;
   message:string;
 
-  constructor(public service:ProfilePageService) { }
+  constructor(public service:ProfilePageService, public serviceReservation:ReservationService) { }
 
   receiveMessage() {  
     alert("User logged in!");
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('token')!= null)
     {
+      this.serviceReservation.loadReservations()
       this.service.getLoggedUser(localStorage.getItem('token'));
     }
     else

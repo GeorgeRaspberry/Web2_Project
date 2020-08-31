@@ -14,7 +14,29 @@ namespace projectBackend.Database.DatabaseFunctions
     {
       Database = database;
     }
+    public double calculateFlightRating(int companyID)
+    {
+      double sum = 0;
+      int count = 0;
+
+      foreach (var reservation in Database.Reservations)
+      {
+        if (reservation.ReservationType != 0 && reservation.ReservationType != 3)
+        {
+          if (reservation.Flight.CompanyID == companyID && reservation.FlightRating != 0)
+          {
+            sum += reservation.FlightRating;
+            count++;
+          }
+        }
+      }
 
 
+      if (count == 0)
+      {
+        return 0;
+      }
+      return sum / count;
+    }
   }
 }

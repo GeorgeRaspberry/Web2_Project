@@ -18,5 +18,39 @@ namespace projectBackend.Database.DatabaseFunctions
     {
       return null;
     }
+
+    public void locationTransfersOrder(Flight flight)
+    {
+      List<LocationTransfers> transfers = flight.LocationTransfers.ToList();
+      for (int i = 0; i < transfers.Count; i++)
+      {
+        if (transfers[i].Status == 1)
+        {
+          var temp = transfers[0];
+          transfers[0] = transfers[i];
+          transfers[i] = temp;
+        }
+        else if (transfers[i].Status == 2)
+        {
+          var temp = transfers[transfers.Count-1];
+          transfers[transfers.Count-1] = transfers[i];
+          transfers[i] = temp;
+        }
+      }
+      flight.LocationTransfers = transfers;  
+    }
+
+    public List<Flight> checkFlightDate(List<Flight> flights)
+    {
+       foreach (var item in flights.ToList())
+      {
+        var now = DateTime.Now;
+        if (item.FlyOffTime < now)
+        {
+          flights.Remove(item);
+        }
+      }
+      return flights;
+    }
   }
 }

@@ -22,10 +22,22 @@ namespace projectBackend.Controllers
     }
 
     // GET: api/Rides
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Ride>>> GetRides()
+    [HttpGet("{location}")]
+    [Route("LoadRidesLocation/{location}")]
+    public async Task<ActionResult<IEnumerable<Ride>>> GetRides(string location)
     {
-      return await _context.Rides.ToListAsync();
+
+      var rides = await _context.Rides.ToListAsync();
+
+      foreach (var item in rides.ToList())
+      {
+        if(item.Location.Name != location)
+        {
+          rides.Remove(item);
+        }
+      }
+
+      return rides;
     }
 
     // GET: api/Rides/5
@@ -53,6 +65,18 @@ namespace projectBackend.Controllers
       return Ok();
     }
 
+
+
+
+    [HttpPost]
+    [Route("PostReservation")]
+    public async Task<ActionResult<List<Ride>>> PostReservation(Reservation reservation)
+    {
+      _context.Reservations.Add(reservation);
+      await _context.SaveChangesAsync();
+
+      return Ok();
+    }
 
     [HttpGet]
     [Route("GetLocations")]

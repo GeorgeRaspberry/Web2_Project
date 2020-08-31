@@ -1,0 +1,45 @@
+    <div *ngIf="this.isAdmin == 1; else elseBlock">
+
+    <table>
+        <tr *ngFor="let t of array(math.ceil( (this.seats.length-20)/10)); let i = index">
+            <td *ngFor="let location of this.seats.slice(10*i,10*i + 10); let j = index">         
+                {{i*10+j}}
+                <button mat-button color="{{this.seats[(i*10)+j].type}}" matTooltip="{{this.seats[20 + (i*10)+j].name}}" (click)="onClick(i,j)">{{this.service.type[(i*10)+j]}}</button>
+            </td> 
+        </tr>
+    </table>
+    <br>
+    <br>
+
+    <table>
+        <tr *ngFor="let t of array(math.ceil( (this.seats.length-20)/10)); let i = index">
+            <td *ngFor="let location of this.seats.slice(20+(10*i),20+ 10*i + 10); let j = index">         
+                {{20+i*10+j}}
+                <button mat-button color="{{this.seats[20 + (i*10)+j].type}}" matTooltip="{{this.seats[20 + (i*10)+j].name}}" (click)="onClick(2+i,j)">{{this.service.type[20+(i*10)+j]}}</button>
+            </td> 
+        </tr>
+    </table>
+    <br>
+    </div>
+    <ng-template #elseBlock>
+        <table>
+            <tr *ngFor="let t of array(math.ceil( (this.seats.length-20)/10)); let i = index">
+                <td *ngFor="let location of this.seats.slice(10*i,10*i + 10); let j = index">         
+                    {{i*10+j}}
+                    <button mat-button color="{{this.seats[(i*10)+j].type}}" matTooltip="{{this.seats[20 + (i*10)+j].name}}" (click)="onClickReserve(i,j)">{{this.service.type[(i*10)+j]}}</button>
+                </td> 
+            </tr>
+        </table>
+        <br>
+        <br>
+        
+        <table>
+            <tr *ngFor="let t of array(math.ceil( (this.seats.length-20)/10)); let i = index">
+                <td *ngFor="let location of this.seats.slice(20+(10*i),20+ 10*i + 10); let j = index">         
+                    {{20+i*10+j}}
+                    <button mat-button color="{{this.seats[20 + (i*10)+j].type}}" matTooltip="{{this.seats[20 + (i*10)+j].name}}" (click)="onClickReserve(2+i,j)">{{this.service.type[20+(i*10)+j]}}</button>
+                </td> 
+            </tr>
+        </table>
+        <br>
+    </ng-template>

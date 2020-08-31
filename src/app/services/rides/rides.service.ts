@@ -26,17 +26,24 @@ export class RidesService {
     return this.http.post(this.rootURL + '/Flights/PostLocation', location);
   }
 
-  loadRides() {
-    this.http.get(this.rootURL + '/Rides')
+  loadRidesOnLocation(location:string) {
+    this.http.get(this.rootURL + '/Rides/LoadRidesLocation/'+location)
     .toPromise()
-    .then(res => this.rides = res as Ride[]);
+    .then(res => {
+      this.rides = res as Ride[]
+    });
   }
 
   loadRide(id:number)
   {
     this.http.get(this.rootURL + '/Rides/'+id)
     .toPromise()
-    .then(res => this.ride = res as Ride);
+    .then(res =>{
+      this.ride = res as Ride
+      this.rides = new Array()
+      this.rides.push(this.ride)
+    }
+    );
   }
 
   

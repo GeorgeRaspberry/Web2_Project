@@ -15,9 +15,10 @@ export class User {
     sentRequests: Array<Request>;
     receivedRequests: Array<Request>;
     friendsList: Array<User>;
-
+    status:number
+    points:number
     constructor()
     {
         this.role = "";
-    }
+    } 
 }

@@ -25,5 +25,7 @@ namespace projectBackend.Database
     public DbSet<RideCompany> RideCompanies { get; set; }
     public DbSet<Ride> Rides { get; set; }
     public DbSet<Requests> Requests { get; set; }
+    public DbSet<Reservation> Reservations { get; set; }
+    public DbSet<Seat> Seats { get; set; }
   }
 }

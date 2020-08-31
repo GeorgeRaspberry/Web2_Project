@@ -1,0 +1,23 @@
+<form #form="ngForm" autocomplete="off">
+    <app-rides [rides]="rideService.rides" ></app-rides>
+
+    <table class="center">
+  
+      <tr>
+        <td>
+          <input name="rentRideStart" #rentRideStart="ngModel" [(ngModel)]="service.formData.rentRideStart" name="rentRideStart" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control" placeholder="Select start date">
+          <owl-date-time #dt1></owl-date-time>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" name="rideRentDays" #rideRentDays="ngModel" [(ngModel)]="service.formData.rideRentDays"  class="form-control" placeholder="Day count">
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <button (click)="book(form)">Create reservation</button>
+        </td>
+      </tr>
+    </table>
+</form>>

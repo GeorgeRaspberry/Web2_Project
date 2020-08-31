@@ -29,14 +29,14 @@ namespace projectBackend.Controllers
     [HttpGet]
     public async Task<ActionResult<List<RideCompany>>> GetRideCompanies()
     {
+      var companies = await _context.RideCompanies.ToListAsync();
 
+      foreach (var item in companies)
+      {
+        item.Rating= rideCompanyFunction.calculateRideRating(item.ID);
+      }
 
-
-
-
-
-      var data = await _context.RideCompanies.ToListAsync();
-      return data;
+      return companies;
     }
 
     // GET: api/FlightCompanies/5
@@ -49,6 +49,9 @@ namespace projectBackend.Controllers
       {
         return NotFound();
       }
+
+      rideCompany.Rating = rideCompanyFunction.calculateRideRating(rideCompany.ID);
+      rideCompany.Rides = rideCompanyFunction.GetFreeCars(rideCompany.Rides);
 
       return rideCompany;
     }

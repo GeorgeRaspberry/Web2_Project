@@ -48,10 +48,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.signUpOrIn = true;
     this.resetForm();
-    if (localStorage.getItem('token') != null)
-    {
-      this.router.navigateByUrl('/flightCompanies');
-    }
   }
 
   logIn(form: NgForm) {

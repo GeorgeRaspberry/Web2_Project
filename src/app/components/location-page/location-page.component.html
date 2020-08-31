@@ -3,6 +3,8 @@
         <thead>
             <tr *ngFor="let location of service.transfers">
                 <td>{{location.name}}</td>
+                <td>{{location.address}}</td>
+                <td><button (click)="deleteLocation(location)">Delete</button></td>
             </tr>
         </thead>
     </table>
@@ -10,7 +12,10 @@
         <table id="overrider" class="table table-hover" >
             <tr>
                 <td>
-                    <input name="name" #name="ngModel" [(ngModel)]="location.name" class="form-control" placeholder="Location name" required>
+                    <input name="name" #name="ngModel" [(ngModel)]="location.name" class="form-control" placeholder="City" required>
+                </td>
+                <td>
+                    <input name="address" #address="ngModel" [(ngModel)]="location.address" class="form-control" placeholder="Address" required>
                 </td>
                 <td>
                     <button class="btn btn-success" id="add" (click)="addLocation()">

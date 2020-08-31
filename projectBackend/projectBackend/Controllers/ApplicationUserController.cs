@@ -100,7 +100,7 @@ namespace projectBackend.Controllers
     public async Task<Object> GetAllFriends(string token)
     {
       var user = await _userManager.FindByIdAsync(token);
-      return userFunctions.GetAllFriends(user);
+      return userFunctions.GetAllFriendsStatus(user);
     }
 
     [HttpGet]
@@ -355,8 +355,9 @@ namespace projectBackend.Controllers
       {
         httpResponseMessage = httpClient.GetAsync(requestUri).Result;
       }
-      catch (Exception ex)
+      catch
       {
+
         return false;
       }
 

@@ -9,7 +9,7 @@
                 <td><img class="imageTest" src={{company.image}}></td>
                 <td>{{company.name}}</td>
                 <td>{{company.promoDescription}}</td>
-                <td><app-rating-star [rating]="company.rating"></app-rating-star></td>
+                <td><app-rating-star [rating]="company.rating" [rateOrShow]="1"></app-rating-star></td>
                 <td>
                     <button class="btn btn-success" routerLink="/flight/{{company.id}}/details">Details</button>
                     <button class="btn btn-success" (click)="updateCompany(company)">Update</button>

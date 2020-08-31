@@ -6,7 +6,7 @@
     <div *ngIf="service.loggedUser.role == ''; else LoggedInBlock" id="currentUser">Not logged in!</div>
     <ng-template #LoggedInBlock>
         <div id="currentUser">
-            Logged in as {{service.loggedUser.userName}} <button (click)="logOut()">Log out.</button>
+            Logged in as {{service.loggedUser.userName}}({{service.loggedUser.role}} Points : {{service.loggedUser.points}}) <button (click)="logOut()">Log out.</button>
         </div>
     </ng-template>
     </div>

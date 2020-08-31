@@ -13,6 +13,8 @@ namespace projectBackend.Models
     [Key]
     public int ID { get; set; }
     public string Name { get; set; }
+    public string Address { get; set; }
+
 
     [InverseProperty("Location")]
     public virtual ICollection<LocationTransfers> LocationTransfers { get; set; }

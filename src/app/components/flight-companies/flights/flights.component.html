@@ -1,9 +1,8 @@
-
     <table id="overrider" class="table table-hover">
         <thead  class="thead-dark">
             <tr>
                 <th scope="col">TAKE OFF/LANDING TIME</th>
-                <th scope="col">TRANSFERS</th>
+                <th scope="col">TAKE OFF/LANDING CITY</th>
                 <th scope="col">DURATION</th>
                 <th scope="col">LENGTH (KM)</th>
                 <th scope="col">PRICE (EUR)</th>
@@ -13,7 +12,7 @@
         <tbody>
             <tr *ngFor="let flight of flights">
                 <td>{{flight.flyOffTime | date: 'short'}} <b>-></b> {{flight.landingTime | date: 'short'}}</td>
-                <td>{{flight.numberOfTransfers}}</td>
+                <td>{{flight.locationTransfers[0].location.name}} <b>-></b> {{flight.locationTransfers[flight.locationTransfers.length-1].location.name}}</td>
                 <td>{{flight.fullFlightTime}}</td>
                 <td>{{flight.flightLength}}</td>
                 <td>{{flight.price}}</td>
@@ -23,4 +22,3 @@
             </tr>
         </tbody>        
     </table>
-

@@ -16,10 +16,13 @@ export class RideRegisterComponent implements OnInit {
  
   id:number
   constructor(public service: RidesService,public route: ActivatedRoute, private router: Router) { 
+  }
+  ngOnInit(): void {
     this.route.params.subscribe(params => { this.id = Number(params['id']); });
     this.service.loadTransfers()
   }
- addRide(form:NgForm) {
+
+  addRide(form:NgForm) {
     if((this.service.formData.carMaker == null || this.service.formData.carMaker == "")
     || (this.service.formData.carModel == null || this.service.formData.carModel == "")
     || (this.service.formData.carType == null || this.service.formData.carType == "")
@@ -35,6 +38,12 @@ export class RideRegisterComponent implements OnInit {
 
     if (this.service.formData.id == null || this.service.formData.id == 0)
     { 
+      if ( this.service.transfers.length != 0 && this.service.formData.locationID == null){
+        this.service.formData.locationID = this.service.transfers[0].id
+      }else if(this.service.formData.locationID == null){
+        alert("No location input")
+        return
+      }
       this.service.postRide().subscribe(
       res=>{
         this.resetForm(form);
@@ -52,8 +61,7 @@ export class RideRegisterComponent implements OnInit {
       );
     }
   }
-  ngOnInit(): void {
-  }
+
 
   resetForm(form?: NgForm) {
     if (form != null)

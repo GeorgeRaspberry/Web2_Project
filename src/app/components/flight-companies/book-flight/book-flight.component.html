@@ -1,3 +1,91 @@
+<form #form="ngForm" autocomplete="off">
+    <table class="center" *ngIf="step == 0;">
+        <tr>
+            <td>
+                <input name="numberOfPeople" type="number" #numberOfPeople="ngModel" [(ngModel)]="serviceReservation.formData.numberOfPeople" class="form-control" placeholder="Enter number of people" required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <input name="bagCount" type="number" #bagCount="ngModel" [(ngModel)]="serviceReservation.formData.bagCount" class="form-control" placeholder="Number of bags(50 euros per bag, max 10)" required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button (click)="chooseFriends()">Choose friends</button>
+            </td>
+        </tr>
+    </table>
+    <table class="center" *ngIf="step == 1;">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Username</th>
+                <th id="friendsHeader">Full name</th>
+                <th id="friendsHeader">Number to pick :{{this.serviceReservation.picked}}</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let user of profileService.loggedUser.friendsList, let i = index">
+            <td>{{user.userName}}</td>
+            <td>{{user.fullName}}</td>
+
+            <td>
+                <button *ngIf="user.status==null || user.status==0;" class="btn btn-success"  id="add" (click)=inviteUser(i)>Invite</button>
+                <button *ngIf="user.status==1;" class="btn btn-success"  id="add" (click)=unInviteUser(i)>Un invite</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <button (click)="chooseSeats()" id="add">Choose seats</button>
+            </td>
+        </tr>
+    </table>
 
 
 
+    <table class="center" *ngIf="step == 2;">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Number to pick :{{this.serviceReservation.picked}}</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                <app-seats [isAdmin]="0" [seats]="this.service.formData.seats"></app-seats>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="rentACar()" id="add">Rent a car</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="makeReservation(form)" id="add">Make reservation</button>
+            </td>
+        </tr>
+    </table>
+
+
+    <table class="center" *ngIf="step == 3;">
+        <thead>
+            <tr>
+                <th id="friendsHeader">Choose a car</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                <input type="number" name="rideRentDays" #rideRentDays="ngModel" [(ngModel)]="serviceReservation.formData.rideRentDays"  class="form-control" placeholder="Day count">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-rides [rides]="rideService.rides" quickRent="1"></app-rides>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="makeReservation(form)" id="add">Make reservation</button>
+            </td>
+        </tr>
+    </table>
+</form>

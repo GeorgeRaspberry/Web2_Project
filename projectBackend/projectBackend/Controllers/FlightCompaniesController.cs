@@ -19,20 +19,27 @@ namespace projectBackend.Controllers
   {
     private readonly DatabaseContext _context;
     private FlightCompanyFunctions flightCompanyFunction;
-
+    private FlightFunctions flightFunction;
 
     public FlightCompaniesController(DatabaseContext context)
     {
       _context = context;
       flightCompanyFunction = new FlightCompanyFunctions(_context);
+      flightFunction = new FlightFunctions(_context);
     }
 
     // GET: api/FlightCompanies
     [HttpGet]
     public async Task<ActionResult<List<FlightCompany>>> GetFlightCompanies()
     {
-      var data = await _context.FlightCompanies.ToListAsync();
-      return data;
+ 
+      var companies = await _context.FlightCompanies.ToListAsync();
+
+      foreach (var item in companies)
+      {
+        item.Rating = flightCompanyFunction.calculateFlightRating(item.ID);
+      }
+      return companies;
     }
 
     // GET: api/FlightCompanies/5
@@ -45,7 +52,14 @@ namespace projectBackend.Controllers
       {
         return NotFound();
       }
+      foreach (var item in flightCompany.Flights)
+      {
+        flightFunction.locationTransfersOrder(item);
+      }
 
+      flightCompany.Flights = flightFunction.checkFlightDate(flightCompany.Flights);
+
+      flightCompany.Rating = flightCompanyFunction.calculateFlightRating(flightCompany.ID);
       return flightCompany;
     }
 

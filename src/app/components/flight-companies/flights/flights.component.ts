@@ -13,7 +13,6 @@ export class FlightsComponent implements OnInit {
 
 
   constructor() {
-    
   }
 
   book(): void {

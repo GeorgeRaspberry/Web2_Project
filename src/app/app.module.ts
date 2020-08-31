@@ -15,7 +15,7 @@ import { FlightsComponent } from './components/flight-companies/flights/flights.
 import { FlightFilterComponent } from './components/flight-companies/flight-filter/flight-filter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlightRegisterComponent } from './components/flight-companies/flight-register/flight-register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { FcompanyRegisterComponent } from './components/flight-companies/fcompany-register/fcompany-register.component';
 import { ProfilePageComponent } from './components/login/profile-page/profile-page.component';
 import { RcompanyRegisterComponent } from './components/ride-companies/rcompany-register/rcompany-register.component';
@@ -31,6 +31,15 @@ import { RideFilterComponent } from './components/ride-companies/ride-filter/rid
 import { RideCompaniesService } from './services/rides/ride-companies.service';
 import { RidesService } from './services/rides/rides.service';
 import { RidesComponent } from './components/ride-companies/rides/rides.component';
+import { ReservationService } from './services/reservation-service';
+import { RideReservationComponent } from './components/ride-companies/ride-reservation/ride-reservation.component';
+import { ReservationPageComponent } from './components/reservation-page/reservation-page.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SeatsComponent } from './components/flight-companies/seats/seats.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { ReserveInviteComponent } from './components/flight-companies/reserve-invite/reserve-invite.component';
+
+
 
 @NgModule({
   declarations: [
@@ -53,7 +62,11 @@ import { RidesComponent } from './components/ride-companies/rides/rides.componen
     RideRegisterComponent,
     LocationPageComponent,
     BookFlightComponent,
-    RideFilterComponent
+    RideFilterComponent,
+    RideReservationComponent,
+    ReservationPageComponent,
+    SeatsComponent,
+    ReserveInviteComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +77,12 @@ import { RidesComponent } from './components/ride-companies/rides/rides.componen
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     NgxMaterialTimepickerModule,
+    MatButtonModule,
+    MatTooltipModule
+    
   ],
-  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService],
+  exports:[ MatButtonModule,MatTooltipModule  ],
+  providers: [FlightsService,FlightCompaniesService,ProfilePageService,RideCompaniesService,RidesService,ReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

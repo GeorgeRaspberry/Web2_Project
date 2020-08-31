@@ -1,7 +1,8 @@
 
 export class Location {
-    locationID: number
+    id: number
     name: string
+    address: string
     constructor()
     {
     }

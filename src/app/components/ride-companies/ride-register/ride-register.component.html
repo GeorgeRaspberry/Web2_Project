@@ -32,14 +32,17 @@
           <input type="text" #carType="ngModel" [(ngModel)]="service.formData.carType" name="carType" class="form-control" placeholder="Car type" required>
         </td>
       </tr>
-  
+      <tr>
+        <td>
+          <input type="text" #price="ngModel" [(ngModel)]="service.formData.price" name="price" class="form-control" placeholder="Price per day" required>
+        </td>
+      </tr>
       <tr>
         <td>
           <select name="locationOfTransfers" (change)="onChange($event)">
             <ng-container *ngFor="let title of service.transfers">
-            <option  *ngIf="service.formData.location != null && title.name==service.formData.location.name" [value]=title.id selected>{{title.name}}</option>
-            <option  *ngIf="service.formData.location == null || title.name!=service.formData.location.name" [value]=title.id>{{title.name}}</option>
-
+            <option  *ngIf="service.formData.location != null && title.name==service.formData.location.name" [value]=title.id selected>{{title.name}}/{{title.address}}</option>
+            <option  *ngIf="service.formData.location == null || title.name!=service.formData.location.name" [value]=title.id>{{title.name}}/{{title.address}}</option>
             </ng-container>
           </select> 
           </td>

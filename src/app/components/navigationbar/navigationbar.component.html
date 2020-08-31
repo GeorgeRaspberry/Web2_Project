@@ -1,9 +1,9 @@
 <img id="logo" src="assets/logo1-3.png">
 <div class="topnav">
-    <a (click)="routeView()" routerLink = "flightCompanies" routerLinkActive="active">FLIGHTS</a>
-    <a (click)="routeView()"  routerLink = "rideCompanies" routerLinkActive="active"  >RIDES</a>
-    <a (click)="routeView()" routerLink = "profilePage">RESERVATIONS</a>
-    <a *ngIf="!service.loggedUser.role || service.loggedUser.role == ''; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
+    <a (click)="routeView()" routerLink = "flightCompanies" >FLIGHTS</a>
+    <a (click)="routeView()"  routerLink = "rideCompanies"   >RIDES</a>
+    <a (click)="routeView()" routerLink = "reservationPage">RESERVATIONS</a>
+    <a *ngIf="service.loggedUser.role == ''; else loggedInBlock"  data-toggle="modal" data-target="#myModal">MY PROFILE</a>
     <ng-template #loggedInBlock>
     <a (click)="routeView()" routerLink = "profilePage">MY PROFILE</a>
     </ng-template>

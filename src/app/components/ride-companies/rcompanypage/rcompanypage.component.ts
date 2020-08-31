@@ -15,6 +15,7 @@ export class RcompanypageComponent implements OnInit {
   id: number;
 
   constructor(private route: ActivatedRoute, public service: RideCompaniesService,public rideService:RidesService, private router:Router) {
+    this.service.company = new RideCompany()
     route.params.subscribe(params => { this.id = params['id']; });
     service.loadCompanyData(this.id);
   }

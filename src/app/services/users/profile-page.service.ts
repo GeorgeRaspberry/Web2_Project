@@ -34,6 +34,21 @@ export class ProfilePageService {
   removeFriend(potentialId: string) {
     return this.http.put(this.rootURL + '/ApplicationUser/RemoveFriend/'+ this.loggedUser.id + '/' + potentialId, null);
   }
+  refreshLogged(token:string){
+    this.http.get(this.rootURL + '/ApplicationUser/GetUserData/'+ token)
+    .toPromise()
+    .then(res =>{
+      if (res == null){
+        localStorage.removeItem('token')
+      }
+      else{
+      this.loggedUser = res as User;
+      var splitter = this.loggedUser.fullName.split(' ', 2);
+      this.loggedUser.name = splitter[0];
+      this.loggedUser.lastname = splitter[1];
+      }
+    })
+  }
 
   getLoggedUser(token:string){
     this.http.get(this.rootURL + '/ApplicationUser/GetUserData/'+ token)
@@ -42,6 +57,7 @@ export class ProfilePageService {
       if (res == null){
         localStorage.removeItem('token')
       }
+      else{
       this.loggedUser = res as User;
       var splitter = this.loggedUser.fullName.split(' ', 2);
       this.loggedUser.name = splitter[0];
@@ -54,6 +70,9 @@ export class ProfilePageService {
         localStorage.removeItem('token')
       }
       this.loggedUser.friendsList = res as Array<User>;
+      this.loggedUser.friendsList.forEach(element => {
+        element.status = 0
+      });
       }
       );
 
@@ -66,7 +85,7 @@ export class ProfilePageService {
       this.allUsers = res as Array<User>;
       }
       );
-
+    }
     }
     );
   }

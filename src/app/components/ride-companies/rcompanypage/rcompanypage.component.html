@@ -1,12 +1,12 @@
 <div id="overrider">
     <div id="companyInfo">
         <img src={{service.company.image}}>
-        <app-rating-star [rating]="service.company.rating"></app-rating-star>
+        <app-rating-star [rating]="service.company.rating" rateOrShow="1"></app-rating-star>
         <p class="promo">{{service.company.promoDescription}}</p>
                 
     </div>
 
-<app-rides [rides]="service.company.rides"></app-rides>
+<app-rides [rides]="service.company.rides" quickRent="0"></app-rides>
         <button class="btn btn-success" id="add" (click)="addRide()" routerLink="/ride/{{id}}/register">
             CREATE NEW RIDE
         </button>
